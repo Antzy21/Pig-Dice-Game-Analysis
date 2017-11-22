@@ -1,6 +1,6 @@
 # Pig-Dice-Game-Analysis
 
-_______________
+______
 
 'Run Pig' contains Code for running the game.
 
@@ -10,12 +10,12 @@ _______________
 
 'Probability & Optimising Code' contains all code for calculating the probability of each strategy winning against another
 
-________________________________________________
+_____
 
 Each other file is a function that calls on other ones in such an order that is notated as such:
 e.g: Function 1 <- (Function 2, Function 3 <- Function 4)
 Where Function 1 calls on Function 2 and Function 3, and within that, function 3 calls on function 4.
-__________________________________________________________________
+____
 
 Finding probability of strategies winning against eachother:
 Probability_Matrices <- (Matrices, Strategies_to_Matrices)
@@ -26,4 +26,4 @@ OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
 Repetative Optimisations:
 OptimisingVs_Iterative <- OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
 
-__
+___
