@@ -1,0 +1,150 @@
+PWD C:/Users/Anthony/OneDrive/Documents/University/Mathematics/Year 3 Term 1/Mathematical Research/Pig-Dice-Game-Analysis
+INPUT c:/texlive/2017/texmf.cnf
+INPUT c:/texlive/2017/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT ./Finding the optimal stategy for the dice game 'Pig'.tex
+OUTPUT Finding the optimal stategy for the dice game 'Pig'.log
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/article.cls
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+INPUT mcode.sty
+INPUT mcode.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-def/pdftex.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/textcomp.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/textcomp.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/ts1enc.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/ts1enc.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/natbib/natbib.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/natbib/natbib.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/graphicx.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/trig.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics/trig.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/url/url.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/url/url.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT Finding the optimal stategy for the dice game 'Pig'.aux
+INPUT Finding the optimal stategy for the dice game 'Pig'.aux
+OUTPUT Finding the optimal stategy for the dice game 'Pig'.aux
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
+INPUT c:/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
+INPUT c:/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT c:/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/grfext.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/oberdiek/grfext.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT c:/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT Finding the optimal stategy for the dice game 'Pig'.out
+INPUT Finding the optimal stategy for the dice game 'Pig'.out
+INPUT Finding the optimal stategy for the dice game 'Pig'.out
+INPUT Finding the optimal stategy for the dice game 'Pig'.out
+OUTPUT Finding the optimal stategy for the dice game 'Pig'.pdf
+INPUT ./Finding the optimal stategy for the dice game 'Pig'.out
+INPUT ./Finding the optimal stategy for the dice game 'Pig'.out
+OUTPUT Finding the optimal stategy for the dice game 'Pig'.out
+INPUT Crest.jpg
+INPUT ./Crest.jpg
+INPUT ./Crest.jpg
+INPUT c:/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT Finding the optimal stategy for the dice game 'Pig'.toc
+INPUT Finding the optimal stategy for the dice game 'Pig'.toc
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+OUTPUT Finding the optimal stategy for the dice game 'Pig'.toc
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT Finding the optimal stategy for the dice game 'Pig'.bbl
+INPUT Finding the optimal stategy for the dice game 'Pig'.bbl
+INPUT Finding the optimal stategy for the dice game 'Pig'.aux
+INPUT ./Finding the optimal stategy for the dice game 'Pig'.out
+INPUT ./Finding the optimal stategy for the dice game 'Pig'.out
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
