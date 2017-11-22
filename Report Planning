@@ -1,0 +1,69 @@
+
+Title – Liam – Make it fancy and professional
+
+Abstract – Josh – give us a good summary of everything to come
+
+1.	INTRO
+    -	A brief intro into the game of pig
+    -	What do we aim to achieve in this project and what is going to be presented to the reader in this report
+        o	Brief them on out choices
+    -	PIG (the Neller story)  
+        o	What has already been done in this area regarding solutions and strategies?
+    -	PIGLET (the runt of the games)??
+2.	METHODOLOGY
+    -	How we set out on this dice oriented project
+        o	Meeting as a group – the great pig lunch
+        o	Meetings – what we did and what foundations did we lay?
+        o	The Barry touch – utilising our supervisor.
+    -	PIGLET
+        o	 The starting point – hours of hand written matrices
+        o	The coding of this so simple game
+        o	Comparisons to our written notes – it was cracked
+    -	Transference to PIG
+        o	Generalising the code from piglet
+        o	The errors of the 0 strategies
+        o	Fixing the bugs in order to get  a working machine 
+    -	Humans the feeling computers
+        o	What did we want to know about people playing the game?
+        o	What do they actually do?
+    -	Statistics
+        o	Do you get similar results playing 1000 times as you do from the theoretical probabilities?
+        o	What is a fair test?
+        o	At what point can you determine that a strategy is better than another?
+    -	Optimals
+        o	What is an optimal strategy?
+        o	How do you get to an optimal?
+        o	Is there a unique one/pair/3way?
+        o	Are these optimal local or global maxima?
+3.	FINDINGS
+    -	Did we “solve” PIG?
+        o	Have we got code that will give you the probability of you winning versus another strategy?
+        o	Do we fully understand pig?
+    -	Humans
+        o	 How did the people perform?
+        o	Can we see a trend?
+        o	Are humans inherently greedy?
+        o	Do we see a universal rule of thumb as to how to play??
+        o	Can we code a human and play them against a computer?
+    -	Statistics
+        o	Have we determined what it means to be a better strategy?
+        o	Have we began to determine whether playing 1000 games is representative of a theoretical result?
+        o	Do we have a new number of games that you can play to be within a tolerance of being a fair representation?
+    -	Optimal
+        o	 Have we decided on what kind of optimal occurs?
+        o	Does It depend on where in the strategy space you start, as in if you start form @HOLD20 do you reach a different maxima than @HOLD21?
+        o	 Is NELLERS’ Optimal actually the global maxima or is it just a very close local maxima to which you have to leave a nash equilibria in order to get to?
+4.	CONCLUSION
+    -	What did we achieve
+        o	Have we solved the pig equations?
+        o	Have we figured out how people play the game?
+        o	Have we determined that experiments can accurately represent theroies?
+        o	Have we determined where the optimal’s lie?
+        o	Have we confirmed what neller has already thought or have we found a counter argument?
+5.	EVALUATION
+    -	Do we want to go over what we have done and give a little self evaluative overview?
+    -	Talking about working in a team?
+    -	Give our thanks to those that helped?
+    -	Does this actually need to be in the presentation instead? (Aswell?)
+6.	BIBLIOGRAPHY
+    -	 Liam to compile everyone’s many citations 
