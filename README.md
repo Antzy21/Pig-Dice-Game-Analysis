@@ -1,5 +1,10 @@
 # Pig-Dice-Game-Analysis
 
+Mathematical Research at Exeter University (3 year group project module)
+Researching the dice game Pig.
+Details on the game found on [Wikipedia](https://en.wikipedia.org/wiki/Pig_(dice_game))
+________________________________________________________________________________
+
 'LaTeX Report' contains our report in Latex form, with file needed to compile it.
 
 'Optimising' contains code for trying to produce an optimal solution against any Strategy.
