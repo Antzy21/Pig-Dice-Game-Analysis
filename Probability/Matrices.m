@@ -3,8 +3,9 @@ function [C,D,n,m,stalemate]=Matrices(i,j,Dice_prob,To_win,A,B,P,Q)
 % Let j be Q's current score
 % Let k be the turn score
 
-C=zeros(2*To_win-i-j,2*To_win-i-j);
-D=zeros(2*To_win-i-j,1);
+Matrix_Size = 2*To_win-i-j;
+C=zeros(Matrix_Size,Matrix_Size);
+D=zeros(Matrix_Size,1);
 stalemate=false;
 
 % Build top half of the matrix
