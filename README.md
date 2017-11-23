@@ -1,7 +1,9 @@
 # Pig-Dice-Game-Analysis
 
 Mathematical Research at Exeter University (3 year group project module)
+
 Researching the dice game Pig.
+
 Details on the game found on [Wikipedia](https://en.wikipedia.org/wiki/Pig_(dice_game))
 ________________________________________________________________________________
 
