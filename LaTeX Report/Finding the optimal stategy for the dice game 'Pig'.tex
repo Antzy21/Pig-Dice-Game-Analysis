@@ -97,20 +97,34 @@
 \newpage
 
 \section{Introduction}
-Suppose I have 2 stratergies A and B. Consider that it is A's turn and we are in postion ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's points so far on this turn. Let $P_{ijk}$ denote probability of A winnig from that position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's banked points ect). Then, \begin{equation}\label{1.1.a}
-p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
-\end{equation}
- if A rolls and
- \begin{equation}\label{1.1.b}
- p_{ijk} = 1-Q_{jik}
- \end{equation}
- if A holds.
 \subsection{Aims and Objectives}
 josh
 \subsection{History of Pig}
-Liam
 \subsubsection{Basics of Pig}
+The dice game `pig' is played by 2 people rolling a die. The number on the die signifies the points gained on that roll which are collated in a sum total of points for the turn which can be banked to end a players turn. However the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end. The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
+\\
+\\
+The probabilities of winning the game from any position can be simplified down into sets of linear equations. Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from that position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's banked points etc.). Then, \begin{equation}\label{1.2.1.a}
+p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
+\end{equation}
+ if A rolls and
+ \begin{equation}\label{1.2.1.b}
+ p_{ijk} = 1-Q_{jik}
+ \end{equation} 
+ if A banks their points.
 \subsubsection{Nellers Work}
+Knizia takes the view of each roll of the die as a bet of not rolling a $1$. He viewed the best strategy as ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice} However, Todd W Neller stated ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal}, from this he proceeded to find an optimal solution for `pig' by taking the maximum of equation \ref{1.2.1.a} and equation \ref{1.2.1.b}. This was not possible however as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows the resulting optimal strategy where you roll if below the surface and bank if above.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{neller_optimal_solution}
+\caption{roll\slash hold boundary for the optimal Pig play policy (Neller)\label{figure1}}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{neller_optimal_solution_2}
+\caption{all of the states reachable by an optimal player (Neller)\label{figure2}}
+\end{figure}
 
 \subsection{Optimal Stratergy}
 chris C
@@ -167,6 +181,7 @@ eliot and sam
 \subsection{Determination of human affects on the optimal stratergy}
 \subsection{Comparison to Nellers stratergy}
 
-\bibliographystyle{plain}
+\nocite{*}
+\bibliographystyle{alpha}
 \bibliography{Pig_bib}
 \end{document}
