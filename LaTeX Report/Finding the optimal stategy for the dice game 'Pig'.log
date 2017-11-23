@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.10.20)  22 NOV 2017 11:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.10.20)  23 NOV 2017 23:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -469,34 +469,45 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \relax 
 l.97 \newpage
-              [1] [2] (./Finding the optimal stategy for the dice game 'Pig'.bbl
+              [1]
+Underfull \hbox (badness 10000) in paragraph at lines 104--107
 
-Package natbib Warning: Empty `thebibliography' environment on input line 3.
+ []
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 172.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 172.
+<neller_optimal_solution.jpg, id=215, 144.54pt x 155.6214pt>
+File: neller_optimal_solution.jpg Graphic file (type jpg)
+<use neller_optimal_solution.jpg>
+Package pdftex.def Info: neller_optimal_solution.jpg  used on input line 120. on input line 120.
+Package pdftex.def Info: Requested size: 241.84843pt x 260.40443pt on input line 120.
+<neller_optimal_solution_2.jpg, id=216, 144.54pt x 156.585pt>
+File: neller_optimal_solution_2.jpg Graphic file (type jpg)
+<use neller_optimal_solution_2.jpg>
+Package pdftex.def Info: neller_optimal_solution_2.jpg  used on input line 125. on input line 125.
+Package pdftex.def Info: Requested size: 241.84843pt x 262.01688pt on input line 125.
+[2] [3 <./neller_optimal_solution.jpg> <./neller_optimal_solution_2.jpg>] (./Finding the optimal stategy for the dice game 'Pig'.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 187.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 187.
  (./Finding the optimal stategy for the dice game 'Pig'.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 172.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 172.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 187.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 187.
 Package rerunfilecheck Info: File `"Finding the optimal stategy for the dice game 'Pig'".out' has not changed.
 (rerunfilecheck)             Checksum: CB9C2C155E253C8EC96B1940DEF7F70F;2634.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 172.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 187.
  ) 
 Here is how much of TeX's memory you used:
- 8587 strings out of 492990
- 123498 string characters out of 6136333
- 224067 words of memory out of 5000000
- 12028 multiletter control sequences out of 15000+600000
- 10053 words of font info for 36 fonts, out of 8000000 for 9000
+ 8619 strings out of 492990
+ 124189 string characters out of 6136333
+ 224284 words of memory out of 5000000
+ 12050 multiletter control sequences out of 15000+600000
+ 10399 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 33i,5n,42p,505b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on "Finding the optimal stategy for the dice game 'Pig'.pdf" (5 pages, 504118 bytes).
+ 33i,6n,42p,1120b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on "Finding the optimal stategy for the dice game 'Pig'.pdf" (6 pages, 613331 bytes).
 PDF statistics:
- 282 PDF objects out of 1000 (max. 8388607)
- 258 compressed objects within 3 object streams
- 45 named destinations out of 1000 (max. 500000)
- 302 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 303 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 312 words of extra memory for PDF output out of 10000 (max. 10000000)
 

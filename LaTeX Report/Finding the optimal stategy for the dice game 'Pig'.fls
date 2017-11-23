@@ -1,4 +1,4 @@
-PWD C:/Users/Anthony/OneDrive/Documents/University/Mathematics/Year 3 Term 1/Mathematical Research/Pig-Dice-Game-Analysis
+PWD C:/Users/Anthony/OneDrive/Documents/University/Mathematics/Year 3 Term 1/Mathematical Research/Pig-Dice-Game-Analysis/LaTeX Report
 INPUT c:/texlive/2017/texmf.cnf
 INPUT c:/texlive/2017/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -130,6 +130,13 @@ INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 OUTPUT Finding the optimal stategy for the dice game 'Pig'.toc
 INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT neller_optimal_solution.jpg
+INPUT ./neller_optimal_solution.jpg
+INPUT ./neller_optimal_solution.jpg
+INPUT neller_optimal_solution_2.jpg
+INPUT ./neller_optimal_solution_2.jpg
+INPUT ./neller_optimal_solution_2.jpg
 INPUT Finding the optimal stategy for the dice game 'Pig'.bbl
 INPUT Finding the optimal stategy for the dice game 'Pig'.bbl
 INPUT Finding the optimal stategy for the dice game 'Pig'.aux
@@ -147,4 +154,5 @@ INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
 INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
