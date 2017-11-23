@@ -50,13 +50,12 @@ for m= Top_size+1:Top_size+Bottom_size
                     D(m)=1-P(i+1,j+k+1,1);
                 end
             elseif S(j+1,i+1,k+1) == 1 % If Rolling
-                C(m,1)=Dice_prob;
                 for z = 2:Top_size+Bottom_size-m
                     if z <= 1/Dice_prob
                         C(m,m+z)=-Dice_prob;
                     end
                 end
-                D(m)= 1+sum(C(m,:))-Dice_prob;
+                D(m)= 1+sum(C(m,:))-Dice_prob*P(i+1,j+1,k+1);
             end
             break
         end

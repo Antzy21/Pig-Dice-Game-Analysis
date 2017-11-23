@@ -1,10 +1,9 @@
 function [P,Q]=Optimising_Probability_Matrices(Strategy_S,To_win,Dice_prob)
 for i=1:2
 
-P=zeros(To_win,To_win,To_win);
-Q=zeros(To_win,To_win,To_win);
-
 [Matrix_S,Name_S]=Strategies_to_Matrices(Strategy_S,To_win);
+    
+[P,Q]=Probability_Matrices(Strategy_S,Strategy_S,To_win,Dice_prob);
 
 global_stalemate = false;
 for i=To_win-1:-1:0
