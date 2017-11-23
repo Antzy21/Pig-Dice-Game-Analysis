@@ -5,7 +5,7 @@ Researching the dice game Pig.
 Details on the game found on [Wikipedia](https://en.wikipedia.org/wiki/Pig_(dice_game))
 ________________________________________________________________________________
 
-##Folder Organisation
+## Folder Organisation
 
 'LaTeX Report' contains our report in Latex form, with file needed to compile it.
 
@@ -20,24 +20,24 @@ ________________________________________________________________________________
 'Strategies' contains strategies to run for the game.
 ________________________________________________________________________________
 
-##Matlab functions
+## Matlab functions
 
 A collection of Matlab functions, to achieve a certain goal, call on each other in an order notated as such:
 e.g. Function 1 <- (Function 2, Function 3 <- Function 4)
 Where Function 1 calls on Function 2 and Function 3, and within that, function 3 calls on function 4.
 Here are a list of objectives and the code that will produce the desired output.
 
-####Finding probability of strategies winning against eachother
+#### Finding probability of strategies winning against eachother
 Probability_Matrices <- (Matrices, Strategies_to_Matrices)
 
-####Optimising a Strategy against another attempt 1
+#### Optimising a Strategy against another attempt 1
 OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
 
-####Repeating Optimisations to find an optimal Strategy
+#### Repeating Optimisations to find an optimal Strategy
 OptimisingVs_Iterative <- OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
 ________________________________________________________________________________
 
-##Report Plan
+## Report Plan
 
 #### Title – Liam – Make it fancy and professional
 
