@@ -1,6 +1,6 @@
 # Pig-Dice-Game-Analysis
 
-Mathematical Research at Exeter University (3 year group project module)
+Mathematical Research at Exeter University (3rd year group project module)
 
 Researching the dice game Pig.
 
@@ -25,8 +25,11 @@ ________________________________________________________________________________
 ## Matlab functions
 
 A collection of Matlab functions, to achieve a certain goal, call on each other in an order notated as such:
+
 e.g. Function 1 <- (Function 2, Function 3 <- Function 4)
+
 Where Function 1 calls on Function 2 and Function 3, and within that, function 3 calls on function 4.
+
 Here are a list of objectives and the code that will produce the desired output.
 
 #### Finding probability of strategies winning against eachother
