@@ -1,9 +1,11 @@
-function [P,Q]=Optimising_Probability_Matrices(Strategy_S,To_win,Dice_prob)
+function [P,Q,Optimised_Strategy]=Optimising_Probability_Matrices(Strategy_S,To_win,Dice_prob)
 for i=1:2
 
 [Matrix_S,Name_S]=Strategies_to_Matrices(Strategy_S,To_win);
     
 [P,Q]=Probability_Matrices(Strategy_S,Strategy_S,To_win,Dice_prob);
+Optimised_Strategy = zeros(To_win,To_win,To_win);
+
 
 global_stalemate = false;
 for i=To_win-1:-1:0
@@ -16,6 +18,9 @@ for i=To_win-1:-1:0
                 Proll=X(l);
                 Pbank=X(n/2+l);
                 P(i+1,j+1,l)=max(Proll,Pbank);
+                if Proll > Pbank % If rolling best option, choose roll
+                    Optimised_Strategy(i+1,j+1,l)=1;
+                end
             end
             for l=1:m-n
                 Q(j+1,i+1,l)=X(n+l);
