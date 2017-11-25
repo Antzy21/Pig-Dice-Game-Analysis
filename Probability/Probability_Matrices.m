@@ -15,8 +15,8 @@ for i=To_win-1:-1:0
         for k=1:P_size
             P(i+1,j+1,k)=X(k);
         end
-        for k=P_size+1:P_size+Q_size
-            Q(j+1,i+1,k)=X(k);
+        for k=1:Q_size
+            Q(j+1,i+1,k)=X(P_size+k);
         end
     end
 end
