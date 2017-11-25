@@ -1,4 +1,4 @@
-function [C,D,n,m,stalemate]=Optimising_Matrices(i,j,Dice_prob,To_win,S,P,Q)
+function [C,D,P_size,Q_size,stalemate]=Optimising_Matrices(i,j,Dice_prob,To_win,S,P,Q)
 % Let i be P's current score
 % Let j be Q's current score
 % Let k be the turn score

@@ -10,27 +10,27 @@ Optimised_Strategy = zeros(To_win,To_win,To_win);
 global_stalemate = false;
 for i=To_win-1:-1:0
     for j=To_win-1:-1:0
-        [C,D,n,m,stalemate]=Optimising_Matrices(i,j,Dice_prob,To_win,Matrix_S,P,Q);
+        [C,D,P_size,Q_size,stalemate]=Optimising_Matrices(i,j,Dice_prob,To_win,Matrix_S,P,Q);
         if stalemate == false
             X=C\D;
-            for l=1:n/2
+            for l=1:P_size
                 % Choose the max between Banking and Rolling
                 Proll=X(l);
-                Pbank=X(n/2+l);
+                Pbank=X(P_size+l);
                 P(i+1,j+1,l)=max(Proll,Pbank);
                 if Proll > Pbank % If rolling best option, choose roll
                     Optimised_Strategy(i+1,j+1,l)=1;
                 end
             end
-            for l=1:m-n
-                Q(j+1,i+1,l)=X(n+l);
+            for l=1:Q_size-P_size
+                Q(j+1,i+1,l)=X(P_size+l);
             end
         elseif stalemate == true
             global_stalemate = true;
-            for l=1:n
+            for l=1:P_size
                 P(i+1,j+1,l)=0;
             end
-            for l=1:m-n
+            for l=1:Q_size-P_size
                 Q(j+1,i+1,l)=1;
             end
         end
