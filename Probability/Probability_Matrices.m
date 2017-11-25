@@ -5,9 +5,6 @@ for i=1:2
 P=zeros(To_win,To_win,To_win);
 Q=zeros(To_win,To_win,To_win);
 
-% Set up Optimal Strategy as a matrix
-Optimal_Vs = zeros(To_win,To_win,To_win);
-
 % Set up Strategies as Matrices (If they aren't strategies already)
 [Matrix_A,Name_A]=Strategies_to_Matrices(Strategy_A,To_win);
 [Matrix_B,Name_B]=Strategies_to_Matrices(Strategy_B,To_win);
