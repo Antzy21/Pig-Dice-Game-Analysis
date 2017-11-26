@@ -22,8 +22,8 @@ for n= 1:P_size
                 end
             elseif A(i+1,j+1,k+1) == 1 % If Rolling:
                 C(n,P_size+1)=Dice_prob;
-                for z = 2:P_size-n
-                    if z <= (1/Dice_prob)
+                for z = 2:1/Dice_prob % For all the possible value to add to the score
+                    if i+k+z < To_win % So long as the GS is not won
                         C(n,n+z)= -Dice_prob;
                     end
                 end
