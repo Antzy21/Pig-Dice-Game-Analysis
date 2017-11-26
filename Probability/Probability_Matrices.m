@@ -19,11 +19,11 @@ for i=To_win-1:-1:0
     for j=To_win-1:-1:0
         [C,D,P_size,Q_size]=Matrices(i,j,Dice_prob,To_win,Matrix_A,Matrix_B,P,Q);
         X=C\D;
-        for k=1:P_size
-            P(i+1,j+1,k)=X(k);
+        for k=0:P_size-1 % Sort out P
+            P(i+1,j+1,k+1)=X(k+1);
         end
-        for k=1:Q_size
-            Q(j+1,i+1,k)=X(P_size+k);
+        for k=0:Q_size-1 % Sort out Q
+            Q(j+1,i+1,k+1)=X(P_size+k+1);
         end
     end
 end
