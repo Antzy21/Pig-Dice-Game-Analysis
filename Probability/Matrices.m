@@ -1,4 +1,4 @@
-function [C,D,n,m,stalemate]=Matrices(i,j,Dice_prob,To_win,A,B,P,Q)
+function [C,D,P_size,Q_size]=Matrices(i,j,Dice_prob,To_win,A,B,P,Q)
 % Let i be P's current score
 % Let j be Q's current score
 % Let k be the turn score
@@ -7,7 +7,6 @@ P_size=To_win-i;
 Q_size=To_win-j;
 C=zeros(P_size+Q_size,P_size+Q_size);
 D=zeros(P_size+Q_size,1);
-stalemate=false;
 
 % Build top half of the matrix
 for n= 1:P_size
@@ -16,12 +15,8 @@ for n= 1:P_size
         if C(z,n)~=0 || n == 1 % If not an impossible GS: variable is used.
             if A(i+1,j+1,k+1) == 0 % If Banking:
                 if k==0 % If Banking on 0... *sigh*
-                    if B(j+1,i+1,1) == 0 % If Oppnt Banking on 0... *sigh*
-                        C=0; D=0; n=P_size; m=P_size+Q_size; stalemate=true;
-                        return
-                    end
-                    D(n)=1;
-                    C(n,To_win-i+1)=1;
+                    D(n)=1; % Value for D matrix
+                    C(n,P_size+1)=1; % Call Q GS in the matrix
                 else % Proper Bank:
                     D(n)=1-Q(j+1,i+k+1,1);
                 end
@@ -47,8 +42,8 @@ for m= P_size+1:P_size+Q_size
         if C(z,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
             if B(j+1,i+1,k+1) == 0 % If Banking
                 if k==0 % If Banking on 0... *sigh*
-                    D(m)=1;
-                    C(m,1)=1;
+                    D(m)=1; % Value for D matrix
+                    C(m,1)=1; % Call Q GS in the matrix
                 else % Proper Bank:
                     D(m)=1-P(i+1,j+k+1,1);
                 end
