@@ -15,7 +15,7 @@ for n= 1:P_size
         if C(z,n)~=0 || n == 1 % If not an impossible GS: variable is used.
             
             if A(i+1,j+1,k+1) == 1 % If Rolling:
-                C(n,P_size+1)=Dice_prob;
+                C(n,P_size+1)=Dice_prob; % If it looses, go to Q
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
                     if i+k+z < To_win % So long as the GS is not won
                         C(n,n+z)= -Dice_prob;
@@ -46,7 +46,7 @@ for m= P_size+1:P_size+Q_size
         if C(z,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
             
             if B(j+1,i+1,k+1) == 1 % If Rolling
-                C(m,1)=Dice_prob;
+                C(m,1)=Dice_prob; % If it looses, go to P
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
                     if j+k+z < To_win % So long as the GS is not won
                         C(m,m+z)=-Dice_prob;
