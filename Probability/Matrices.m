@@ -13,14 +13,8 @@ for n= 1:P_size
     k=n-1; % Set value of turn score (k) for use and clarity
     for z = 1:n % Checks all values above to see if variable is used.
         if C(z,n)~=0 || n == 1 % If not an impossible GS: variable is used.
-            if A(i+1,j+1,k+1) == 0 % If Banking:
-                if k==0 % If Banking on 0... *sigh*
-                    D(n)=1; % Value for D matrix
-                    C(n,P_size+1)=1; % Call Q GS in the matrix
-                else % Proper Bank:
-                    D(n)=1-Q(j+1,i+k+1,1);
-                end
-            elseif A(i+1,j+1,k+1) == 1 % If Rolling:
+            
+            if A(i+1,j+1,k+1) == 1 % If Rolling:
                 C(n,P_size+1)=Dice_prob;
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
                     if i+k+z < To_win % So long as the GS is not won
@@ -29,6 +23,16 @@ for n= 1:P_size
                 end
                 D(n)= 1+sum(C(n,:))-Dice_prob;
             end
+                
+            if A(i+1,j+1,k+1) == 0 % If Banking:
+                if k==0 % If Banking on 0... *sigh*
+                    D(n)=1; % Value for D matrix
+                    C(n,P_size+1)=1; % Call Q GS in the matrix
+                else % Proper Bank:
+                    D(n)=1-Q(j+1,i+k+1,1);
+                end
+            end
+            
             break
         end
     end
