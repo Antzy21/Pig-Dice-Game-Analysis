@@ -11,8 +11,8 @@ D=zeros(P_size+Q_size,1);
 % Build top half of the matrix
 for n= 1:P_size
     k=n-1; % Set value of turn score (k) for use and clarity
-    for z = 1:n % Checks all values above to see if variable is used.
-        if C(z,n)~=0 || n == 1 % If not an impossible GS: variable is used.
+    for v = 1:n % Checks all values above to see if variable is used.
+        if C(v,n)~=0 || n == 1 % If not an impossible GS: variable is used.
             
             if A(i+1,j+1,k+1) == 1 % If Rolling:
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
@@ -42,8 +42,8 @@ end
 % Build bottom half of the matrix
 for m= P_size+1:P_size+Q_size
     k=m-P_size-1;
-    for z = n+1:m % Checks all values above to see if variable is used.
-        if C(z,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
+    for v = n+1:m % Checks all values above to see if variable is used.
+        if C(v,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
             
             if B(j+1,i+1,k+1) == 1 % If Rolling
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
