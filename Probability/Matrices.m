@@ -43,7 +43,7 @@ end
 for m= P_size+1:P_size+Q_size
     k=m-P_size-1;
     for v = n+1:m % Checks all values above to see if variable is used.
-        if C(v,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
+        if C(v,m)~=0 || m == P_size+1 % If not an impossible GS: variable is used.
             
             if B(j+1,i+1,k+1) == 1 % If Rolling
                 for z = 2:1/Dice_prob % For all the possible value to add to the score
