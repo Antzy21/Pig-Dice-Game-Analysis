@@ -49,8 +49,8 @@ for m= P_size+1:P_size+Q_size
                 end
             elseif B(j+1,i+1,k+1) == 1 % If Rolling
                 C(m,1)=Dice_prob;
-                for z = 2:P_size+Q_size-m
-                    if z <= 1/Dice_prob
+                for z = 2:1/Dice_prob % For all the possible value to add to the score
+                    if j+k+z < To_win % So long as the GS is not won
                         C(m,m+z)=-Dice_prob;
                     end
                 end
