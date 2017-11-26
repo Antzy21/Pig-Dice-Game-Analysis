@@ -18,7 +18,7 @@ end
 for i=To_win-1:-1:0
     for j=To_win-1:-1:0
         [C,D,P_size,Q_size]=Matrices(i,j,Dice_prob,To_win,Matrix_A,Matrix_B,P,Q);
-        X=C/D;
+        X=C\D;
         for k=1:P_size
             P(i+1,j+1,k)=X(k);
         end
@@ -28,7 +28,7 @@ for i=To_win-1:-1:0
     end
 end
 
-fprintf('Probability of ''%s'' winning when going first is %d\n',Name_A,P(1,1,1));
-fprintf('Probability of ''%s'' winning when going first is %d\n',Name_B,Q(1,1,1));
+fprintf('Probability of ''%s'' winning when going first is %f\n',Name_A,P(1,1,1));
+fprintf('Probability of ''%s'' winning when going first is %f\n',Name_B,Q(1,1,1));
 
 end
