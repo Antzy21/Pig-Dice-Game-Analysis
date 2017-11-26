@@ -16,7 +16,7 @@ for n= 1:P_size
             if A(i+1,j+1,k+1) == 0 % If Banking:
                 if k==0 % If Banking on 0... *sigh*
                     D(n)=1; % Value for D matrix
-                    C(n,P_size+1)=1; % 
+                    C(n,P_size+1)=1; % Call Q GS in the matrix
                 else % Proper Bank:
                     D(n)=1-Q(j+1,i+k+1,1);
                 end
@@ -42,8 +42,8 @@ for m= P_size+1:P_size+Q_size
         if C(z,m)~=0 || m == n+1 % If not an impossible GS: variable is used.
             if B(j+1,i+1,k+1) == 0 % If Banking
                 if k==0 % If Banking on 0... *sigh*
-                    D(m)=1;
-                    C(m,1)=1;
+                    D(m)=1; % Value for D matrix
+                    C(m,1)=1; % Call Q GS in the matrix
                 else % Proper Bank:
                     D(m)=1-P(i+1,j+k+1,1);
                 end
