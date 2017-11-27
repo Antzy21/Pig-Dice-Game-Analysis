@@ -1,0 +1,18 @@
+\begin{thebibliography}{Kni99}
+
+\bibitem[Kni99]{knizia2010dice}
+Reiner Knizia.
+\newblock {\em Dice Games Properly Explained}.
+\newblock Elliot Right-Way Books, 1999.
+
+\bibitem[NP04]{neller2004optimal}
+Todd~W Neller and Clifton~GM Presser.
+\newblock Optimal play of the dice game pig.
+\newblock {\em The UMAP Journal}, 25(1), 2004.
+
+\bibitem[NP10]{neller2010practical}
+Todd~W Neller and Clifton~GM Presser.
+\newblock Practical play of the dice game pig.
+\newblock {\em The UMAP Journal}, 31(1), 2010.
+
+\end{thebibliography}
