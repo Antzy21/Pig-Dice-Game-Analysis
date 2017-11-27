@@ -2,8 +2,12 @@
 *.asv
 *.aux
 *.bbl
+*.blg
 *.fdb_latexmk
 *.fls
 *.log
+*.out
 *.pdf
+*.toc
+*.synctex.gz
 *.toc
