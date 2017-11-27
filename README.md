@@ -1,5 +1,6 @@
 # Pig-Dice-Game-Analysis
 
+
 Mathematical Research at Exeter University (3rd year group project module)
 
 Researching the dice game Pig.
@@ -40,6 +41,7 @@ OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices, Catch
 
 #### Repeating Optimisations (attempt 1) to find an optimal Strategy
 OptimisingVs_Iterative <- OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices, Catch_Stalemates)
+
 
 #### Optimising a strategy against another (attempt 3 {_attempt 2 failed_})
 Optimising_Probability_Matrices <- (Optimising_Matrices, Strategies_to_Matrices, Catch_Stalemates)
