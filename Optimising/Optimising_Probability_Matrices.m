@@ -36,7 +36,7 @@ for i=To_win-1:-1:0
     end
 end
 
-fprintf('Probability of ''%s'' winning when going first is %f\n',Opt_name,P(1,1,1));
+fprintf('Probability of optimised ''%s'' winning when going first is %f\n',Opt_name,P(1,1,1));
 fprintf('Probability of ''%s'' winning when going first is %f\n',Strat_name,Q(1,1,1));
 
 end
