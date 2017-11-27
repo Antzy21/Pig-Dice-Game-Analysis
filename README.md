@@ -33,13 +33,16 @@ Where Function 1 calls on Function 2 and Function 3, and within that, function 3
 Here are a list of objectives and the code that will produce the desired output.
 
 #### Finding probability of strategies winning against eachother
-Probability_Matrices <- (Matrices, Strategies_to_Matrices)
+Probability_Matrices <- (Matrices, Strategies_to_Matrices, Catch_Stalemates)
 
-#### Optimising a Strategy against another attempt 1
-OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
+#### Optimising a Strategy against another (attempt 1)
+OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices, Catch_Stalemates)
 
-#### Repeating Optimisations to find an optimal Strategy
-OptimisingVs_Iterative <- OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices)
+#### Repeating Optimisations (attempt 1) to find an optimal Strategy
+OptimisingVs_Iterative <- OptimisingVs <- Probability_Matrices <- (Matrices, Strategies_to_Matrices, Catch_Stalemates)
+
+#### Optimising a strategy against another (attempt 3 {_attempt 2 failed_})
+Optimising_Probability_Matrices <- (Optimising_Matrices, Strategies_to_Matrices, Catch_Stalemates)
 ________________________________________________________________________________
 
 ## Report Plan
