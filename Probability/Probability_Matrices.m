@@ -1,5 +1,4 @@
 function [P,Q]=Probability_Matrices(Strategy_A,Strategy_B,To_win,Dice_prob)
-for i=1:2
 
 % Set up P & Q probabilities as a matrix
 P=zeros(To_win,To_win,To_win);
@@ -9,36 +8,27 @@ Q=zeros(To_win,To_win,To_win);
 [Matrix_A,Name_A]=Strategies_to_Matrices(Strategy_A,To_win);
 [Matrix_B,Name_B]=Strategies_to_Matrices(Strategy_B,To_win);
 
-global_stalemate = false;
+% Check for Stalemates
+[Stalemate,I,J]=Catch_Stalemates(Matrix_A,Matrix_B,To_win);
+if Stalemate == 1
+    fprintf('A Stalemate has occured when ''%s'' has %d points and when ''%s'' has %d points\n',Name_A,I,Name_B,J);
+    return
+end
+
 for i=To_win-1:-1:0
     for j=To_win-1:-1:0
-        [C,D,n,m,stalemate]=Matrices(i,j,Dice_prob,To_win,Matrix_A,Matrix_B,P,Q);
-        if stalemate == false
-            X=C\D;
-            for l=1:n
-                P(i+1,j+1,l)=X(l);
-            end
-            for l=1:m-n
-                Q(j+1,i+1,l)=X(n+l);
-            end
-        elseif stalemate == true
-            global_stalemate = true;
-            for l=1:n
-                P(i+1,j+1,l)=0;
-            end
-            for l=1:m-n
-                Q(j+1,i+1,l)=1;
-            end
+        [C,D,P_size,Q_size]=Matrices(i,j,Dice_prob,To_win,Matrix_A,Matrix_B,P,Q);
+        X=C\D;
+        for k=0:P_size-1 % Sort out P
+            P(i+1,j+1,k+1)=X(k+1);
+        end
+        for k=0:Q_size-1 % Sort out Q
+            Q(j+1,i+1,k+1)=X(P_size+k+1);
         end
     end
 end
 
-if global_stalemate == false
-    fprintf('Probability of ''%s'' winning when going first is %f \n',Name_A,P(1,1,1));
-    fprintf('Probability of ''%s'' winning when going first is %f \n',Name_B,Q(1,1,1));
-    return
-end
-fprintf('Probability of ''%s'' winning when going first is %f \n',Name_A,P(1,1,1));
-Strategy_temp = Strategy_A; Strategy_A = Strategy_B; Strategy_B = Strategy_temp;
-end
+fprintf('Probability of ''%s'' winning when going first is %f\n',Name_A,P(1,1,1));
+fprintf('Probability of ''%s'' winning when going first is %f\n',Name_B,Q(1,1,1));
+
 end
