@@ -142,13 +142,56 @@ Mia
 Chris C
 \subsubsection{Hand Written notes}
 \subsubsection{Coding Pig}
+
+% Required knowledge:
+% - Similataneous equation sets
+% - Matrix form of the sets
+
+Once we had familisirised ourselves with the rules of the game, the equations, and
+a few simple piglet examples, we moved to matlab.
+The end goal is the make use of Matlab's computational power, to solve thousands of
+similtaneous equations and find all the probabilites at each game state.
+We can also make use of variable inputs to compare any strategy to another, and
+even change the score needed to win and the dice probability.
+
+Our first attempt at simply getting out ideas down as code was a very simplified
+calculation of piglet. Although we coded in a dice probability variable that could be changed,
+the code only worked for a dice flip, and when the variable was set to $\frac{1}{2}$.
+It was also limited to taking in only Bank on strategies.
+%Explain what Bank on strats are
+We could however run to any winning score.
+
+The way we got Matlab to solve the sets of similtanious equations was by turning them into
+matrices of coefficients, variables and constants. $CX=D$ This was discussed before
+and will be touched on again to talk about the layout of the matrices in the more general
+refined code for pig.
+
+By using the hand calculated simple piglet probabilities we could check to see if our
+coded matrices were correct and fix any bugs. Once this was working we had our first
+runnable code to get us going. We just had to generalise the code.
+There were two steps to doing this; taking any strategy as an input, and having any
+dice probability working in the code. The former was easier; an independent problem that we
+made a function to do for us. The later was a little trickier but was a fundamental part
+of building the matrices.
+
+% Subsection on Strategies to matrices
+
+% Subsection on coding matrices
+
+...
+
+Once we had done this, we had a generalised working code that could calculate the
+probabilities of winning at any game state, for any two strategies, for any given
+dice proability and to any winning score.
+
 \subsubsection{Piglet Findings}
 
 \subsection{Pig}
 anthony and rhodri
 \subsubsection{Expansion from Piglet}
 
-I DID SOMETHING IOMPORTANT HERE
+% The layout of subsections needs to change but the subsection below on debuggin
+% can come right after the last thing i wrote in "coding for pig" ( For Rhodri, from Ant <3 )
 
 \subsubsection{Debugging of the code}
 \subsection{Behavioural Economics}
