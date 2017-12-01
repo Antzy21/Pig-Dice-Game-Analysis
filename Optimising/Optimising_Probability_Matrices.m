@@ -1,12 +1,12 @@
-function [P,Q,Opt]=Optimising_Probability_Matrices(Opt,Str,To_win,Dice_prob)
+function [Opt,P,Q]=Optimising_Probability_Matrices(Opt,Str,To_win,Dice_prob)
 
 % Set up P & Q probabilities as a matrix
 P=zeros(To_win,To_win,To_win);
 Q=zeros(To_win,To_win,To_win);
 
 % Set up Stregies as Matrices (If they aren't Stregies already)
-[Opt,Opt_name]=Stregies_to_Matrices(Opt,To_win);
-[Str,Str_name]=Stregies_to_Matrices(Str,To_win);
+[Opt,Opt_name]=Strategies_to_Matrices(Opt,To_win);
+[Str,Str_name]=Strategies_to_Matrices(Str,To_win);
 
 % Check for Stalemates
 [Stalemate,i,j]=Catch_Stalemates(Opt,Str,To_win);
