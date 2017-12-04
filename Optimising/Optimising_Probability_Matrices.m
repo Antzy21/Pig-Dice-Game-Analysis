@@ -1,12 +1,11 @@
 function [Opt,P,Q]=Optimising_Probability_Matrices(Opt,Str,To_win,Dice_prob)
 
 % Set up P & Q probabilities as a matrix
-P=zeros(To_win,To_win,To_win);
-Q=zeros(To_win,To_win,To_win);
+[P,Q]=P_M_NoComment(Opt,Str,To_win,Dice_prob);
 
-% Set up Stregies as Matrices (If they aren't Stregies already)
-[Opt,Opt_name]=Strategies_to_Matrices(Opt,To_win);
-[Str,Str_name]=Strategies_to_Matrices(Str,To_win);
+% Set up Stregies as Matrices (If they aren't Strategies already)
+[Opt]=Strategies_to_Matrices(Opt,To_win);
+[Str]=Strategies_to_Matrices(Str,To_win);
 
 % Check for Stalemates
 [Stalemate,i,j]=Catch_Stalemates(Opt,Str,To_win);
@@ -17,26 +16,46 @@ end
 
 for i=To_win-1:-1:0
     for j=To_win-1:-1:0
-        [C,D,P_size,Q_size]=Optimising_Matrices(i,j,Dice_prob,To_win,Opt,Str,P,Q);
-        X=C\D;
-        for k=0:P_size-1 % Sort out P
-            Proll = X(k+1);
-            Pbank = X(P_size+k+1);
-            if      Proll > Pbank
-                P(i+1,j+1,k+1)   = Proll;   % Set probability Value
-                Opt(i+1,j+1,k+1) = 1; % Set best choice in Stregy
-            elseif  Pbank < Proll
-                P(i+1,j+1,k+1)   = Pbank;   % Set probability Value
-                Opt(i+1,j+1,k+1) = 0; % Set best choice in Stregy
+            
+            Continue = 1; % Always run at least once
+            
+            Iters = 0;
+            
+            while (Continue == 1 && Iters < 10)
+            
+            Iters = Iters + 1;
+            
+            fprintf('Game State (%d,%d) Iteration:%d\n',i,j,Iters)
+
+            [C,D,P_size,~]=Optimising_Matrices(i,j,Dice_prob,To_win,Opt,Str,P,Q); X=C\D;
+
+            Proll=zeros(P_size,1);
+            Pbank=zeros(P_size,1);
+
+            for k=0:P_size-1 % Sort out P
+                Proll(k+1) = X(k+1);
+                Pbank(k+1) = X(P_size+k+1);
+                if      Proll(k+1) > Pbank(k+1) && Opt(i+1,j+1,k+1) ~= 1; % If rolling is better & current doesn't roll
+                    Opt(i+1,j+1,k+1) = 1; % Change Strategy to roll
+                    fprintf('The strategy has changed to roll at (%d,%d,%d), re-calculate\n',i,j,k);
+                    Continue = 1;
+                elseif  Pbank(k+1) > Proll(k+1) && Opt(i+1,j+1,k+1) ~= 0; % If banking is better & current doesn't bank
+                    Opt(i+1,j+1,k+1) = 0; % Change Strategy to bank
+                    fprintf('The strategy has changed to bank at (%d,%d,%d), re-calculate\n',i,j,k);
+                    Continue = 1;
+                else
+                    %fprintf('The strategy is stababilise at (%d,%d,%d)\n',i,j,k)
+                    Continue = 0;
+                end
             end
-        end
-        for k=0:Q_size-1 % Sort out Q
-            Q(j+1,i+1,k+1)=X(2*P_size+k+1);
+
+            % Recalculate P & Q probabilites to use in re-run
+            [P,Q]=P_M_NoComment(Opt,Str,To_win,Dice_prob);
+
         end
     end
 end
 
-fprintf('Probability of optimised ''%s'' winning when going first is %f\n',Opt_name,P(1,1,1));
-fprintf('Probability of ''%s'' winning when going first is %f\n',Str_name,Q(1,1,1));
+[P,Q]=Probability_Matrices(Opt,Str,To_win,Dice_prob);
 
 end
