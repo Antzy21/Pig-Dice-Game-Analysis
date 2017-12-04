@@ -4,9 +4,21 @@ function [P,Q]=Probability_Matrices(Strategy_A,Strategy_B,To_win,Dice_prob)
 P=zeros(To_win,To_win,To_win);
 Q=zeros(To_win,To_win,To_win);
 
+inputname(1);
+
 % Set up Strategies as Matrices (If they aren't strategies already)
-[Matrix_A,Name_A]=Strategies_to_Matrices(Strategy_A,To_win);
-[Matrix_B,Name_B]=Strategies_to_Matrices(Strategy_B,To_win);
+if isa(Strategy_A, 'double')
+    Name_A=inputname(1);
+elseif isa(Strategy_A, 'function_handle')
+    Name_A=func2str(Strategy_A);
+    [Matrix_A]=Strategies_to_Matrices(Strategy_A,To_win);
+end
+if isa(Strategy_B, 'double')
+    Name_B=inputname(1);
+elseif isa(Strategy_B, 'function_handle')
+    Name_B=func2str(Strategy_B);
+    [Matrix_B]=Strategies_to_Matrices(Strategy_B,To_win);
+end
 
 % Check for Stalemates
 [Stalemate,I,J]=Catch_Stalemates(Matrix_A,Matrix_B,To_win);
