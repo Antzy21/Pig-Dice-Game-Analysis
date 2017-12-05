@@ -1,12 +1,8 @@
 function winner = pig_with_matrices(opp1,opp2)
 
 
-    if isa(opp1, 'function_handle')
-        [opp1]=Strategies_to_Matrices(opp1,100);
-    end
-    if isa(opp2, 'function_handle')
-        [opp2]=Strategies_to_Matrices(opp2,100);
-    end
+    [opp1]=Strategies_to_Matrices(opp1,100);
+    [opp2]=Strategies_to_Matrices(opp2,100);
 
     score1 = 0;
     score2 = 0;
