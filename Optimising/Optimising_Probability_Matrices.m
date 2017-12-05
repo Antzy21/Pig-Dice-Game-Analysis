@@ -49,8 +49,8 @@ for i=To_win-1:-1:0
                 end
             end
 
-            % Recalculate P & Q probabilites to use in re-run
-            [P,Q]=P_M_NoComment(Opt,Str,To_win,Dice_prob);
+            % Recalculate P & Q probabilites (for specific i and j only) to use in re-run
+            [P,Q]=X_to_Probabilities(i,j,Opt,Str,Dice_prob,To_win,P,Q);
 
         end
     end
