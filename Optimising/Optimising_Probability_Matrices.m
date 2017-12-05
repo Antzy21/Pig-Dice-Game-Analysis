@@ -25,7 +25,7 @@ for i=To_win-1:-1:0
             
             Iters = Iters + 1;
             
-            fprintf('Game State (%d,%d) Iteration:%d\n',i,j,Iters)
+            %fprintf('Game State (%d,%d) Iteration:%d\n',i,j,Iters)
 
             [C,D,P_size,~]=Optimising_Matrices(i,j,Dice_prob,To_win,Opt,Str,P,Q); X=C\D;
 
@@ -37,11 +37,11 @@ for i=To_win-1:-1:0
                 Pbank(k+1) = X(P_size+k+1);
                 if      Proll(k+1) > Pbank(k+1) && Opt(i+1,j+1,k+1) ~= 1; % If rolling is better & current doesn't roll
                     Opt(i+1,j+1,k+1) = 1; % Change Strategy to roll
-                    fprintf('The strategy has changed to roll at (%d,%d,%d), re-calculate\n',i,j,k);
+                    %fprintf('The strategy has changed to roll at (%d,%d,%d), re-calculate\n',i,j,k);
                     Continue = 1;
                 elseif  Pbank(k+1) > Proll(k+1) && Opt(i+1,j+1,k+1) ~= 0; % If banking is better & current doesn't bank
                     Opt(i+1,j+1,k+1) = 0; % Change Strategy to bank
-                    fprintf('The strategy has changed to bank at (%d,%d,%d), re-calculate\n',i,j,k);
+                    %fprintf('The strategy has changed to bank at (%d,%d,%d), re-calculate\n',i,j,k);
                     Continue = 1;
                 else
                     %fprintf('The strategy is stababilise at (%d,%d,%d)\n',i,j,k)
