@@ -1,4 +1,4 @@
-function [M,Name]=Strategies_to_Matrices(S,To_win)
+function [M]=Strategies_to_Matrices(S,To_win)
 M=zeros(To_win,To_win,To_win);
 for i=0:To_win-1
     for j=0:To_win-1
