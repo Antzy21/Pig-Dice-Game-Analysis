@@ -1,7 +1,12 @@
 function winner = pig_with_matrices(opp1,opp2)
 
-    [M]=Strategies_to_Matrices(opp1,100);
-    [M]=Strategies_to_Matrices(opp2,100);
+
+    if isa(opp1, 'function_handle')
+        [opp1]=Strategies_to_Matrices(opp1,100);
+    end
+    if isa(opp2, 'function_handle')
+        [opp2]=Strategies_to_Matrices(opp2,100);
+    end
 
     score1 = 0;
     score2 = 0;
@@ -10,11 +15,11 @@ function winner = pig_with_matrices(opp1,opp2)
     turn = 0;
     
     while cont_game
-        if opp1(score1,score2,0) == 0 && opp2(score2,score1,0) == 0
+        if opp1(score1+1,score2+1,1) == 0 && opp2(score2+1,score1+1,1) == 0
             winner = 0;
             return
         end
-        while opp1(score1,score2,turn) == 1
+        while opp1(score1+1,score2+1,turn+1) == 1
             throw = randi(6);
             if throw == 1
                 turn = 0;
@@ -31,7 +36,7 @@ function winner = pig_with_matrices(opp1,opp2)
         %score = [score1, score2]
         
         if score1 < 100
-            while opp2(score2,score1,turn) == 1
+            while opp2(score2+1,score1+1,turn+1) == 1
                 throw = randi(6);
                 if throw == 1
                     turn = 0;
