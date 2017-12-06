@@ -35,19 +35,19 @@ for i=To_win-1:-1:0
                 
                 if      Proll(k+1) > Pbank(k+1) && Opt(i+1,j+1,k+1) ~= 1; % If rolling is better & current doesn't roll
                     Opt(i+1,j+1,k+1) = 1; % Change Strategy to roll
-                    fprintf('The strategy has changed to roll at (%d,%d,%d), re-calculate\n',i,j,k);
+                    % fprintf('The strategy has changed to roll at (%d,%d,%d), re-calculate\n',i,j,k);
                     % Recalculate P & Q probabilites (for specific i and j only) to use in re-run
                     [P,Q]=X_to_Probabilities(i,j,Opt,Str,Dice_prob,To_win,P,Q);
                     Continue = 1;
                     
                 elseif  Pbank(k+1) > Proll(k+1) && Opt(i+1,j+1,k+1) ~= 0; % If banking is better & current doesn't bank
                     Opt(i+1,j+1,k+1) = 0; % Change Strategy to bank
-                    fprintf('The strategy has changed to bank at (%d,%d,%d), re-calculate\n',i,j,k);
+                    % fprintf('The strategy has changed to bank at (%d,%d,%d), re-calculate\n',i,j,k);
                     % Recalculate P & Q probabilites (for specific i and j only) to use in re-run
                     [P,Q]=X_to_Probabilities(i,j,Opt,Str,Dice_prob,To_win,P,Q);
                     Continue = 1;
                 else
-                    fprintf('The strategy is stababilise at (%d,%d,%d)\n',i,j,k)
+                    % fprintf('The strategy is stababilise at (%d,%d,%d)\n',i,j,k)
                 end
             end
         end
