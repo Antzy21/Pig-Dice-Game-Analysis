@@ -16,9 +16,9 @@ for n= 1:P_size
     C(n,n)=1; % Set Identity Values
     for z = 2:1/Dice_prob % For all the possible value to add to the score
         if i+k+z < To_win % So long as the GS is not won
-            if     Opt(i+1,j+1,k+1) == 1 % If Opt's future GS is rolling
+            if     Opt(i+1,j+1,k+z+1) == 1 % If Opt(i,j,k+z) future GS is rolling
                 C(n,n+z)        = -Dice_prob;
-            elseif Opt(i+1,j+1,k+1) == 0 % If Opt's future GS is banking
+            elseif Opt(i+1,j+1,k+z+1) == 0 % If Opt(i,j,k+z) future GS is banking
                 C(n,P_size+n+z) = -Dice_prob;
             end
         end
@@ -47,9 +47,9 @@ for m= 2*P_size+1:2*P_size+Q_size
                         C(m,m+z)=-Dice_prob;
                     end
                 end
-                if     Opt(i+1,j+1,k+1) == 1 % If Opt's future GS is rolling
+                if     Opt(i+1,j+1,1) == 1 % If Opt(i,j,0) future GS is rolling
                     C(m,1)=Dice_prob;        % If it loses, go to P
-                elseif Opt(i+1,j+1,k+1) == 0 % If Opt's future GS is banking
+                elseif Opt(i+1,j+1,1) == 0 % If Opt(i,j,0) future GS is banking
                     C(m,P_size+1)=Dice_prob; % If it loses, go to P
                 end
                 D(m)= 1+sum(C(m,:))-Dice_prob; % Value for D matrix
@@ -58,9 +58,9 @@ for m= 2*P_size+1:2*P_size+Q_size
             if Strat(j+1,i+1,k+1) == 0 % If Banking
                 if k==0 % If Banking on 0... *sigh*
                     D(m)=1; % Value for D matrix
-                    if     Opt(i+1,j+1,k+1) == 1 % If Opt's future GS is rolling
+                    if     Opt(i+1,j+1,1) == 1 % If Opt(i,j,0) future GS is rolling
                         C(m,1)=Dice_prob;        % Go to P
-                    elseif Opt(i+1,j+1,k+1) == 0 % If Opt's future GS is banking
+                    elseif Opt(i+1,j+1,1) == 0 % If Opt(i,j,0) future GS is banking
                         C(m,P_size+1)=Dice_prob; % Go to P
                     end
                 else % Proper Bank:
