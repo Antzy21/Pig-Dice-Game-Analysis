@@ -5,18 +5,18 @@ P=zeros(To_win,To_win,To_win);
 Q=zeros(To_win,To_win,To_win);
 
 % Set up Strategies as Matrices (If they aren't strategies already)
-if isa(Strategy_A, 'double')
-    Name_A=inputname(1);
-    [Strategy_A]=Strategies_to_Matrices(Strategy_A,To_win);
-elseif isa(Strategy_A, 'function_handle')
+if isa(Strategy_A, 'function_handle')
     Name_A=func2str(Strategy_A);
     [Strategy_A]=Strategies_to_Matrices(Strategy_A,To_win);
+else
+    Name_A=inputname(1);
+    [Strategy_A]=Strategies_to_Matrices(Strategy_A,To_win);
 end
-if isa(Strategy_B, 'double')
-    Name_B=inputname(2);
-    [Strategy_B]=Strategies_to_Matrices(Strategy_B,To_win);
-elseif isa(Strategy_B, 'function_handle')
+if isa(Strategy_B, 'function_handle')
     Name_B=func2str(Strategy_B);
+    [Strategy_B]=Strategies_to_Matrices(Strategy_B,To_win);
+else
+    Name_B=inputname(2);
     [Strategy_B]=Strategies_to_Matrices(Strategy_B,To_win);
 end
 
