@@ -102,7 +102,10 @@
 josh
 
 \subsubsubsection{Basics of Pig}
-`Pig' is a turn based dice game played by 2 people rolling a die. The number on the die signifies the points gained on that roll, which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end. However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end. The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
+`Pig' is a turn based dice game played by 2 people rolling a die. The number on the die signifies the points gained on that roll,
+which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end.
+However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end.
+The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
 \\
 \\
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking.
@@ -122,7 +125,11 @@ If this does define every strategy, the next big question, and the main focus of
 What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
 \\
 \\
-The probabilities of winning the game from any position can be simplified down into sets of linear equations. Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's banked points etc.). Then, \begin{equation}\label{1.2.1.a}
+The probabilities of winning the game from any gamestate can be simplified down into sets of linear equations.
+Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points,
+$j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning
+from the current position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's
+banked points etc.). Then, \begin{equation}\label{1.2.1.a}
 p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
  if A rolls and
@@ -131,7 +138,13 @@ p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
  \end{equation}
  if A banks their points.
 \subsection{Nellers Work}
-In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each roll of the die in `pig' as a bet of not rolling a $1$. He viewed the best strategy as ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}. However, Todd W Neller stated ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal}, from this Neller proceeded to find a more optimal solution for `pig' by taking the maximum of equation \ref{1.2.1.a} and equation \ref{1.2.1.b}. This was not possible however as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows the resulting optimal strategy where you should roll if you are below the surface of the graph and bank if above.
+In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each roll of the die in `pig' as a bet of not rolling a $1$.
+He viewed the best strategy as ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}.
+However, Todd W Neller stated ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal},
+from this Neller proceeded to find a more optimal solution for `pig' by taking the maximum of equation \ref{1.2.1.a} and equation \ref{1.2.1.b}.
+This was not possible however as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method.
+As a result Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll.
+Figure \ref{figure1} shows the resulting optimal strategy where you should roll if you are below the surface of the graph and bank if above.
 
 \begin{figure}
 \centering
@@ -146,9 +159,20 @@ In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each 
 
 
 \subsection{Optimal Stratergy}
-An optimal strategy is the strategy that when played against all other strategies is the best all-rounder. It will beat most others more than half the time however may have a few weaknesses. In the game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time. However, in some game the optimum is to do something destructive. The optimum is not set out to get the best win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
-\\ \\In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter. One of them is all to do with the optimal strategy for the game of pig. As such the programme looks at all possible game states within the pig dimension and at each node picks the one with the highest win likelihood. We aimed to look at this in order to see whether we could get to Neller’s optimal with our own code, or perhaps we get to a different optimal that may be better than Neller’s.
-\\ \\The other possibilities for the optimal was to reach a pair of strategies that when played together existed in a Nash equilibrium. A Nash equilibrium (named after Jordan Nash) is a point in a game space at which two strategies have to get worse against there opponent in order to adapt from their current position. Because of this it would not be optimal to follow such a path and so they stay stuck in that state. A good example of this is the prisoners game. It is defined as the following: \\
+An optimal strategy is the strategy that when played against all other strategies is the best all-rounder.
+It will beat most others more than half the time however may have a few weaknesses.
+In the game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time.
+However, in some game the optimum is to do something destructive. The optimum is not set out to get the best
+win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
+\\ \\In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter.
+One of them is all to do with the optimal strategy for the game of pig. As such the programme looks at all possible
+game states within the pig dimension and at each node picks the one with the highest win likelihood.
+We aimed to look at this in order to see whether we could get to Neller’s optimal with our own code,
+or perhaps we get to a different optimal that may be better than Neller’s.
+\\ \\The other possibilities for the optimal was to reach a pair of strategies that when played together existed in a Nash equilibrium.
+A Nash equilibrium (named after Jordan Nash) is a point in a game space at which two strategies have to get worse against there opponent
+in order to adapt from their current position. Because of this it would not be optimal to follow such a path and so they stay stuck in that state.
+A good example of this is the prisoners game. It is defined as the following: \\
 \textit{If you confess and your accomplice fails to confess, then you go free. If you fail to confess but your accomplice confesses, then you will be convicted and sentenced for the maximum term in jail. If you both confess, then you will both be convicted, but the maximum sentence will not be imposed. If neither confess, you will both be framed for another crime in which a conviction is certain.}\\
 
 \begin{figure}
@@ -157,7 +181,10 @@ An optimal strategy is the strategy that when played against all other strategie
 \caption{Prisoner's dilemma diagram\label{figure3}}
 \end{figure}
 
-As you can see the best outcome for each is that of no confession. However this is when one prisoner would look and say that confessing is the better option for them and then does so. Because this scenario is played such that both prisoners cannot discuss it then they would both make this discussion and you are left with the top left box after just a quick step. As you can see, this is not the best outcome for each of them, but they would have to take a greater loss in order to reach the best outcome and so are stuck in this nash equilibrium.
+As you can see the best outcome for each is that of no confession. However this is when one prisoner would look and say that confessing is the better
+option for them and then does so. Because this scenario is played such that both prisoners cannot discuss it then they would both make this discussion
+and you are left with the top left box after just a quick step. As you can see, this is not the best outcome for each of them, but they would have to
+take a greater loss in order to reach the best outcome and so are stuck in this nash equilibrium.
 \subsection{Preliminary Findings}
 chris N
 
