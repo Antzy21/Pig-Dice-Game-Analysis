@@ -101,7 +101,7 @@
 \subsection{Aims and Objectives}
 josh
 
-\subsubsubsection{Basics of Pig}
+\subsection{Basics of Pig}
 `Pig' is a turn based dice game played by 2 people rolling a die. The number on the die signifies the points gained on that roll,
 which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end.
 However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end.
@@ -125,11 +125,11 @@ If this does define every strategy, the next big question, and the main focus of
 What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
 \\
 \\
-The probabilities of winning the game from any gamestate can be simplified down into sets of linear equations.
+At any gamestate it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that gamestate.
 Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points,
 $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning
-from the current position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's
-banked points etc.). Then, \begin{equation}\label{1.2.1.a}
+from the current position and $Q_{jik}$ denote probability of B winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is
+from the perspective of each player). Then, \begin{equation}\label{1.2.1.a}
 p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
  if A rolls and
@@ -137,6 +137,10 @@ p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
  p_{ijk} = 1-Q_{jik}
  \end{equation}
  if A banks their points.
+ \\
+ \\
+ These equations and this way of thinking about gamestates and strategies is key to our exploration further for an optimal strategy.
+
 \subsection{Nellers Work}
 In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each roll of the die in `pig' as a bet of not rolling a $1$.
 He viewed the best strategy as ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}.
