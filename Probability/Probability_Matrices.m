@@ -33,7 +33,7 @@ for i=To_win-1:-1:0
     end
 end
 
-fprintf('Probability of ''%s'' winning when going first is %f\n',Name_A,P(1,1,1));
-fprintf('Probability of ''%s'' winning when going first is %f\n',Name_B,Q(1,1,1));
+fprintf('    %f    ''%s'' Probability of winning when going first\n',P(1,1,1),Name_A);
+fprintf('    %f    ''%s'' Probability of winning when going first\n',Q(1,1,1),Name_B);
 
 end
