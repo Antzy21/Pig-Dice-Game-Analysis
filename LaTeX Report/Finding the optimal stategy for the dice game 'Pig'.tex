@@ -105,6 +105,23 @@ josh
 The dice game `pig' is played by 2 people rolling a die. The number on the die signifies the points gained on that roll, which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end. However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end. The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
 \\
 \\
+Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking.
+A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
+
+A game state is defined by the current position of the game, my banked score, your banked score, and my turn score.
+These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million
+game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example,
+this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible
+game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is
+with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+
+Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every
+possible game state.
+Does this let us define every possible strategy or are there more variables to consider?
+If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play?
+What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
+\\
+\\
 The probabilities of winning the game from any position can be simplified down into sets of linear equations. Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's banked points etc.). Then, \begin{equation}\label{1.2.1.a}
 p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
