@@ -1,4 +1,4 @@
-function [P,NellaVI]=Nella_Value_Iteration(Number_of_Iterations,To_win,Dice_prob,Strategy)
+function [P,NellaVI]=Nella_Value_Iteration(To_win,Dice_prob,Strategy)
 
 % Set up Strategy
 NellaVI = Strategies_to_Matrices(Strategy,To_win);
@@ -6,19 +6,25 @@ NellaVI = Strategies_to_Matrices(Strategy,To_win);
 % Set up Probabilities
 [P,~]=Probability_Matrices(NellaVI,Strategy,To_win,Dice_prob);
 
-for n = 1:Number_of_Iterations % Run iterations to get close to true value
+old_NellaVI = NellaVI;
+old_NellaVI(1,1,1)=2;
+Iteration = 0;
 
+while isequal(old_NellaVI,NellaVI) == 0 % Run iterations Untill full convergence
+    Iteration = Iteration+1;
+    old_NellaVI = NellaVI; % For comparison after changes
+    
     for i = To_win-1:-1:0            % work backwards
         for j = To_win-1:-1:0        % work backwards
             for k = 0:To_win-1-i     % work backwards
                 
                 Continue = 1; 
                 
+                fprintf('Iteration: %d Game State (%d,%d,%d)\n',Iteration,i,j,k);   % Game_State
+                
                 while Continue == 1;
                     
                     Continue = 0;
-                
-                    % fprintf('%d: Game State (%d,%d,%d)\n',n,i,j,k);   % Game_State
 
                     % Calculate probabilities from Equations
                     [Pbank,Proll]  = BankvsRoll_Probabilities(P,i,j,k,To_win,Dice_prob);
@@ -38,6 +44,10 @@ for n = 1:Number_of_Iterations % Run iterations to get close to true value
             end % end for k
         end % end for j
     end % end for i
+    
+    Change(Iteration) = abs(sum(sum(sum(old_NellaVI - NellaVI))));
+    fprintf('total GS choices changed: %d\n',Change(Iteration));
+    disp(Change);
     
     [~,~]=Probability_Matrices(NellaVI,Strategy,To_win,Dice_prob);
     
