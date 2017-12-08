@@ -7,7 +7,7 @@ NellaVI = Strategies_to_Matrices(Strategy,To_win);
 [P,~]=Probability_Matrices(NellaVI,Strategy,To_win,Dice_prob);
 
 old_NellaVI = NellaVI;
-old_NellaVI(1,1,1)=2;
+old_NellaVI(1,1,1)=0;
 Iteration = 0;
 
 while isequal(old_NellaVI,NellaVI) == 0 % Run iterations Untill full convergence
@@ -45,7 +45,7 @@ while isequal(old_NellaVI,NellaVI) == 0 % Run iterations Untill full convergence
         end % end for j
     end % end for i
     
-    Change(Iteration) = abs(sum(sum(sum(old_NellaVI - NellaVI))));
+    Change(Iteration) = sum(sum(sum(abs(old_NellaVI - NellaVI))));
     fprintf('total GS choices changed: %d\n',Change(Iteration));
     disp(Change);
     
