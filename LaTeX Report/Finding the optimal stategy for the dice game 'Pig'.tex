@@ -100,9 +100,9 @@
 
 \subsection{Aims and Objectives}
 josh
-\subsection{A brief history of Pig}
-\subsubsection{Basics of Pig}
-The dice game `pig' is played by 2 people rolling a die. The number on the die signifies the points gained on that roll, which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end. However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end. The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
+
+\subsubsubsection{Basics of Pig}
+`Pig' is a turn based dice game played by 2 people rolling a die. The number on the die signifies the points gained on that roll, which are collated in a sum total of points for the turn. These points can be banked to bring a players turn to an end. However, the points in this rolling total can be lost if the player rolls a $1$, this will also automatically bring their turn to an end. The aim of the game is to be the first player to have a banked total of points greater than or equal to $100$.
 \\
 \\
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking.
@@ -128,9 +128,9 @@ p_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
  if A rolls and
  \begin{equation}\label{1.2.1.b}
  p_{ijk} = 1-Q_{jik}
- \end{equation} 
+ \end{equation}
  if A banks their points.
-\subsubsection{Nellers Work}
+\subsection{Nellers Work}
 In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each roll of the die in `pig' as a bet of not rolling a $1$. He viewed the best strategy as ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}. However, Todd W Neller stated ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal}, from this Neller proceeded to find a more optimal solution for `pig' by taking the maximum of equation \ref{1.2.1.a} and equation \ref{1.2.1.b}. This was not possible however as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows the resulting optimal strategy where you should roll if you are below the surface of the graph and bank if above.
 
 \begin{figure}
@@ -147,7 +147,7 @@ In \textit{Dice Games Properly Explained}, Reiner Knizia takes the view of each 
 
 \subsection{Optimal Stratergy}
 An optimal strategy is the strategy that when played against all other strategies is the best all-rounder. It will beat most others more than half the time however may have a few weaknesses. In the game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time. However, in some game the optimum is to do something destructive. The optimum is not set out to get the best win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
-\\ \\In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter. One of them is all to do with the optimal strategy for the game of pig. As such the programme looks at all possible game states within the pig dimension and at each node picks the one with the highest win likelihood. We aimed to look at this in order to see whether we could get to Neller’s optimal with our own code, or perhaps we get to a different optimal that may be better than Neller’s. 
+\\ \\In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter. One of them is all to do with the optimal strategy for the game of pig. As such the programme looks at all possible game states within the pig dimension and at each node picks the one with the highest win likelihood. We aimed to look at this in order to see whether we could get to Neller’s optimal with our own code, or perhaps we get to a different optimal that may be better than Neller’s.
 \\ \\The other possibilities for the optimal was to reach a pair of strategies that when played together existed in a Nash equilibrium. A Nash equilibrium (named after Jordan Nash) is a point in a game space at which two strategies have to get worse against there opponent in order to adapt from their current position. Because of this it would not be optimal to follow such a path and so they stay stuck in that state. A good example of this is the prisoners game. It is defined as the following: \\
 \textit{If you confess and your accomplice fails to confess, then you go free. If you fail to confess but your accomplice confesses, then you will be convicted and sentenced for the maximum term in jail. If you both confess, then you will both be convicted, but the maximum sentence will not be imposed. If neither confess, you will both be framed for another crime in which a conviction is certain.}\\
 
@@ -178,10 +178,10 @@ Anthony
 
 \subsubsection{Piglet}
 When starting out on this project we were informed about a simpler version of pig, known as piglet. This is a version of pig where by players take it in turns, flipping a coin until either a tail is flipped, or the player banks their turn score.\\ \\
-This simpler game contained all the same elements as pig but on a smaller scale. For starters it is a played with a coin rather than a die, giving most probabilities as $\dfrac{1}{2}$ or multiples thereof, as opposed to the $\dfrac{1}{6}$ that you obtain via a die. The other difference is that you typically only play to a score of $10$ compared to $100$ in pig. These most simple of rule changes changed how the game works by a significant amount. Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. All of this made piglet the perfect first stepping stone to solving pig. 
+This simpler game contained all the same elements as pig but on a smaller scale. For starters it is a played with a coin rather than a die, giving most probabilities as $\dfrac{1}{2}$ or multiples thereof, as opposed to the $\dfrac{1}{6}$ that you obtain via a die. The other difference is that you typically only play to a score of $10$ compared to $100$ in pig. These most simple of rule changes changed how the game works by a significant amount. Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. All of this made piglet the perfect first stepping stone to solving pig.
 
 \subsubsection{Hand Written notes}
-Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below. 
+Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below.
 %INSERT PICTURE OF MATRICES
 From this we worked down through all possibilities to obtain the probabilities of each strategy winning from $P_{0,0,0}$ given they went first. This was the first theoretical answer we had achieved and had no idea of its validity.\\ \\
 We repeated this process for a game to total score $2$ with both strategies being bank at $1$. We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here it was realised that working our piglet to $10$ would require $100$ sets of equations for which too much time would be wasted.
@@ -243,14 +243,14 @@ Mia and Josh
 \subsubsection{Fair test}
 Throughout our project, we will be testing numerous different strategies against one and other to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result.\\ \\
 Say we were testing two strategies and played them against each other just once. Due to statistical inference, this test could give an unreliable result. Consider that you play the same strategy against itself for one game; there must be one winner, therefore the result will conclude that one strategy is better than the other, even though it’s the same strategy. Now say we were playing two different strategies where one was significantly better than the other, that doesn’t mean to say, that for all games played, the better strategy will always win. Again playing only one game of pig with these strategies may conclude that the worse game wins which would imply it is better than the other, even though we know this to be false. This is due to statistical inference.\\ \\
-To reduce statistical inference, we will need to play numerous games of pig, say $n$ games. We will need to find an optimal value for $n$ to ensure that our result is as reliable as possible. By doing this we can find a reliable probability value for the strategies of winning against each other. We will calculate a confidence interval across a range of $n$-values on one strategy winning against itself. This would imply that the probability of the strategies winning are both 0.5. By running simulations in matlab, we can increase our value of n until the results are consistently within the confidence interval. 
+To reduce statistical inference, we will need to play numerous games of pig, say $n$ games. We will need to find an optimal value for $n$ to ensure that our result is as reliable as possible. By doing this we can find a reliable probability value for the strategies of winning against each other. We will calculate a confidence interval across a range of $n$-values on one strategy winning against itself. This would imply that the probability of the strategies winning are both 0.5. By running simulations in matlab, we can increase our value of n until the results are consistently within the confidence interval.
 \subsubsection{Theory of Hypothosis testing}
-Let $S$ denote a certain strategy within the game of pig. 
-Let $X$ denote the number of games won by that strategy after $n$ games. 
-As we will be playing $S$ against itself, we can say $E(X) = 
-\dfrac{n}{2}$, the expected amount of games $S$ should win against itself. 
-We can approximate $X$ to the binomial distribution to conduct the hypothesis test. 
-$X \sim Bin(n , p=0.5)$ 
+Let $S$ denote a certain strategy within the game of pig.
+Let $X$ denote the number of games won by that strategy after $n$ games.
+As we will be playing $S$ against itself, we can say $E(X) =
+\dfrac{n}{2}$, the expected amount of games $S$ should win against itself.
+We can approximate $X$ to the binomial distribution to conduct the hypothesis test.
+$X \sim Bin(n , p=0.5)$
 By the binomial distribution
 
 \begin{align}
@@ -258,7 +258,7 @@ E(X) &= np & SD(X) &= \sqrt{var(X)}\notag\\
 &= \dfrac{n}{2} & &= \sqrt{np(1-p)}\notag\\
 & & &= 0.5\sqrt{n} \notag
 \end{align}
-By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval. 
+By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval.
 \begin{align}
 95\%Cl &= (\dfrac{n}{2} -1.96(0.5\sqrt{n}), \dfrac{n}{2} +1.96(0.5\sqrt{n}))\notag\\
 &= (\dfrac{n}{2}-0.98\sqrt{n}, \dfrac{n}{2}+0.98\sqrt{n})
@@ -274,7 +274,7 @@ This would imply that playing a game of pig $1537$ times would end up giving a p
 \caption{stats testing\label{figure4}}
 \end{figure}
 Figure \ref{figure3} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for a small number of games played. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, marked by the two lines at $y=0.525$ and $y=0.475$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is large. By looking at the graph we can choose a value at which the majority of points lie within the interval. After the number of games passes $2500$, there doesn’t appear to be much decrease in the width of the distribution, so we will chose $3000$ as the appropriate number of games to play for a fair test.\\ \\
-It would be a mistake to now only use $n=3000$ to test strategies. As the graph in figure \ref{figure3} shows, even for high values for $n$, you can still get stray results. Therefore, like what was done in the test to find $n$, for strategies we want to compare we will take $100$ results of $3000$ games. Then we can take the average of these results to further improve the reliability of the result. 
+It would be a mistake to now only use $n=3000$ to test strategies. As the graph in figure \ref{figure3} shows, even for high values for $n$, you can still get stray results. Therefore, like what was done in the test to find $n$, for strategies we want to compare we will take $100$ results of $3000$ games. Then we can take the average of these results to further improve the reliability of the result.
 \subsubsection{Running of tests}
 
 
