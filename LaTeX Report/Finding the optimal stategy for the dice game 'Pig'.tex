@@ -293,7 +293,7 @@ Moving onto a more complicated similtaneous set, start from A's turn at game sta
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 \end{align*}
-After writting this out we see the other probabilities it relies on. The method now is to see what the strategy does at those gamestates and then write out the probability equations for them.
+After writting this out we see the other probabilities it relies on. The method now is to see what the strategies do at these gamestates and then write out the probability equations for them.
 In this example let A roll at $97,99,2$ and B roll at $99,97,0$
 \begin{align*}
 	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
@@ -423,12 +423,19 @@ Notice how $Q_{99,99,0}$ is in the constant values matrix. As discussed before t
 When starting out on this project we were informed about a simpler version of pig, known as piglet. This is a version of pig
 where by players take it in turns, flipping a coin until either a tail is flipped, or the player banks their turn score.
 
-This simpler game contained all the same elements as pig but on a smaller scale. For starters it is a played with a coin rather than a die,
-giving most probabilities as $\dfrac{1}{2}$ or multiples thereof, as opposed to the $\dfrac{1}{6}$ that you obtain via a die.
-The other difference is that you typically only play to a score of $10$ compared to $100$ in pig.
-These most simple of rule changes changed how the game works by a significant amount. % Disagree with this statement A LOT.
-% The whole point is that it doesn't change how to game works so we can understand it and thus understand pig. Consider removing this sentence completely and check that what it is saying is not implied throughout the rest of the paragraph - Anthony
-Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. All of this made piglet the perfect first stepping stone to solving pig.
+This simpler game contained all the same elements as pig but on a smaller scale. For starters it is played with a coin rather than a die,
+giving most probabilities as $\frac{1}{2}$ or multiples thereof, as opposed to the $\frac{1}{6}$ that you obtain via a die.
+The other difference is that you typically play to a much lower score compared to $100$ in pig. This score can be chosen to be whatever we want, often $10$ but sometimes as low as $2$ or $3$ for the most simple games.
+
+A subtle yet vital difference is that $1$ is added for a successful flip. Consider however if the coin was a two sided die, with $1$ and $2$ rather than tails and heads respectively.
+If it was the same as pig, the face value of the roll would be added to the turn score, so $2$, not $1$. We know that it is not possible to gain $1$ in pig from a roll, as $1$ is reserved for a loss.
+This leads to a long list of questions regarding the rules of pig. What if instead of loosing on a roll of $1$, it was a roll of $6$ that looses the turn score or any other number?
+This was one of many points throughout our project where we found other areas to investigate, but decided to stay focused on our set goals.
+For now we accept that piglet adds $1$ to the turnscore on a flip of a head.
+
+Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll,
+giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. 
+All of this made piglet the perfect first stepping stone to solving pig.
 
 \subsubsection{Hand Written notes}
 Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below.
