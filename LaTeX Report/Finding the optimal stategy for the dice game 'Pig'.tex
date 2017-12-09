@@ -325,8 +325,96 @@ Note that it will not rely on gamestates "lower" than it.
 So long as we solve the sets containing higher gamestates first, we can to run through and solve them all successfully!
 \\
 \\
-To reiterate the power this gives us. We can calculate every probability of winning from every gamestate for every type of strategy, at least in theory... actualy doing these calculations is another thing entirely.
-Perhaps there is a simpler game for us to test this theory on.
+To reiterate the power this gives us. We can calculate every probability of winning from every gamestate for every type of strategy. Actualy doing these calculations by hand is a rediculous task however.
+Computational power is required to give us the probability values we want to calculate. This is where we turn to matlab for assistance.
+
+\subsubsection{Matrices}
+To make use of Matlab, we needed to write the equations in terms of matrices.
+Every set of equations translates to three matrices, written $CX=D$; The coefficients, the probabilities, and the contant values respectively.
+To see how these matrices are built, we will take the examples used earlier.
+
+The first important part is to simplify the equations down. We want them in terms of seperated probabilities and their coefficient values on the left hand side of the equation, and a combined constant value on the right.
+This usualy involves expanding brackets and adding constants together.\\
+So
+\begin{align*}
+	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + 1 + 1 + 1 + 1 + 1\bigg)\\
+	Q_{99,99,0} &= \frac{1}{6}\bigg((1 - P_{99,99,0}) + 1 + 1 + 1 + 1 + 1\bigg)\\
+\end{align*}
+becomes
+\begin{align*}
+	P_{99,99,0} + \frac{1}{6}Q_{99,99,0} &= 1\\
+	Q_{99,99,0} + \frac{1}{6}P_{99,99,0} &= 1
+\end{align*}
+
+Using basic ideas of matrix multiplication, we can construct a Matrix
+\begin{align*}
+	\begin{bmatrix}
+	    1          & \frac{1}{6}\\
+	    \frac{1}{6} & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_{99,99,0}\\
+		Q_{99,99,0}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1\\
+		1
+	\end{bmatrix}
+\end{align*}
+This is useful as we can now take the inverse of the coeefficients matrix, using it in left matrix multiplication to find the probabilities.
+\begin{align*}
+	C^{-1}CX &= C^{-1}D\\
+	X        &= C^{-1}D
+\end{align*}
+Matlab has a function that does this for us, giving the probability values in the matrix $X$.
+Looking at the other two examples:\\
+A rolling on $97,99,2$.
+\begin{align*}
+	P_{97,99,0} + \frac{1}{6}Q_{99,97,0} - \frac{1}{6}P_{97,99,2} &= \frac{5}{6}\\
+	P_{97,99,2} + \frac{1}{6}Q_{99,97,0}                          &=  1\\
+	Q_{99,97,0} + \frac{1}{6}P_{97,99,0}                          &= 1\\
+	\begin{bmatrix}
+		1           & \frac{1}{6} & -\frac{1}{6}\\
+		\frac{1}{6} & 1           & 0\\
+		\frac{1}{6} & 0           & 1\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_{97,99,0}\\
+		P_{97,99,2}\\
+		Q_{99,99,0}
+	\end{bmatrix}
+	& =
+	\begin{bmatrix}
+		\frac{5}{6}\\
+		1\\
+		1
+	\end{bmatrix}
+\end{align*}
+A banking on $97,99,2$.
+\begin{align*}
+	P_{97,99,0} - \frac{1}{6}P_{97,99,2} + \frac{1}{6}Q_{99,97,0}) &= \frac{5}{6}\\
+	P_{97,99,2}                                                    &= 1 - Q_{99,99,0}\\
+	Q_{99,97,0} + \frac{1}{6}P_{97,99,0}                           &= 1\\
+	\begin{bmatrix}
+		1           & \frac{1}{6} & -\frac{1}{6}\\
+		0           & 1           & 0\\
+		\frac{1}{6} & 0           & 1\\
+	\end{bmatrix}
+	\begin{bmatrix}
+		P_{97,99,0}\\
+		P_{97,99,2}\\
+		Q_{99,99,0}
+	\end{bmatrix}
+	& =
+	\begin{bmatrix}
+		\frac{5}{6}\\
+		1 - Q_{99,99,0}\\
+		1
+	\end{bmatrix}
+\end{align*}
+
+Notice how $Q_{99,99,0}$ is in the constant values matrix. As discussed before this is because its value should be pretermined from a previous solved similtaneous set.
 
 
 % Outline how to solve for the probabilities by similitanious equations.
