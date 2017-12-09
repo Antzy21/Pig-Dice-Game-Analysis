@@ -1,4 +1,4 @@
-function [M]=Strategies_to_Matrices(S,To_win)
+function M = Strategies_to_Matrices(S,To_win)
 if isa(S, 'function_handle')
     M=zeros(To_win,To_win,To_win);
     for i=0:To_win-1
@@ -9,11 +9,9 @@ if isa(S, 'function_handle')
         end
     end
 else
-    if size(S) == [To_win,To_win,To_win]
-        M=S;
-    else
+    M=S;
+    if size(S) ~= [To_win,To_win,To_win]
         disp('The Matrix is not the correct size for this game')
-        return
     end
 end
 end
