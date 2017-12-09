@@ -175,8 +175,7 @@ Mia
 \subsubsection{Meetings}
 \subsubsection{Creation of Project Plan}
 
-\subsection{Coding}
-\subsubsection{Similataneous Equations}
+\subsection{Understanding the Equations}
 
 As discussed briefly in the introduction, linear equations can describe the probability of winning from any given gamestate. This is a powerful method of calculation that Nella used to produce his optimal and we used for all of the programmed strategies we produced. As in the introduction, let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$.
 \\
@@ -217,7 +216,10 @@ Where player A has accumulated enough turn score to immediatly bank and win. Gen
 This gamestate is where the opponent has won the game, so player A has 0 probability of winning. A shame indeed as A was so close to winning on $99$! Generaly, if $i<100$ and $j\geq100$, then the probability of that gamestate is $0$, as it means the other player has won.
 \\
 \\
-These trivial gamestate probabilities allow us to calculate the non trivial probabilities of a game. Let us start with a simple one, near the very end of the game. Both of the players are on $99$ points, and it is the beginning of player A's turn. Let us assume that both A and B roll on gamestate $99,99,0$. It may seem an obvious choice, as they have no turn score to loose, but the idea of banking on a turn score of zero is something we shal be investigating further.
+These trivial gamestate probabilities allow us to calculate the non trivial probabilities of a game, which we will look at next.
+
+\subsubsection{Similataneous Equations}
+Let us start with a simple pair of equations, near the very end of the game. Both of the players are on $99$ points, and it is the beginning of player A's turn. Let us assume that both A and B roll on gamestate $99,99,0$. It may seem an obvious choice, as they have no turn score to loose, but the idea of banking on a turn score of zero is something we shal be investigating further.
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
@@ -405,23 +407,18 @@ We first played piglet to a total score of $3$ with two strategies against each 
 \\
 We repeated this process for a game to total score $2$, which we probably should have done before we did it for a total score of $3$. We used the same strategies again; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$, which is equivalent to rolling at every game state, what we called "rolling to win". We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here we realised that working out piglet to $10$ would require $100$ sets of equations. This was would be too much time would be wasted and have a high chance of us making mistakes.
 
-\subsubsection{Writing code}
-Once we had familisirised ourselves with the rules of the game, the equations, and a few simple piglet examples, we moved to matlab. The end goal is the make use of Matlab's computational power, to solve thousands of similtaneous equations and find all the probabilites at each game state. We can also make use of variable inputs to compare any strategy to another, and even change the score needed to win and the dice probability.
+\subsection{Coding}
+Once we had familisirised ourselves with the rules of the game, the equations, the matrices, and a few simple piglet examples, we moved to Matlab. The goal now is build general matrices for every similtaneoes set, and to make use of Matlab's computational power. Then we could solve thousands of similtaneous equations and find all the probabilites at each game state. We also wanted to make use of variable inputs to compare any strategy to another, and even change the score needed to win and the dice probability.
 \\
 \\
 Our first attempt at simply getting out ideas down as code was a very simplified calculation of piglet. Although we coded in a dice probability variable that could be changed, the code only worked for a dice flip, and when the variable was set to $\frac{1}{2}$. It was also limited to taking in only Bank on strategies. %Explain what Bank on strats are
 We could however run to any winning score.
 \\
 \\
-The way we got Matlab to solve the sets of similtanious equations was by turning them into matrices of coefficients, variables and constants. $CX=D$ This was discussed before and will be touched on again to talk about the layout of the matrices in the more general refined code for pig.
-\\
-\\
-By using the hand calculated simple piglet probabilities we could check to see if our coded matrices were correct and fix any bugs. Once this was working we had our first runnable code to get us going. We just had to generalise the code. There were two steps to doing this; taking any strategy as an input, and having any dice probability working in the code. The former was easier; an independent problem that we made a function to do for us. The later was a little trickier but was a fundamental part of building the matrices.
-\\
-\\
-% Subsection on Strategies to matrices
+By using the hand calculated simple piglet probabilities we could check to see if our coded matrices were correct and fix any bugs. We even found that we could use the matlab produed matrices to correct our hand written mistakes. Once this was working we had our first runnable code to get us going. We just had to fully generalise the code. There were two steps to doing this; taking any strategy as an input, and having any dice probability working in the code. The former was easier; an independent problem that we made a function to do for us. The later was a little trickier but was a fundamental part of building the matrices.
 
-% Subsection on coding matrices
+\subsubsection{Strategies to Matrices}
+
 
 ...
 
