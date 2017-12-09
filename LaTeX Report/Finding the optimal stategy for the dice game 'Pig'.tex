@@ -101,7 +101,17 @@
 \section{Introduction}
 
 \subsection{Aims and Objectives}
-josh
+The ultimate aim of this project was to find an optimal strategy (or optimal strategies) for the dice game ‘Pig’. The optimal strategy is to be defined as a strategy that when played against all other strategies, it has the highest probability of winning. The other aims of the project were to compare our optimal strategy found to the optimal strategy that Todd Neller describes in his 2004 paper\cite{neller2004optimal}. Finally, we looked at the psychological aspect of playing pig and whether human players play according to their risk preferences (risk neutral, risk loving or risk averse) and whether an individuals strategy is influenced by how well his opponent is.
+
+We tried to achieve these aims by pursuing the following objectives:
+
+\begin{enumerate}
+\item Using MATLAB to create and develop a code that finds the optimal strategy firstly for piglet and then adapting this for ‘Pig’
+
+\item Once the code for the optimal solution had been created we then used MATLAB again to create a code that takes two given ‘optimal strategies’, compares them against each other and determines which one has the statistically highest probability of winning when played multiple times. This enables us to determine which of the optimal strategies is statistically the best. 
+
+\item Get a sample of people to play pig, get them to record their results and then determine whether their strategy is influenced by how well (or badly) their opponent is doing and whether they stick to their stated risk preferences (risk averse, risk neutral, risk loving) 
+\end{enumerate}
 
 \subsection{Basics of Pig}
 `Pig' is a turn based dice game played by 2 people rolling a die. The number on the die signifies the points gained on that roll,
@@ -367,68 +377,120 @@ Mia and Josh
 
 \subsection{Statistical Testing}
 \subsubsection{Fair test}
-Throughout our project, we will be testing numerous different strategies against one and other to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result.
-
-Say we were testing two strategies and played them against each other just once. Due to statistical inference, this test could give an unreliable result. Consider that you play the same strategy against itself for one game; there must be one winner, therefore the result will conclude that one strategy is better than the other, even though it’s the same strategy. Now say we were playing two different strategies where one was significantly better than the other, that doesn’t mean to say, that for all games played, the better strategy will always win. Again playing only one game of pig with these strategies may conclude that the worse game wins which would imply it is better than the other, even though we know this to be false. This is due to statistical inference.
-
-To reduce statistical inference, we will need to play numerous games of pig, say $n$ games. We will need to find an optimal value for $n$ to ensure that our result is as reliable as possible. By doing this we can find a reliable probability value for the strategies of winning against each other. We will calculate a confidence interval across a range of $n$-values on one strategy winning against itself. This would imply that the probability of the strategies winning are both 0.5. By running simulations in matlab, we can increase our value of n until the results are consistently within the confidence interval.
-\subsubsection{Theory of Hypothosis testing}
-Let $S$ denote a certain strategy within the game of pig.
-Let $X$ denote the number of games won by that strategy after $n$ games.
-As we will be playing $S$ against itself, we can say $E(X) =
-\dfrac{n}{2}$, the expected amount of games $S$ should win against itself.
-We can approximate $X$ to the binomial distribution to conduct the hypothesis test.
-$X \sim Bin(n , p=0.5)$
-By the binomial distribution
-
-\begin{align*}
-E(X) &= np & SD(X) &= \sqrt{var(X)}\notag\\
-&= \dfrac{n}{2} & &= \sqrt{np(1-p)}\notag\\
-& & &= 0.5\sqrt{n} \notag
-\end{align*}
-By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval.
-\begin{align*}
-95\%Cl &= (\dfrac{n}{2} -1.96(0.5\sqrt{n}), \dfrac{n}{2} +1.96(0.5\sqrt{n}))\notag\\
-&= (\dfrac{n}{2}-0.98\sqrt{n}, \dfrac{n}{2}+0.98\sqrt{n})
-\notag
-\end{align*}
-We would like the p value that we obtain to be within 95\% of the true value of the probability. For this system this implies that $0.475<p<0.525$. From the above interval for $X$, we can say that as $X=np$, using the upper and lower bounds for our $p$, we can then calculate a value for $n$, i.e. $0.475n$ would be equal to the lower bound of the confidence interval with $0.525n$ being the upper bound.
-$$0.475n = \dfrac{n}{2} –0.98\sqrt{n}$$
-Solving this for $n$, we get that $n=1537$. Similarly for the upper bound.
-
-This would imply that playing a game of pig $1537$ times would end up giving a probability of the strategies winning against each other that is within 95\% of the true value. As theoretical stats is not 100\% accurate, this theory was simulated in matlab. We tested this theory by running n games of pig $100$ times for a given strategy against itself, from n ranging from $1$ to $4000$, and calculating the $p$-value from each of the games.
-
-\begin{figure}
-\centering
-\includegraphics[height=24cm]{stats_testing}
-\caption{stats testing\label{figure4}}
-\end{figure}
-Figure \ref{figure3} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for a small number of games played. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, marked by the two lines at $y=0.525$ and $y=0.475$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is large. By looking at the graph we can choose a value at which the majority of points lie within the interval. After the number of games passes $2500$, there doesn’t appear to be much decrease in the width of the distribution, so we will chose $3000$ as the appropriate number of games to play for a fair test.
-
-It would be a mistake to now only use $n=3000$ to test strategies. As the graph in figure \ref{figure3} shows, even for high values for $n$, you can still get stray results. Therefore, like what was done in the test to find $n$, for strategies we want to compare we will take $100$ results of $3000$ games. Then we can take the average of these results to further improve the reliability of the result.
-\subsubsection{Running of tests}
+Throughout our project, we will be testing numerous different strategies against one and other to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result. This will be particularly important for our final findings when we want to test our version of the optimal strategy. We will want to know whether it is an optimal strategy or whether there are still some strategies that are able to beat it, meaning it isn’t `the' optimal.\\ \\
+To determine whether a strategy is better than another is not as simple as playing them against each other once and deciding that the winner is the better strategy. A strategy will have a theoretical probability of winning against another given strategy, but playing only one game may not give a reliable result. Say you were to play the same strategy against itself.  The theoretical probability of either strategy winning would be $0.5$, if you were to alternate which goes first and to play a numerous amount of games. By playing only one game you would deduce that one of the strategies is better than the other even though they are the same strategy. You could also play two strategies where one has a significantly larger theoretical probability of winning than the other, but the test could conclude that the worse strategy wins, meaning you would accept that the lesser strategy is better even though theoretically it is not. This false result will be due to statistical inference.\\ \\
+In the world of stats, theoretical probabilities don’t always agree with the practical results, though there are ways where you can improve the accuracy of a practical test to make it more accurate, closer to its theoretical probability. That is the point behind the fair test, to try and get a result that’s accurate to within a certain confidence of the theoretical results.  In our case, we can increase the number of games we play so that inference is reduced, therefore giving a reliable score when testing strategies.  Instead of playing only 1 game, we can play numerous games and then take scores. Say we played $100$ games, each individual game of pig will result in a winner which will result in that strategy receiving a score of $1$. This will be continued until $100$ games are complete and the probability for each strategy would be their score divided by $100$, in this case.\\ \\
+The true $n$ value will need to be calculated and not decided. To do so we can use hypothesis testing. From theoretical probability values, we can define an interval around the value for which we want the practical result to lie in. The practical test will involve playing $N$ amount of games of pig were a strategy receives a score of $1$ for each game they win. After $N$ games have been completed, we can calculate the probability of the strategy winning against the other by dividing the number of games it has won by the total number of games. Then we can test numerous results for different values of $N$ and observe the distribution of $p$ as $N$ increases. From there we can chose an appropriate value for the number of games which will give us constant results within our confidence interval. Once this value has been obtained, the testing of strategies should result in reliable results and therefore be as fair of a test as possible.
+ \subsubsection{Deciding that a strategy is better than another}
+As mentioned before, to decide that one strategy is better than another is not as simple as playing one game of pig and saying that the victor is a better strategy.\\ \\
+Once we have decided on a value for $N$ at which we decide that the test is fair, it will follow immediately what results will conclude that one strategy is better than another. By finding $N$, we will have chosen an upper and lower limit of the $p$-value at which we want our results to lie within. To illustrate this, say we conclude that $100$ games of pig is a form of a fair test and we want our practical probability to lie within $0.1$ of the true (theoretical) probability. If we were to test the same strategy against itself, theoretically either strategy should win with a probability of $0.5$, therefore after performing practical tests, we will want the representative probability to lie within $0.4$ and $0.6$. As the probability will be calculated by dividing the number of wins a strategy had and dividing it by the total number of games, we can then either perform this calculation to find the representative probability or we can calculate directly from the confidence interval how many games a certain strategy will need to win in order to conclude that it is a better strategy. In the above case, as it will need to have a probability higher than $0.6$ to conclude that it is a better strategy, it will therefore need to win $100\times0.6=60$ games at least in order to be considered a better strategy. 
+\subsubsection{Testing our optimal}
+To finalise our findings we will need to test our version of the optimal to find whether it is actually an optimal or at least as good as Neller’s\citep{neller2004optimal}, therefore we will need to run some test on it and evaluate the findings.\\ \\
+We may begin our testing by playing our version of the optimal against simply hold at strategies, which have actually been found to be quite effective, even against Neller’s strategy:  Though of course, not better than it. By doing this we can decide whether it is actually better than simple hold at strategies or whether it needs adjusting before playing it against Neller’s version.\\ \\
+Throughout these test we will keep to our definition of whether a strategy is better than another. Once we have succeeded in deducing that our version is better than all hold at strategies, we may then test our version against Neller’s and analyse the results. 
 
 
 \section{Findings}
 \subsection{Pig}
 \subsubsection{Did we solve Pig}
-{\tiny YES.}
 
 \subsection{Behavioural Economics}
 \subsubsection{Do players stick to their risk preference}
 \subsubsection{Players Interactions}
 
 \subsection{Statistical Testing}
-\subsubsection{Non-transitivity}
-\subsubsection{Testing against our optimal}
-\subsubsection{Testing against Nellers optimal}
+\subsubsection{The test}
+As mentioned in the methodology, to calculate the number of games required to play to perform a fair test we will use hypothesis testing.\\ \\
+Let $S$ denote a certain strategy within the game of pig. 
+Let $n$ denote the number of games played.
+Let $X$ denote the number of games won by that strategy after $n$ games. 
+As we will be playing $S$ against itself, we can say $E(X) = 
+\dfrac{n}{2}$, the expected amount of games $S$ should win against itself. 
+We can approximate $X$ to the binomial distribution to conduct the hypothesis test. 
+$X \sim Bin(n , p=0.5)$ 
+by the binomial distribution
 
+\begin{align}
+E(X) &= np & SD(X) &= \sqrt{var(X)}\notag\\
+&= \dfrac{n}{2} & &= \sqrt{np(1-p)}\notag\\
+& & &= 0.5\sqrt{n} \notag
+\end{align}
+By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval. 
+\begin{align}
+95\%Cl &= (\dfrac{n}{2} -1.96(0.5\sqrt{n}), \dfrac{n}{2} +1.96(0.5\sqrt{n}))\notag\\
+&= (\dfrac{n}{2}-0.98\sqrt{n}, \dfrac{n}{2}+0.98\sqrt{n})
+\notag
+\end{align}
+We would like the $p$ value that we obtain to be within $0.025$ of the true value of the probability. As probabilities range from $0$ to $1$, this would mean that the practical result is within $95\%$ of the theoretical value. For this system this implies that $0.475<p<0.525$. From the above interval for $X$, we can say that as $X=np$, using the upper and lower bounds for our $p$, we can then calculate a value for $n$, i.e. $0.475n$ would be equal to the lower bound for $X$ of the confidence interval with $0.525n$ being the upper bound.\\
+I.e.
+\begin{equation}
+0.475n=\dfrac{n}{2}-0.98\sqrt{n}
+\notag
+\end{equation}
+Solving this for $n$, we get that $n=1537$, and similarly for the upper bound.\\ \\
+This would imply that playing a game of pig $1537$ times would end up giving a probability of the strategies winning against each other that is within 95\% of the true value. As theoretical stats is not 100\% accurate, this theory was simulated in matlab. We tested this theory by running $n$ games of pig $100$ times for a given strategy against itself, for $n$ ranging from $1$ to $4000$, and calculating the $p$-value from each of the games.\\ \\
+\begin{figure}
+\centering
+\includegraphics[height=24cm]{stats_testing}
+\caption{stats testing\label{figure4}}
+\end{figure}
+Figure \ref{figure4} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The two lines on the $y$ axis at $y=0.475$ and $y=0.525$ show the confidence interval we want for $p$. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for small number of games played and converges as the number of games increases. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is increased. By looking at the graph we can chose a value at which the majority of points lie within the interval.\\ \\
+After the number of games passes $2500$, there doesn’t appear to be much decrease in the width of the distribution, so we will chose $3000$ as the appropriate number of games to play for a fair test. It would be a mistake to now only use $n=3000$ to test strategies. As the figure \ref{figure4} shows, even for high values for $n$, you can still get stray results. Therefore, like what was done in the test to find $n$, for strategies we want to compare we will take $100$ results of $3000$ games. Then we can take the average of these results to further improve the reliability of the result.
+\subsubsection{Corollary}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{stats_2}
+\caption{stats\label{figure5}}
+\end{figure}
+In matlab, we tested the fair test numerous times by creating a code which ran the test $100$ times, that is, $100$ results $3000$ games played $100$ times with the average computed. Figure \ref{figure5} illustrates $1$ of the results of running this code. You can see that for $100$ results of the test, the distribution of $p$ is still very small. For this particular result, $p$ ranged from $0.4974$ and $0.5020$ which is well within our confidence interval for $p$. The mean of the results was (coincidently) $0.5$ exactly.\\ \\
+The purpose of the fair test is that our practical results are accurate to within a certain degree of confidence to the theoretical results, in our case, within $0.025$. As we have coded a programme which can calculate the theoretical probabilities, we can run multiple simulations with the fair test to see how accurate our results are to the theoretical values.
+\subsubsection{Testing theoretical probability values to practical values with the fair test}
+We have showed that for a strategy playing against itself, playing $3000$ games $100$ times gives a reliable result for the probability of winning, but we now should ensure that this test also works for different strategies playing against itself. From using the theoretical probabilities calculated in matlab, we will run numerous tests for different strategies playing against themselves and comparing the theoretical results to the practical results obtained from the test. We will consider simple hold at strategies with this. Due to time constraints we will not compare every hold at strategy, though we will test a wide variety of hold at strategies.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{stats_table}
+\caption{stats\label{figure6}}
+\end{figure}
+Figure \ref{figure6} shows the result from $10$ different games of $2$ different strategies under the fair test. The last column shows the deviation from the theoretical values of the probability and the practical values obtained from the test. By our conditions, if the deviation is greater than $0.025$ then this would imply that the practical results aren’t consistent with the theoretical results implying that the test wasn’t reliable. As you can see the results are all less, and comfortably so, than $0.025$, therefore we can say that the test conducted gives reliable results and is therefore fair.
+\subsubsection{Determining whether a strategy is better than another}
+There are two ways which we could analyse the results. As we are playing $3000$ games of pig and giving each strategy a score of $1$ for each game they win, we could analyse the score for both strategies and use that to determine whether it is better or worse than the other strategy. Though we are playing $100$ independent $3000$ games and then taking the average score of both strategies, the following method will still apply.\\ \\
+From looking at our maximal value for the probability in the confidence interval, as $X=np$ where $n=3000$ and $p=0.525$, we can say that if one strategy wins on average $X=3000\times0.525=1575$ then it is better than the other strategy.\\ \\
+We could also look at the respective probability of the strategies from the theoretical results.  As $p=\dfrac{X}{n}$, if the value for $p$ is outside our determined confidence interval, we can then deduce that one of the strategies is better than the other.
+\subsubsection{Statistical findings on the optimal}
+It happens to be that simply hold at strategies, i.e. If your turn score is less than $20$ (say, then you always roll, are quite affective (as said by neller?). This made us think that testing our version of the optimal strategy against simply hold at strategies would be a good place to start. We could find the optimal and then play it against numerous hold at strategies and see the results, though we thought it would be good to find whether there was a best hold at strategy so that we only need to use that to analyse our version of the optimal.\\ \\
+As we saw earlier, Figure \ref{figure6} shows some of the probabilities we obtained from running these tests along with their theoretical probabilities. We decided to run a test, in compliance with our rules for a fair test, in Matlab of every hold at strategy from hold at $1$ to hold at $100$ in order to determine which particular hold at strategy was better than all of the others. As we saw earlier, the strategy hold at $0$ cannot win any games it plays and so, to reduce computing time, we will not include this in our simulations. We wanted to know whether there was one hold at strategy which beat all other strategies, as opposed to finding which one won the most against the others. By this we mean whether the strategies are transitive. By saying that the strategies are transitive, we mean that if we have strategies A, B and C, where A is better than B and B is better than C, then A is better than C also. This would mean that if we find one strategy that is the best, it will beat all other strategies. We ran a Matlab simulation, again alongside our rules for a fair test, which returned a result that confirmed that these simple hold at strategies are in fact transitive.\\ \\
+After we had looked at the transitivity of strategies, we looked at playing a tournament between all of the ‘hold at’ strategies from $1$ to $100$ in order to find which such strategy was the most superior and beat all of the rest. We again ran this in compliance with our rules for a fair test and the outcome of this tournament was that hold at $25$ came out to be victorious from $10$ tournaments.
+\subsubsection{Interesting note}
+After we evaluated all of the simple hold at strategies, we decided to look at more complicated strategies that have other rules other than just at what turn score to bank at. When evaluating strategies of this description, we were able to find three strategies that are non-transitive. The strategies we have found that have such properties are named turtle, roll to win and roll and wait. Turtle is a slow strategy, as suggested by its given name, banking on a low score each turn and thus slowly making its way towards $100$. Roll to win is a very simple strategy, where it only banks once the turn score reaches $100$. Roll and wait is a strategy that behaves such that it gets up to a banked score of $80$, before not rolling and waiting for the opponent to catch up, before then rolling to try to win. We ran fair tests between these strategies and have found both practical and theoretical probabilities of each strategy winning against another. When turtle played against roll to win, we got a practical probability that turtle will win with probability of $0.8127$ when going first, compared to $0.1949$ for that of roll to win. Comparatively, we get theoretical probabilities of $0.812840$ for turtle to win going first and $0.195448$ for roll to win. Using these number to calculate who wins in general from multiple games is fairly simple and will be explained further on, but the calculate to be $0.8089$ for turtle winning and $0.1911$ for roll to win to win. This is again showing that our tests are accurate, with very little deviation between the practical and theoretical values. This shows that turtle is a better strategy as both the practical and theoretical probabilities of it beating roll to win lie above $0.525$, the upper bound of our previously stated confidence interval. Similarly, roll to win’s probability lies below the lower bound of $0.475$, further confirming our conclusion that turtle is superior. We then played roll to win against roll and wait and got both practical and theoretical probabilities of $1$ for roll to win winning, regardless of who went first. Roll and wait produces a practical probability of beating turtle $0.7101$ when going first and $0.7062$, whereas the latter wins with probability $0.2983$ when it goes first. This compares to the practical probabilities of $0.710606$ for roll and wait and $0.297148$ for turtle. The probabilities for roll and wait to win clearly lie above the upper bound of our confidence interval, and turtle below the lower bound, hence we conclude that it is the better strategy. As this experiment shows, for both practical and theoretical probabilities, turtle is better than roll to win, roll to win is better than roll and wait, however, roll and wait is better than turtle, giving us a 3-way loop, and hence proving that these such strategies are non-transitive.\\ \\
+Our function in matlab calculates the probability of a strategy winning given that it starts the game, therefore, theoretically we calculate the general probability of it beating every other ‘hold at’ strategy as follows:\\
+Let $x$ denote the probability hold at $25$ winning when going first.\\
+Let $y$ denote that of its opposing strategy when it goes first.\\
+Let $X$ be the general probability of hold at $25$ winning.\\
+For $3000$ games, hold at $25$ goes first $1500$ times and second the same amount of times, so we have 
+\begin{align}
+X &= \dfrac{1500(x)+1500(1-y)}{3000}\notag\\
+X &= \dfrac{x+(1-y)}{2}\notag
+\end{align}
+As an example, let’s compare it against hold at $30$. We calculated the probability of hold at $25$ winning when going first as $0.573741$ and that of hold at $30$ as $0.48091$. If we put this in our formula, we get\\ $X=\dfrac{0.573741+(1-0.48091)}{2}=0.546416$. Applying this against all other ‘hold at’ strategies, we can produce the graph in figure \ref{figure7}.
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{stats_3}
+\caption{\label{figure7}}
+\end{figure}
+As we can see in figure \ref{figure7}, all of the general probabilities for hold at $25$ winning lie strictly above the line of $y=0.5$, other than when it plays against itself, when it gives a value of $0.5$ as expected. From this, we can deduce that, theoretically, this is also the best of these simple ‘hold at’ strategies.\\ \\
+Upon finding our ``optimal strategy'', we then had to test it against other strategies in order to show that it is in fact the superior of the two in question and, in turn, the best to play against any given strategy. As we saw from the tournament of all of the ‘hold at’ strategies, and the subsequent table of probabilities, hold at $25$ was the best of the simple old at strategies. As the ‘hold at’ strategies are also transitive, it made sense to test our optimal against this one and then conclude that our strategy beats all of the rest also. We ran the two against each other in line with our fair test and the simulation returned a practical probability of $0.55076$ that our optimal would win when going first and $0.52136$ in general, compared to hold at $25$ winning with probability $0.50804$ when going first and just $0.47864$ in general. As we can see our optimal strategy beats hold at $25$ when going first with a probability that lies above our confidence interval, showing that our strategy is superior. This is also in agreement of theoretical calculations, with our optimal theoretically winning $0.55127$ in general and bank at $25$ winning with probability $0.50914$. As we know that the ‘hold at’ strategies are transitive, this then means that our optimal strategy beats all such simple strategies also.\\ \\
+We then tested our optimal strategy against that of Neller’s. These simulations returned results of a probability of $0.53182$ when our strategy went first and $0.53176$ when Neller’s went first, which are values within each-others confidence interval which suggest that practically the two strategies could have the same probability. This was also backed up, with theoretical results showing that both neller’s and our optimal won when going first with a probability of $0.53059$. This then gave us a general probability of each strategy winning of $0.5$, showing that our optimal strategy has in fact converged to that found by Neller previously. 
 
 \section{Conclusions}
 \subsection{Overall findings}
 \subsection{Determination of human affects on the optimal stratergy}
-\subsection{Comparison to Nellers stratergy}
-
+\subsection{Statsical analysis}
+To conclude statistical analysis, we first had to acknowledge that probabilities for our strategies winning could be measured both practically and theoretically and these can often differ greatly. In order to ensure that these were as close as they could be, we needed to create some rules for a fair test by which we would have to follow when playing two strategies against each other, in order to accurately compare them.\\ \\
+We first noted that a particular strategy will win against itself with a general probability of $0.5$. We then constructed a confidence interval at the $95\%$ significance level with the idea that we didn’t want $p$ to differ more than $0.025$ away from $0.5$, where $p$ denotes the probability of a strategy winning against itself. From this, we could work backwards from our confidence interval and find the optimal number of games, $n$, required for one single fair test. This method produced $n=1537$. However, we saw from figure \ref{figure4} that this value of $n$ gave too many outliers in the data, so we instead chose $3000$ as it appeared accurate for our particular confidence interval. As this number still produced some outlying data, we decided to run $100$ fair tests in order to minimise the error as much as we could in order to obtain accurate practical probabilities against theoretical ones. \\ \\
+We decided first to look at simple ‘hold at’ strategies and found them to be transitive. By this, we mean, for three strategies A, B and C, if A is better than B and B is better than C, then A is better than C. This means we could have one strategy superior than the rest and we found this to be hold at 25, when we ran a tournament between the strategies.\\ \\
+We were then required to test if the optimal strategy that we thought we had found was in fact superior. As we knew the ‘hold at’ strategies to be transitive, we only needed to test it against the best of these in order to know that it was better than the rest, assuming that it won. Our optimal strategy won with general probability of $0.52136$, thus allowing us to conclude that it was better than all of the ‘hold at’ strategies.\\ \\
+We then tested our optimal against that found by Neller\citep{neller2004optimal} to see if our strategy had in fact converged to this. Both strategies, when going first, won with the same probability of $0.53182$, giving a general probability of $0.5$ for each strategy. We could then conclude that our strategy was in fact the same as the optimal that Neller had found and written about himself. 
+ 
 \nocite{*}
 \bibliographystyle{alpha}
 \bibliography{Pig_bib}
