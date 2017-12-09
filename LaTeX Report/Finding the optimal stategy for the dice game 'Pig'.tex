@@ -321,7 +321,7 @@ So with this we can again solve the equations, getting a much different result.
 	Q_{99,97,0} &= 0.8816
 \end{align*}
 From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of gamestates nearer the end of the game than it, which we shal call "higher gamestates".
-Note that it will not rely on gamestates "lower" than it.
+Note that it will not rely on gamestates "lower" than it as the game will always be progressing forward and a player cannot loose banked points.
 So long as we solve the sets containing higher gamestates first, we can to run through and solve them all successfully!
 \\
 \\
@@ -433,23 +433,24 @@ This leads to a long list of questions regarding the rules of pig. What if inste
 This was one of many points throughout our project where we found other areas to investigate, but decided to stay focused on our set goals.
 For now we accept that piglet adds $1$ to the turnscore on a flip of a head.
 
-Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll,
-giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. 
-All of this made piglet the perfect first stepping stone to solving pig.
+With a coin you may only score $1$ per flip, meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll,
+giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves.
+
+Our goal is to find the probability a strategy has of winning when going first. For a strategy A, the probability of winning is $P_{0,0,0}$, as this is the starting point of the game on A's turn.
+Piglet's simplicity made it the perfect first stepping stone to solving this.
 
 \subsubsection{Hand Written notes}
-Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below.
-%INSERT PICTURE OF MATRICES
-From this we worked down through all possibilities to obtain the probabilities of each strategy winning from $P_{0,0,0}$ given they went first. This was the first theoretical answer we had achieved and had no idea of its validity.
+We first played piglet to a total score of $3$ with two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got to the winning score.
+From this we wrote out all the simultaneous equations by hand. This starts at the set that considers the probability $P_{2,2,0}$ and $Q_{2,2,0}$ where by each strategy wins on its next go, similarly to our first example in Pig.
+Once we had these equations written in terms of matrices, we manualy put them into matlab and got it to solve them. From this we worked down through all similtaneous sets to obtain the probabilities of each strategy winning from gamestate $0,0,0$.
+This was the first theoretical answer we had achieved and despite is being so simple, it took us a long time to calculate. We were even unsure of its validity due to potential human error when writing out the matrix equations!
 
-We repeated this process for a game to total score $2$ with both strategies being bank at $1$. We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here it was realised that working our piglet to $10$ would require $100$ sets of equations for which too much time would be wasted.
+We repeated this process for a game to total score $2$, which we probably should have done before we did it for a total score of $3$.
+We used the same strategies again; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$, which is equivalent to rolling at every game state, what we called "rolling to win".
+We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared.
+It was here we realised that working out piglet to $10$ would require $100$ sets of equations. This was would be too much time would be wasted and have a high chance of us making mistakes.
 
 \subsubsection{Writing code}
-
-% Required knowledge:
-% - Similataneous equation sets
-% - Matrix form of the sets
-
 Once we had familisirised ourselves with the rules of the game, the equations, and
 a few simple piglet examples, we moved to matlab.
 The end goal is the make use of Matlab's computational power, to solve thousands of
