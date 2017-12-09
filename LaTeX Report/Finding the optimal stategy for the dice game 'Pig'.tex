@@ -208,8 +208,16 @@ Anthony
 % Outline how to solve for the probabilities by similitanious equations.
 
 \subsubsection{Piglet}
-When starting out on this project we were informed about a simpler version of pig, known as piglet. This is a version of pig where by players take it in turns, flipping a coin until either a tail is flipped, or the player banks their turn score.\\ \\
-This simpler game contained all the same elements as pig but on a smaller scale. For starters it is a played with a coin rather than a die, giving most probabilities as $\dfrac{1}{2}$ or multiples thereof, as opposed to the $\dfrac{1}{6}$ that you obtain via a die. The other difference is that you typically only play to a score of $10$ compared to $100$ in pig. These most simple of rule changes changed how the game works by a significant amount. Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. All of this made piglet the perfect first stepping stone to solving pig.
+When starting out on this project we were informed about a simpler version of pig, known as piglet. This is a version of pig
+where by players take it in turns, flipping a coin until either a tail is flipped, or the player banks their turn score.
+\\
+\\
+This simpler game contained all the same elements as pig but on a smaller scale. For starters it is a played with a coin rather than a die,
+giving most probabilities as $\dfrac{1}{2}$ or multiples thereof, as opposed to the $\dfrac{1}{6}$ that you obtain via a die.
+The other difference is that you typically only play to a score of $10$ compared to $100$ in pig.
+These most simple of rule changes changed how the game works by a significant amount. % Disagree with this statement A LOT.
+% The whole point is that it doesn't change how to game works so we can understand it and thus understand pig. Consider removing this sentence completely and check that what it is saying is not implied throughout the rest of the paragraph - Anthony
+Since with a coin you may only score $1$ per flip meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves. All of this made piglet the perfect first stepping stone to solving pig.
 
 \subsubsection{Hand Written notes}
 Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below.
