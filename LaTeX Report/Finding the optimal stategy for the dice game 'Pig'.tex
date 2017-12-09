@@ -6,6 +6,8 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage[margin=2cm]{geometry}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
 
 \begin{document}
 
@@ -168,12 +170,12 @@ It will beat most others more than half the time however may have a few weakness
 In the game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time.
 However, in some game the optimum is to do something destructive. The optimum is not set out to get the best
 win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
-\\ \\In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter.
+In the world of pig there is a man called Todd W. Neller, who has 3 published papers on the matter.
 One of them is all to do with the optimal strategy for the game of pig. As such the programme looks at all possible
 game states within the pig dimension and at each node picks the one with the highest win likelihood.
 We aimed to look at this in order to see whether we could get to Neller’s optimal with our own code,
 or perhaps we get to a different optimal that may be better than Neller’s.
-\\ \\The other possibilities for the optimal was to reach a pair of strategies that when played together existed in a Nash equilibrium.
+The other possibilities for the optimal was to reach a pair of strategies that when played together existed in a Nash equilibrium.
 A Nash equilibrium (named after Jordan Nash) is a point in a game space at which two strategies have to get worse against there opponent
 in order to adapt from their current position. Because of this it would not be optimal to follow such a path and so they stay stuck in that state.
 A good example of this is the prisoners game. It is defined as the following: \\
@@ -222,7 +224,8 @@ Since with a coin you may only score $1$ per flip meaning you must flip a minimu
 \subsubsection{Hand Written notes}
 Since we had noticed pig was simpler we chose to use it as a way to achieve our first solution. We took pig and had it played to a total score of $3$. We played two strategies against each other; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$; with both strategies banking as soon as they got over the winning score. From this we calculated all the simultaneous equations. This starts at the set that considers what the game state $P_{2,2,0}$ where by each strategy wins on its next go. These were solved using matrices like the one below.
 %INSERT PICTURE OF MATRICES
-From this we worked down through all possibilities to obtain the probabilities of each strategy winning from $P_{0,0,0}$ given they went first. This was the first theoretical answer we had achieved and had no idea of its validity.\\ \\
+From this we worked down through all possibilities to obtain the probabilities of each strategy winning from $P_{0,0,0}$ given they went first. This was the first theoretical answer we had achieved and had no idea of its validity.
+
 We repeated this process for a game to total score $2$ with both strategies being bank at $1$. We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here it was realised that working our piglet to $10$ would require $100$ sets of equations for which too much time would be wasted.
 
 \subsubsection{Writing code}
@@ -292,8 +295,10 @@ Mia and Josh
 
 \subsection{Statistical Testing}
 \subsubsection{Fair test}
-Throughout our project, we will be testing numerous different strategies against one and other to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result.\\ \\
-Say we were testing two strategies and played them against each other just once. Due to statistical inference, this test could give an unreliable result. Consider that you play the same strategy against itself for one game; there must be one winner, therefore the result will conclude that one strategy is better than the other, even though it’s the same strategy. Now say we were playing two different strategies where one was significantly better than the other, that doesn’t mean to say, that for all games played, the better strategy will always win. Again playing only one game of pig with these strategies may conclude that the worse game wins which would imply it is better than the other, even though we know this to be false. This is due to statistical inference.\\ \\
+Throughout our project, we will be testing numerous different strategies against one and other to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result.
+
+Say we were testing two strategies and played them against each other just once. Due to statistical inference, this test could give an unreliable result. Consider that you play the same strategy against itself for one game; there must be one winner, therefore the result will conclude that one strategy is better than the other, even though it’s the same strategy. Now say we were playing two different strategies where one was significantly better than the other, that doesn’t mean to say, that for all games played, the better strategy will always win. Again playing only one game of pig with these strategies may conclude that the worse game wins which would imply it is better than the other, even though we know this to be false. This is due to statistical inference.
+
 To reduce statistical inference, we will need to play numerous games of pig, say $n$ games. We will need to find an optimal value for $n$ to ensure that our result is as reliable as possible. By doing this we can find a reliable probability value for the strategies of winning against each other. We will calculate a confidence interval across a range of $n$-values on one strategy winning against itself. This would imply that the probability of the strategies winning are both 0.5. By running simulations in matlab, we can increase our value of n until the results are consistently within the confidence interval.
 \subsubsection{Theory of Hypothosis testing}
 Let $S$ denote a certain strategy within the game of pig.
@@ -317,14 +322,17 @@ By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compu
 \end{align}
 We would like the p value that we obtain to be within 95\% of the true value of the probability. For this system this implies that $0.475<p<0.525$. From the above interval for $X$, we can say that as $X=np$, using the upper and lower bounds for our $p$, we can then calculate a value for $n$, i.e. $0.475n$ would be equal to the lower bound of the confidence interval with $0.525n$ being the upper bound.
 $$0.475n = \dfrac{n}{2} –0.98\sqrt{n}$$
-Solving this for $n$, we get that $n=1537$. Similarly for the upper bound.\\ \\
-This would imply that playing a game of pig $1537$ times would end up giving a probability of the strategies winning against each other that is within 95\% of the true value. As theoretical stats is not 100\% accurate, this theory was simulated in matlab. We tested this theory by running n games of pig $100$ times for a given strategy against itself, from n ranging from $1$ to $4000$, and calculating the $p$-value from each of the games.\\ \\
+Solving this for $n$, we get that $n=1537$. Similarly for the upper bound.
+
+This would imply that playing a game of pig $1537$ times would end up giving a probability of the strategies winning against each other that is within 95\% of the true value. As theoretical stats is not 100\% accurate, this theory was simulated in matlab. We tested this theory by running n games of pig $100$ times for a given strategy against itself, from n ranging from $1$ to $4000$, and calculating the $p$-value from each of the games.
+
 \begin{figure}
 \centering
 \includegraphics[height=24cm]{stats_testing}
 \caption{stats testing\label{figure4}}
 \end{figure}
-Figure \ref{figure3} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for a small number of games played. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, marked by the two lines at $y=0.525$ and $y=0.475$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is large. By looking at the graph we can choose a value at which the majority of points lie within the interval. After the number of games passes $2500$, there doesn’t appear to be much decrease in the width of the distribution, so we will chose $3000$ as the appropriate number of games to play for a fair test.\\ \\
+Figure \ref{figure3} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for a small number of games played. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, marked by the two lines at $y=0.525$ and $y=0.475$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is large. By looking at the graph we can choose a value at which the majority of points lie within the interval. After the number of games passes $2500$, there doesn’t appear to be much decrease in the width of the distribution, so we will chose $3000$ as the appropriate number of games to play for a fair test.
+
 It would be a mistake to now only use $n=3000$ to test strategies. As the graph in figure \ref{figure3} shows, even for high values for $n$, you can still get stray results. Therefore, like what was done in the test to find $n$, for strategies we want to compare we will take $100$ results of $3000$ games. Then we can take the average of these results to further improve the reliability of the result.
 \subsubsection{Running of tests}
 
