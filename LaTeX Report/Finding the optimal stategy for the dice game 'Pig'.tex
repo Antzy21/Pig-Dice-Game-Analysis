@@ -106,9 +106,9 @@ We tried to achieve these aims by pursuing the following objectives:
 \begin{enumerate}
 \item Using MATLAB to create and develop a code that finds the optimal strategy firstly for piglet and then adapting this for ‘Pig’
 
-\item Once the code for the optimal solution had been created we then used MATLAB again to create a code that takes two given ‘optimal strategies’, compares them against each other and determines which one has the statistically highest probability of winning when played multiple times. This enables us to determine which of the optimal strategies is statistically the best. 
+\item Once the code for the optimal solution had been created we then used MATLAB again to create a code that takes two given ‘optimal strategies’, compares them against each other and determines which one has the statistically highest probability of winning when played multiple times. This enables us to determine which of the optimal strategies is statistically the best.
 
-\item Get a sample of people to play pig, get them to record their results and then determine whether their strategy is influenced by how well (or badly) their opponent is doing and whether they stick to their stated risk preferences (risk averse, risk neutral, risk loving) 
+\item Get a sample of people to play pig, get them to record their results and then determine whether their strategy is influenced by how well (or badly) their opponent is doing and whether they stick to their stated risk preferences (risk averse, risk neutral, risk loving)
 \end{enumerate}
 
 \subsection{Basics of Pig}
@@ -120,20 +120,23 @@ The aim of the game is to be the first player to have a banked total of points g
 \\
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking.
 A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
-
+\\
+\\
 A game state is defined by the current position of the game, my banked score, your banked score, and my turn score.
 These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million
 game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example,
 this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible
 game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is
 with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
-
+\\
+\\
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every
 possible game state.
 Does this let us define every possible strategy or are there more variables to consider?
 If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play?
 What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
-
+\\
+\\
 At any gamestate it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that gamestate.
 Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points,
 $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning
@@ -216,7 +219,8 @@ As discussed briefly in the introduction, linear equations can describe the prob
 This is a powerful method of calculation that Nella used to produce his optimal and we used for all of the programmed strategies we produced.
 As in the introduction, let $P_{i,j,k}$ denote the probability of player A winning
 from the game state $i,j,k$.
-
+\\
+\\
 Firstly let us look at the probability of A winning when banking.
 A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn.
 The probability $Q_{j,i,k}$ is the probability the player B has of winning \textit{on their turn} at their gamestate $j,i,k$.
@@ -225,53 +229,69 @@ Note that this is from any point in the game, not at any gamestate, as a gamesta
 From this we conclude that when it is player B's turn at gamestate $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$.
 By banking, A add's their turn score to their banked score, and B's turn starts with a turn score of zero.
 Thus we can define the probability A has at any gamestate by banking as
+
 \begin{align*}
 P^{Bank}_{i,j,k} = 1-Q_{j,i+k,0}
 \end{align*}
 
 Take the probability of A winning when rolling.
+
 \begin{align*}
 P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{j,i,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
 \end{align*}
+
 The first part on the right side of the equation is when a 1 is rolled. Similarly to banking, when a 1 is rolled the game passes to B so the probability will be in terms of $Q_{j,i,0}$.
 The main differences being that the turnscore is not added to the banked score, as can be seen in the gamestate, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening.
 The second part on the right is the sum of all the other possibile outcomes of rolling. Again each roll outcome has a $\frac{1}{6}^\text{th}$ chance of happening.
 The results take A to new gamestates, with a higher turn score. $r$ represents the different scores that can be added, ranging from $2$ to $6$ depending on the number rolled.
-
+\\
+\\
 How do we find out the useful probabilities that we have produced notation for?
 To explain it clearly, we will look at trivial probabilities and very simple calculations.
 The following equation gives the probability of winning from the gamestate where the banked score of player A is 100. By the rules of the game, A has won, meaning this probability is equal to $1$.
+
 \begin{align*}
 	P_{100,0,0}=1
 \end{align*}
+
 This is one of many trivial gamestate probabilities that are important to understand. Another would be
+
 \begin{align*}
 	P_{82,0,20}=1
 \end{align*}
+
 Where player A has accumulated enough turn score to immediatly bank and win.
 Generaly, if $i+k\geq100$ and $j<100$ then the probability of that gamestate is $1$, as it means the player has won.
 On the otherhand, take the following gamestate probability from A's perspective.
+
 \begin{align*}
 	P_{99,100,0}=0
 \end{align*}
+
 This gamestate is where the opponent has won the game, so player A has 0 probability of winning. A shame indeed as A was so close to winning on $99$!
 Generaly, if $i<100$ and $j\geq100$, then the probability of that gamestate is $0$, as it means the other player has won.
-
+\\
+\\
 These trivial gamestate probabilities allow us to calculate the non trivial probabilities of a game.
 Let us start with a simple one, near the very end of the game. Both of the players are on $99$ points, and it is the beginning of player A's turn.
 Let us assume that both A and B roll on gamestate $99,99,0$.
 It may seem an obvious choice, as they have no turn score to loose, but the idea of banking on a turn score of zero is something we shal be investigating further.
+
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
 \end{align*}
+
 From what we know about trivial probabilities, we see that if A successfully rolls, i.e. doesn't roll a 1, they win the game!
 So we can write the probabilities as followed, filling in the trivial probabilities.
+
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + (1) + (1) + (1) + (1) + (1)\bigg)\\
 	P_{99,99,0} &= \frac{1}{6}(1 - Q_{99,99,0})+\frac{5}{6}\\
 	P_{99,99,0} &= 1 - \frac{1}{6}Q_{99,99,0}
 \end{align*}
+
 Similarly for B's turn
+
 \begin{align*}
 	Q_{99,99,0} &= \frac{1}{6}\bigg((1 - P_{99,99,0}) + Q_{99,100,2} + Q_{99,100,3} + Q_{99,100,4} + Q_{99,100,5} + Q_{99,100,6}\bigg)\\
 	Q_{99,99,0} &= \frac{1}{6}\bigg((1 - P_{99,99,0}) + (1) + (1) + (1) + (1) + (1)\bigg)\\
@@ -280,6 +300,7 @@ Similarly for B's turn
 \end{align*}
 
 Now the two equations can be solved similtaneously, getting the results
+
 \begin{align*}
 	P_{99,99,0} &= \frac{6}{7}\\
 	Q_{99,99,0} &= \frac{6}{7}
@@ -288,36 +309,46 @@ Now the two equations can be solved similtaneously, getting the results
 This example is one complete set of similtanious equations. It turns out that every probability can be collected into a set of equations to be calculated.
 Whereas this one only contained two unknowns to be solved together, others may be much larger!
 Moving onto a more complicated similtaneous set, start from A's turn at game state $97,99,0$. Let A's strategy be to roll at this game state.
+
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 \end{align*}
+
 After writting this out we see the other probabilities it relies on. The method now is to see what the strategies do at these gamestates and then write out the probability equations for them.
 In this example let A roll at $97,99,2$ and B roll at $99,97,0$
+
 \begin{align*}
 	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
+
 Now we have all three similtaneous equations that can be solved.
+
 \begin{align*}
 	P_{97,99,0} &= 0.8325\\
 	P_{97,99,2} &= 0.8565\\
 	Q_{99,97,0} &= 0.8612
 \end{align*}
+
 This looks good so far! Does this mean we can run through all the sets of equations now?
 Not just yet! First of all we must look at the interesting case of banking. Say for example instead of rolling at $97,99,2$, A banks.
 The equations are now
+
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 	P_{97,99,2} &= 1 - Q_{99,99,0}\\
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
+
 We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example! Its value was $\frac{6}{7}$.
 So with this we can again solve the equations, getting a much different result.
+
 \begin{align*}
 	P_{97,99,0} &= 0.7102\\
 	P_{97,99,2} &= 0.1429\\
 	Q_{99,97,0} &= 0.8816
 \end{align*}
+
 From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of gamestates nearer the end of the game than it, which we shal call "higher gamestates".
 Note that it will not rely on gamestates "lower" than it as the game will always be progressing forward and a player cannot loose banked points.
 So long as we solve the sets containing higher gamestates first, we can to run through and solve them all successfully!
@@ -330,21 +361,26 @@ Computational power is required to give us the probability values we want to cal
 To make use of Matlab, we needed to write the equations in terms of matrices.
 Every set of equations translates to three matrices, written $CX=D$; The coefficients, the probabilities, and the contant values respectively.
 To see how these matrices are built, we will take the examples used earlier.
-
+\\
+\\
 The first important part is to simplify the equations down. We want them in terms of seperated probabilities and their coefficient values on the left hand side of the equation, and a combined constant value on the right.
 This usualy involves expanding brackets and adding constants together.\\
 So
+
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + 1 + 1 + 1 + 1 + 1\bigg)\\
 	Q_{99,99,0} &= \frac{1}{6}\bigg((1 - P_{99,99,0}) + 1 + 1 + 1 + 1 + 1\bigg)\\
 \end{align*}
+
 becomes
+
 \begin{align*}
 	P_{99,99,0} + \frac{1}{6}Q_{99,99,0} &= 1\\
 	Q_{99,99,0} + \frac{1}{6}P_{99,99,0} &= 1
 \end{align*}
 
 Using basic ideas of matrix multiplication, we can construct a Matrix
+
 \begin{align*}
 	\begin{bmatrix}
 	    1          & \frac{1}{6}\\
@@ -360,14 +396,18 @@ Using basic ideas of matrix multiplication, we can construct a Matrix
 		1
 	\end{bmatrix}
 \end{align*}
+
 This is useful as we can now take the inverse of the coeefficients matrix, using it in left matrix multiplication to find the probabilities.
+
 \begin{align*}
 	C^{-1}CX &= C^{-1}D\\
 	X        &= C^{-1}D
 \end{align*}
+
 Matlab has a function that does this for us, giving the probability values in the matrix $X$.
 Looking at the other two examples:\\
 A rolling on $97,99,2$.
+
 \begin{align*}
 	P_{97,99,0} + \frac{1}{6}Q_{99,97,0} - \frac{1}{6}P_{97,99,2} &= \frac{5}{6}\\
 	P_{97,99,2} + \frac{1}{6}Q_{99,97,0}                          &=  1\\
@@ -389,7 +429,9 @@ A rolling on $97,99,2$.
 		1
 	\end{bmatrix}
 \end{align*}
+
 A banking on $97,99,2$.
+
 \begin{align*}
 	P_{97,99,0} - \frac{1}{6}P_{97,99,2} + \frac{1}{6}Q_{99,97,0}) &= \frac{5}{6}\\
 	P_{97,99,2}                                                    &= 1 - Q_{99,99,0}\\
@@ -414,26 +456,27 @@ A banking on $97,99,2$.
 
 Notice how $Q_{99,99,0}$ is in the constant values matrix. As discussed before this is because its value should be pretermined from a previous solved similtaneous set.
 
-
-% Outline how to solve for the probabilities by similitanious equations.
-
 \subsubsection{Piglet}
 When starting out on this project we were informed about a simpler version of pig, known as piglet. This is a version of pig
 where by players take it in turns, flipping a coin until either a tail is flipped, or the player banks their turn score.
-
+\\
+\\
 This simpler game contained all the same elements as pig but on a smaller scale. For starters it is played with a coin rather than a die,
 giving most probabilities as $\frac{1}{2}$ or multiples thereof, as opposed to the $\frac{1}{6}$ that you obtain via a die.
 The other difference is that you typically play to a much lower score compared to $100$ in pig. This score can be chosen to be whatever we want, often $10$ but sometimes as low as $2$ or $3$ for the most simple games.
-
+\\
+\\
 A subtle yet vital difference is that $1$ is added for a successful flip. Consider however if the coin was a two sided die, with $1$ and $2$ rather than tails and heads respectively.
 If it was the same as pig, the face value of the roll would be added to the turn score, so $2$, not $1$. We know that it is not possible to gain $1$ in pig from a roll, as $1$ is reserved for a loss.
 This leads to a long list of questions regarding the rules of pig. What if instead of loosing on a roll of $1$, it was a roll of $6$ that looses the turn score or any other number?
 This was one of many points throughout our project where we found other areas to investigate, but decided to stay focused on our set goals.
 For now we accept that piglet adds $1$ to the turnscore on a flip of a head.
-
+\\
+\\
 With a coin you may only score $1$ per flip, meaning you must flip a minimum of $10$ times for you to reach you end goal. In pig this is not the case as you can roll anywhere from $2$ to $6$ points on a successful roll,
 giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves.
-
+\\
+\\
 Our goal is to find the probability a strategy has of winning when going first. For a strategy A, the probability of winning is $P_{0,0,0}$, as this is the starting point of the game on A's turn.
 Piglet's simplicity made it the perfect first stepping stone to solving this.
 
@@ -442,7 +485,8 @@ We first played piglet to a total score of $3$ with two strategies against each 
 From this we wrote out all the simultaneous equations by hand. This starts at the set that considers the probability $P_{2,2,0}$ and $Q_{2,2,0}$ where by each strategy wins on its next go, similarly to our first example in Pig.
 Once we had these equations written in terms of matrices, we manualy put them into matlab and got it to solve them. From this we worked down through all similtaneous sets to obtain the probabilities of each strategy winning from gamestate $0,0,0$.
 This was the first theoretical answer we had achieved and despite is being so simple, it took us a long time to calculate. We were even unsure of its validity due to potential human error when writing out the matrix equations!
-
+\\
+\\
 We repeated this process for a game to total score $2$, which we probably should have done before we did it for a total score of $3$.
 We used the same strategies again; Strategy A was to bank on a turn score of $1$; Strategy B was to bank on a turn score of $2$, which is equivalent to rolling at every game state, what we called "rolling to win".
 We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared.
@@ -455,19 +499,22 @@ The end goal is the make use of Matlab's computational power, to solve thousands
 similtaneous equations and find all the probabilites at each game state.
 We can also make use of variable inputs to compare any strategy to another, and
 even change the score needed to win and the dice probability.
-
+\\
+\\
 Our first attempt at simply getting out ideas down as code was a very simplified
 calculation of piglet. Although we coded in a dice probability variable that could be changed,
 the code only worked for a dice flip, and when the variable was set to $\frac{1}{2}$.
 It was also limited to taking in only Bank on strategies.
 %Explain what Bank on strats are
 We could however run to any winning score.
-
+\\
+\\
 The way we got Matlab to solve the sets of similtanious equations was by turning them into
 matrices of coefficients, variables and constants. $CX=D$ This was discussed before
 and will be touched on again to talk about the layout of the matrices in the more general
 refined code for pig.
-
+\\
+\\
 By using the hand calculated simple piglet probabilities we could check to see if our
 coded matrices were correct and fix any bugs. Once this was working we had our first
 runnable code to get us going. We just had to generalise the code.
@@ -475,7 +522,8 @@ There were two steps to doing this; taking any strategy as an input, and having 
 dice probability working in the code. The former was easier; an independent problem that we
 made a function to do for us. The later was a little trickier but was a fundamental part
 of building the matrices.
-
+\\
+\\
 % Subsection on Strategies to matrices
 
 % Subsection on coding matrices
@@ -516,11 +564,11 @@ In the world of stats, theoretical probabilities don’t always agree with the p
 The true $n$ value will need to be calculated and not decided. To do so we can use hypothesis testing. From theoretical probability values, we can define an interval around the value for which we want the practical result to lie in. The practical test will involve playing $N$ amount of games of pig were a strategy receives a score of $1$ for each game they win. After $N$ games have been completed, we can calculate the probability of the strategy winning against the other by dividing the number of games it has won by the total number of games. Then we can test numerous results for different values of $N$ and observe the distribution of $p$ as $N$ increases. From there we can chose an appropriate value for the number of games which will give us constant results within our confidence interval. Once this value has been obtained, the testing of strategies should result in reliable results and therefore be as fair of a test as possible.
  \subsubsection{Deciding that a strategy is better than another}
 As mentioned before, to decide that one strategy is better than another is not as simple as playing one game of pig and saying that the victor is a better strategy.\\ \\
-Once we have decided on a value for $N$ at which we decide that the test is fair, it will follow immediately what results will conclude that one strategy is better than another. By finding $N$, we will have chosen an upper and lower limit of the $p$-value at which we want our results to lie within. To illustrate this, say we conclude that $100$ games of pig is a form of a fair test and we want our practical probability to lie within $0.1$ of the true (theoretical) probability. If we were to test the same strategy against itself, theoretically either strategy should win with a probability of $0.5$, therefore after performing practical tests, we will want the representative probability to lie within $0.4$ and $0.6$. As the probability will be calculated by dividing the number of wins a strategy had and dividing it by the total number of games, we can then either perform this calculation to find the representative probability or we can calculate directly from the confidence interval how many games a certain strategy will need to win in order to conclude that it is a better strategy. In the above case, as it will need to have a probability higher than $0.6$ to conclude that it is a better strategy, it will therefore need to win $100\times0.6=60$ games at least in order to be considered a better strategy. 
+Once we have decided on a value for $N$ at which we decide that the test is fair, it will follow immediately what results will conclude that one strategy is better than another. By finding $N$, we will have chosen an upper and lower limit of the $p$-value at which we want our results to lie within. To illustrate this, say we conclude that $100$ games of pig is a form of a fair test and we want our practical probability to lie within $0.1$ of the true (theoretical) probability. If we were to test the same strategy against itself, theoretically either strategy should win with a probability of $0.5$, therefore after performing practical tests, we will want the representative probability to lie within $0.4$ and $0.6$. As the probability will be calculated by dividing the number of wins a strategy had and dividing it by the total number of games, we can then either perform this calculation to find the representative probability or we can calculate directly from the confidence interval how many games a certain strategy will need to win in order to conclude that it is a better strategy. In the above case, as it will need to have a probability higher than $0.6$ to conclude that it is a better strategy, it will therefore need to win $100\times0.6=60$ games at least in order to be considered a better strategy.
 \subsubsection{Testing our optimal}
 To finalise our findings we will need to test our version of the optimal to find whether it is actually an optimal or at least as good as Neller’s\citep{neller2004optimal}, therefore we will need to run some test on it and evaluate the findings.\\ \\
 We may begin our testing by playing our version of the optimal against simply hold at strategies, which have actually been found to be quite effective, even against Neller’s strategy:  Though of course, not better than it. By doing this we can decide whether it is actually better than simple hold at strategies or whether it needs adjusting before playing it against Neller’s version.\\ \\
-Throughout these test we will keep to our definition of whether a strategy is better than another. Once we have succeeded in deducing that our version is better than all hold at strategies, we may then test our version against Neller’s and analyse the results. 
+Throughout these test we will keep to our definition of whether a strategy is better than another. Once we have succeeded in deducing that our version is better than all hold at strategies, we may then test our version against Neller’s and analyse the results.
 
 
 \section{Findings}
@@ -534,13 +582,13 @@ Throughout these test we will keep to our definition of whether a strategy is be
 \subsection{Statistical Testing}
 \subsubsection{The test}
 As mentioned in the methodology, to calculate the number of games required to play to perform a fair test we will use hypothesis testing.\\ \\
-Let $S$ denote a certain strategy within the game of pig. 
+Let $S$ denote a certain strategy within the game of pig.
 Let $n$ denote the number of games played.
-Let $X$ denote the number of games won by that strategy after $n$ games. 
-As we will be playing $S$ against itself, we can say $E(X) = 
-\dfrac{n}{2}$, the expected amount of games $S$ should win against itself. 
-We can approximate $X$ to the binomial distribution to conduct the hypothesis test. 
-$X \sim Bin(n , p=0.5)$ 
+Let $X$ denote the number of games won by that strategy after $n$ games.
+As we will be playing $S$ against itself, we can say $E(X) =
+\dfrac{n}{2}$, the expected amount of games $S$ should win against itself.
+We can approximate $X$ to the binomial distribution to conduct the hypothesis test.
+$X \sim Bin(n , p=0.5)$
 by the binomial distribution
 
 \begin{align}
@@ -548,7 +596,7 @@ E(X) &= np & SD(X) &= \sqrt{var(X)}\notag\\
 &= \dfrac{n}{2} & &= \sqrt{np(1-p)}\notag\\
 & & &= 0.5\sqrt{n} \notag
 \end{align}
-By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval. 
+By using the $Z$ distribution at a 95\% confidence interval $(z=1.96)$, we compute the following interval.
 \begin{align}
 95\%Cl &= (\dfrac{n}{2} -1.96(0.5\sqrt{n}), \dfrac{n}{2} +1.96(0.5\sqrt{n}))\notag\\
 &= (\dfrac{n}{2}-0.98\sqrt{n}, \dfrac{n}{2}+0.98\sqrt{n})
@@ -599,7 +647,7 @@ Our function in matlab calculates the probability of a strategy winning given th
 Let $x$ denote the probability hold at $25$ winning when going first.\\
 Let $y$ denote that of its opposing strategy when it goes first.\\
 Let $X$ be the general probability of hold at $25$ winning.\\
-For $3000$ games, hold at $25$ goes first $1500$ times and second the same amount of times, so we have 
+For $3000$ games, hold at $25$ goes first $1500$ times and second the same amount of times, so we have
 \begin{align}
 X &= \dfrac{1500(x)+1500(1-y)}{3000}\notag\\
 X &= \dfrac{x+(1-y)}{2}\notag
@@ -612,7 +660,7 @@ As an example, let’s compare it against hold at $30$. We calculated the probab
 \end{figure}
 As we can see in figure \ref{figure7}, all of the general probabilities for hold at $25$ winning lie strictly above the line of $y=0.5$, other than when it plays against itself, when it gives a value of $0.5$ as expected. From this, we can deduce that, theoretically, this is also the best of these simple ‘hold at’ strategies.\\ \\
 Upon finding our ``optimal strategy'', we then had to test it against other strategies in order to show that it is in fact the superior of the two in question and, in turn, the best to play against any given strategy. As we saw from the tournament of all of the ‘hold at’ strategies, and the subsequent table of probabilities, hold at $25$ was the best of the simple old at strategies. As the ‘hold at’ strategies are also transitive, it made sense to test our optimal against this one and then conclude that our strategy beats all of the rest also. We ran the two against each other in line with our fair test and the simulation returned a practical probability of $0.55076$ that our optimal would win when going first and $0.52136$ in general, compared to hold at $25$ winning with probability $0.50804$ when going first and just $0.47864$ in general. As we can see our optimal strategy beats hold at $25$ when going first with a probability that lies above our confidence interval, showing that our strategy is superior. This is also in agreement of theoretical calculations, with our optimal theoretically winning $0.55127$ in general and bank at $25$ winning with probability $0.50914$. As we know that the ‘hold at’ strategies are transitive, this then means that our optimal strategy beats all such simple strategies also.\\ \\
-We then tested our optimal strategy against that of Neller’s. These simulations returned results of a probability of $0.53182$ when our strategy went first and $0.53176$ when Neller’s went first, which are values within each-others confidence interval which suggest that practically the two strategies could have the same probability. This was also backed up, with theoretical results showing that both neller’s and our optimal won when going first with a probability of $0.53059$. This then gave us a general probability of each strategy winning of $0.5$, showing that our optimal strategy has in fact converged to that found by Neller previously. 
+We then tested our optimal strategy against that of Neller’s. These simulations returned results of a probability of $0.53182$ when our strategy went first and $0.53176$ when Neller’s went first, which are values within each-others confidence interval which suggest that practically the two strategies could have the same probability. This was also backed up, with theoretical results showing that both neller’s and our optimal won when going first with a probability of $0.53059$. This then gave us a general probability of each strategy winning of $0.5$, showing that our optimal strategy has in fact converged to that found by Neller previously.
 
 \section{Conclusions}
 \subsection{Overall findings}
@@ -622,8 +670,8 @@ To conclude statistical analysis, we first had to acknowledge that probabilities
 We first noted that a particular strategy will win against itself with a general probability of $0.5$. We then constructed a confidence interval at the $95\%$ significance level with the idea that we didn’t want $p$ to differ more than $0.025$ away from $0.5$, where $p$ denotes the probability of a strategy winning against itself. From this, we could work backwards from our confidence interval and find the optimal number of games, $n$, required for one single fair test. This method produced $n=1537$. However, we saw from figure \ref{figure4} that this value of $n$ gave too many outliers in the data, so we instead chose $3000$ as it appeared accurate for our particular confidence interval. As this number still produced some outlying data, we decided to run $100$ fair tests in order to minimise the error as much as we could in order to obtain accurate practical probabilities against theoretical ones. \\ \\
 We decided first to look at simple ‘hold at’ strategies and found them to be transitive. By this, we mean, for three strategies A, B and C, if A is better than B and B is better than C, then A is better than C. This means we could have one strategy superior than the rest and we found this to be hold at 25, when we ran a tournament between the strategies.\\ \\
 We were then required to test if the optimal strategy that we thought we had found was in fact superior. As we knew the ‘hold at’ strategies to be transitive, we only needed to test it against the best of these in order to know that it was better than the rest, assuming that it won. Our optimal strategy won with general probability of $0.52136$, thus allowing us to conclude that it was better than all of the ‘hold at’ strategies.\\ \\
-We then tested our optimal against that found by Neller\citep{neller2004optimal} to see if our strategy had in fact converged to this. Both strategies, when going first, won with the same probability of $0.53182$, giving a general probability of $0.5$ for each strategy. We could then conclude that our strategy was in fact the same as the optimal that Neller had found and written about himself. 
- 
+We then tested our optimal against that found by Neller\citep{neller2004optimal} to see if our strategy had in fact converged to this. Both strategies, when going first, won with the same probability of $0.53182$, giving a general probability of $0.5$ for each strategy. We could then conclude that our strategy was in fact the same as the optimal that Neller had found and written about himself.
+
 \nocite{*}
 \bibliographystyle{alpha}
 \bibliography{Pig_bib}
