@@ -223,12 +223,12 @@ P^{Bank}_{i,j,k} = 1-Q_{j,i+k,0}
 
 Take the probability of A winning when rolling.
 \begin{align*}
-P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{i,j,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
+P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{j,i,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
 \end{align*}
 The first part on the right side of the equation is when a 1 is rolled. Similarly to banking, when a 1 is rolled the game passes to B so the probability will be in terms of $Q_{j,i,0}$.
 The main differences being that the turnscore is not added to the banked score, as can be seen in the gamestate, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening.
 The second part on the right is the sum of all the other possibile outcomes of rolling. Again each roll outcome has a $\frac{1}{6}^\text{th}$ chance of happening.
-The results takes A to new gamestates, with a higher turn score. $r$ represents the different scores that can be added, ranging from $2$ to $6$ depending on the number rolled.
+The results take A to new gamestates, with a higher turn score. $r$ represents the different scores that can be added, ranging from $2$ to $6$ depending on the number rolled.
 
 How do we find out the useful probabilities that we have produced notation for?
 To explain it clearly, we will look at trivial probabilities and very simple calculations.
@@ -251,8 +251,8 @@ Generaly, if $i<100$ and $j\geq100$, then the probability of that gamestate is $
 
 These trivial gamestate probabilities allow us to calculate the non trivial probabilities of a game.
 Let us start with a simple one, near the very end of the game. Both of the players are on $99$ points, and it is the beginning of player A's turn.
-Let us assume that both A and B do not bank on gamestate $99,99,0$.
-It may seem an obvious choice, as they have no turn score to loose, but the idea of banking on a turn score of zero is something we shal investigate further.
+Let us assume that both A and B roll on gamestate $99,99,0$.
+It may seem an obvious choice, as they have no turn score to loose, but the idea of banking on a turn score of zero is something we shal be investigating further.
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
 \end{align*}
@@ -277,7 +277,46 @@ Now the two equations can be solved similtaneously, getting the results
 	Q_{99,99,0} &= \frac{6}{7}
 \end{align*}
 
-
+This example is one complete set of similtanious equations. It turns out that every probability can be collected into a set of equations to be calculated.
+Whereas this one only contained two unknowns to be solved together, others may be much larger!
+Moving onto a more complicated similtaneous set, start from A's turn at game state $97,99,0$. Let A's strategy be to roll at this game state.
+\begin{align*}
+	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
+\end{align*}
+After writting this out we see the other probabilities it relies on. The method now is to see what the strategy does at those gamestates and then write out the probability equations for them.
+In this example let A roll at $97,99,2$ and B roll at $99,97,0$
+\begin{align*}
+	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
+	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
+\end{align*}
+Now we have all three similtaneous equations that can be solved.
+\begin{align*}
+	P_{97,99,0} &= 0.8325\\
+	P_{97,99,2} &= 0.8565\\
+	Q_{99,97,0} &= 0.8612
+\end{align*}
+This looks good so far! Does this mean we can run through all the sets of equations now?
+Not just yet! First of all we must look at the interesting case of banking. Say for example instead of rolling at $97,99,2$, A banks.
+The equations are now
+\begin{align*}
+	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
+	P_{97,99,2} &= 1 - Q_{99,99,0}\\
+	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
+\end{align*}
+We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example! Its value was $\frac{6}{7}$.
+So with this we can again solve the equations, getting a much different result.
+\begin{align*}
+	P_{97,99,0} &= 0.7102\\
+	P_{97,99,2} &= 0.1429\\
+	Q_{99,97,0} &= 0.8816
+\end{align*}
+From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of gamestates nearer the end of the game than it, which we shal call "higher gamestates".
+Note that it will not rely on gamestates "lower" than it.
+So long as we solve the sets containing higher gamestates first, we can to run through and solve them all successfully!
+\\
+\\
+To reiterate the power this gives us. We can calculate every probability of winning from every gamestate for every type of strategy, at least in theory... actualy doing these calculations is another thing entirely.
+Perhaps there is a simpler game for us to test this theory on.
 
 
 % Outline how to solve for the probabilities by similitanious equations.
