@@ -475,7 +475,25 @@ This way of defining a strategy was used when runn'ing the code for the game Pig
 
 It makes sense to work with matrix strategies, but we still wanted to use function strategies in our code where possible. Thereforte, we devised a function \textit{Strategies to Matrices} that could convert functions to matrices but leave the strategy alone if it is already a matrix. Firstly, we checked that the input was a function handle, then it runs through every game state, outputting the choice that the function produces, then stores that value in the corresponding matrix. We also used this function to check that the Matrix was the correct size for the game. Unlike function strategies, the matrix strategies only work for a certain game length.
 
-% Inset Strategies to Matrices code
+\begin{lstlisting}
+function M = Strategies_to_Matrices(S,To_win)
+if isa(S, 'function_handle')
+    M=zeros(To_win,To_win,To_win);
+    for i=0:To_win-1
+        for j=0:To_win-1
+            for k=0:To_win-1
+                M(i+1,j+1,k+1)=S(i,j,k);
+            end
+        end
+    end
+else
+    M=S;
+    if size(S) ~= [To_win,To_win,To_win]
+        disp('The Matrix is not the correct size for this game')
+    end
+end
+end
+\end{lstlisting}
 
 This allowed us to check what the strategy wanted to do at any game state, which was important for the type of equation to use when building the matrices.
 
