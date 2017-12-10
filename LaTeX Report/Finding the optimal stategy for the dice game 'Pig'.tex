@@ -172,7 +172,11 @@ We can see from this diagram that the best outcome for each player is not to con
 The first step we took to familiarise ourselves with Pig was to do some tests of the game . We began by testing a few basic strategies, such as 'Bank at $20$'. We then tried to formulate our own strategies in an attempt to beat the aforementioned strategies. We were very successful in beating the previously defined strategies, which led us to believe that there are many strategies that in theory would be optimal but in practice are easily beaten.
 \\
 \\
-Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Hold at $21$'. \textbf{[Is this true?]} Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
+Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Hold at $21$'. \textbf{[Is this true? NOT TRUE, I REPEAT, NOT TRUE - Anthony ]}
+%Probability_Matrices(@Bank20,@Bank21,100,1/6);
+%   0.542626    'Bank20' Probability of winning when going first
+%   0.525837    'Bank21' Probability of winning when going first
+Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
 \\
 \\
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
