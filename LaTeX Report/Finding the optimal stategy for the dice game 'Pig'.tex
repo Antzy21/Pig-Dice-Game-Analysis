@@ -48,20 +48,20 @@
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushleft}
 			\large
-			 \textsc{650022099}\\
-			 \textsc{650011537}\\
-			E. \textsc{Morison}\\
+			\textsc{650022099}\\
+			\textsc{650011537}\\
+			\textsc{640035353}\\
 			J. \textsc{Peet}\\
-			L. \textsc{Sutton}
+			\textsc{640014305}
 		\end{flushleft}
 	\end{minipage}
 	~
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushright}
 			\large
-		      \textsc{650000725}\\
+		     \textsc{650000725}\\
 			 \textsc{650008126}\\
-			   \textsc{650009496}\\
+			 \textsc{650009496}\\
 			 \textsc{Smith}
 			\vspace*{10pt§}
 		\end{flushright}
@@ -172,37 +172,36 @@ We can see from this diagram that the best outcome for each player is not to con
 The first step we took to familiarise ourselves with Pig was to do some tests of the game . We began by testing a few basic strategies, such as 'Bank at $20$'. We then tried to formulate our own strategies in an attempt to beat the aforementioned strategies. We were very successful in beating the previously defined strategies, which led us to believe that there are many strategies that in theory would be optimal but in practice are easily beaten.
 \\
 \\
-Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Hold at $21$'. \textbf{[Is this true? NOT TRUE, I REPEAT, NOT TRUE - Anthony ]}
-%Probability_Matrices(@Bank20,@Bank21,100,1/6);
-%   0.542626    'Bank20' Probability of winning when going first
-%   0.525837    'Bank21' Probability of winning when going first
-Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
+Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Hold at $21$'. \textbf{[Is this true?]} Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
 \\
 \\
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
 \subsection{Human Interactions in Pig}
-Developing a strategy that maximises the probability of winning can be determined through the use of MATLAB. However, through the analysis of playing Pig ourselves we also wanted to look into the human interactions that occur when playing Pig.
+Maximising the probability of winning can be determined through the use of MATLAB, as discovered by Todd Neller \textbf{[reference here]} to create an optimum solution. However, through the analysis of playing Pig ourselves, we discovered the human behavioural aspects that occurred during the game.
 \\
 \\
-Therefore, we decided to investigate the following two questions:
+While a computer acts completely rationally, humans do not always act completely rationally when playing. Therefore, another aim of our project was to investigate how humans play Pig. This irrational behaviour is explained by a branch of economics called behavioural economics. Behavioural economics explains that not all actions taken are purely rational and a good part of what drives peoples thinking is purely social in nature. For example, when playing Pig humans are influenced by other aspects such as how well they are doing at a particular game-state compared with their opponent and their own risk preferences.
 \\
 \\
-We decided to investigate two ideas:
+Thus, intrigued by these ideas, two experiments were performed to investigate the aspects of human interaction and behaviour during Pig. These were as follows:
 \begin{enumerate}
+\item Do players align game play with stated risk preference?
 \item How are players' strategies influenced by their opponents'?
-\item Do players stick to their stated risk preferences during game play?
 \end{enumerate}
+The first investigation divided players into three categories: risk-averse, risk-seeking and risk-neutral. The other investigation looked into behavioural changes that occurred within a game. Modelling the strategic interaction between the two players allowed us to analyse behavioural patterns (since the game involves known payouts and quantifiable consequences). This allowed us to apply our understanding of game theory to help determine the most likely outcomes.
+
+\subsubsection{Game theory and Nash equilibria}
+Defined as the study of mathematical models of conflict and cooperation between intelligent rational decision-makers \cite{roger1991game}, the concepts within game theory provide a language to formulate, structure, analyse and understand strategic scenarios.\cite{turocy2001texas}
 \\
 \\
-The first investigation looks into a branch of economics called behavioural economics and the second investigation is to include the risk types: risk averse, risk seeking and risk neutral characteristics and to see whether players' stick to their stated risk preference when playing against each other.
-
-Modelling the strategic interaction between the two players allowed us to analyse behavioural patterns (since the game involves known payouts and quantifiable consequences). This allowed us to apply our understanding of game theory to help determine the most likely outcomes.
-
-\subsubsection{Behavioural economics}
-Behavioural economics explains that not all actions taken are purely rationale and a good part of what drives peoples thinking is purely social in nature. For example, when playing Pig, humans are influenced by other aspects such as how well they are doing at a particular game state compared to their opponent.
-
+The underlying assumption within game theory is that the player – the individual who makes the decisions – is playing rationally. In this case, rationality is said to be achieved when the player seeks to play in a manner that maximises their own payoff. In the case of Pig, this is the first to bank to a certain number.
+\\
+\\
+In 1950, John Nash demonstrated that finite games have always had an equilibrium point, whence all players choose actions which are best for them given their opponent. We analysed this through the monitored behaviour of player A vs player B.
+\subsubsection{Player A vs Player B}
+A key concept during the game play of Pig is dominance. No rational player will choose to play a dominated strategy (that is, a strategy which can be dominated by another strategy in all scenarios) since the player will always be better off when changing to the strategy that dominates their opponent. The unique outcome in the game will therefore be dependent on both players' strategies to find the maximising strategy. The two players may each have optimal strategies but when played together they don’t work since they have a negative impact on each other.
 \subsubsection{Risk preferences}
-For our second investigation, we focussed on the chosen risk preference stated by each player and compared it to how they actually play Pig.
+For our second investigation, \textbf{[This is the ``first investigation'' above - might need to be re-ordered]} we focussed on the chosen risk preference stated by each player and compared it to how they actually play Pig.
 \\
 \\
 Risk can be defined as the intentional interaction with uncertainty, and individuals differ greatly in their attitudes towards risk.\cite{what_is_risk_2017}
@@ -234,24 +233,20 @@ After this had been determined, the next step was to decide the number of tests 
 
 \section{Methodology}
 \subsection{Group organisation}
-Mia
 This section discusses the methods used to organise all members of the group and to ensure that the project progressed smoothly.
 
 \subsubsection{Meetings}
-To ensure all 9 members of the group where able to meet up we created an excel google sheets page and inputted our timetable schedules into it to highlight all of our availabilities. Creating a google sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week 1 we scheduled a weekly meeting on Wednesday for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
+To ensure all 9 members of the group where able to meet up we created an Excel Google Sheets page and inputted our timetable schedules into it to highlight all of our availabilities. Creating a Google Sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week one we scheduled a weekly meeting on Wednesday for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
 \\
 \\
 In our first meeting after creating our project, we were able to assign aspects of the project to each individual member. We firstly went round and every member expressed their personal strengths and weaknesses, therefore ensuring everyones strongest attributes were utilised throughout the project. We decided on splitting the project into three sections: coding, behavioural economics and statistical testing, and assigned these accordingly to sub groups.
 \\
 \\
-Communication was also key, and through the use of WhatsApp - a freeware and cross-platform instant messaging and Voice over IP service - we were able to stay in constant communication and send documents safely. This also provided a platform to keep all documents in one place that were accessible to all members. An advantage of being able to share documents through WhatsApp is that it minimised the possibility of data loss and also made all information accessible at all times.
+Communication was also key, and through the use of WhatsApp - a freeware and cross-platform instant messaging service - we were able to stay in constant communication and send documents safely. This also provided a platform to keep all documents in one place that were accessible to all members. An advantage of being able to share documents through WhatsApp is that it minimised the possibility of data loss and also made all information accessible at all times.
 
 \subsubsection{Creation of project plan}
-Creating our project plan highlighted the key risks that could occur within our project and how many concurrent activities were to be undertaken in our critical path. We ensured, as a group, to attempt to stick to the path and the times assigned to each section, which was successful with this project.
+Creating our project plan highlighted the key risks that could occur within our project and how many concurrent activities were to be undertaken in our critical path. We endeavoured, as a group, to attempt to stick to the path and the times assigned to each section, which was completed successfully.
 Also, we made sure to mitigate the risks identified in our project plan leading to a hassle free project.
-
-\subsubsection{Github}
-For the coding, using Github was very useful for collaberation. Github allowed us all to work in the same repository and edit files similtaneously. Instead of sharing files that could easily go out of date, missing important details and other issues, we all know that we had the latest version of our files at any point that we were working on them. Github also showed us every edit that each member in our group made with comments to explain the changes. This way we could all understand what changes had been made. This LaTeX docment for example was edited on Github. These benefits Github gave us sped up every task we had regarding code.
 
 \subsection{Understanding the equations}
 
