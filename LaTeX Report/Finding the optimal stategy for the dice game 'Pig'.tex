@@ -483,7 +483,7 @@ We first played Piglet to a total score of $3$, taking strategy A as banking on 
 \\
 \textbf{[This paragraph doesn't really add anything]} We repeated this process for a game to total score $2$, which we probably should have done before we did it for a total score of $3$. We used the same strategies again; strategy A was to bank on a turn score of $1$; strategy B was to bank on a turn score of $2$, which is equivalent to rolling at every game-state, what we called "rolling to win". We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here we realised that working out piglet to $10$ would require $100$ sets of equations. This was would be too much time would be wasted and have a high chance of us making mistakes.
 
-\subsection{Coding}
+\subsection{Coding for Probabilities}
 Once we had familiarised ourselves with the rules of the game, the equations, the matrices, and a few simple Piglet examples, we moved to MATLAB. The goal now is build general matrices for every simultaneous set, and to make use of MATLAB's computational power. Then we could solve thousands of simultaneous equations and find all the probabilites at each game-state. We also wanted to make use of variable inputs to compare any strategy to another, and generalise the program to accept different winning scores and dice probabilities.
 \\
 \\
