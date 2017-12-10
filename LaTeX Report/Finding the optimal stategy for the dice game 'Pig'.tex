@@ -101,7 +101,7 @@
 \section{Introduction}
 
 \subsection{Aims and objectives}
-The ultimate aim of this project was to find an optimal strategy (or optimal strategies) for the dice game Pig. The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. Another aim of the project was to compare our findings to the optimal strategy that T. Neller described in his 2004 paper\cite{neller2004optimal}. Finally, we looked at the psychological aspect of playing Pig; including whether human players play according to their risk preferences (risk-neutral, risk-loving or risk-averse) and whether an individual's strategy is influenced by how well his opponent is playing.
+The ultimate aim of this project was to find an optimal strategy (or optimal strategies) for the dice game Pig. The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. Another aim of the project was to compare our findings to the optimal strategy that Todd Neller described in his 2004 paper\cite{neller2004optimal}. Finally, we looked at the psychological aspect of playing Pig; including whether human players play according to their risk preferences (risk-neutral, risk-loving or risk-averse) and whether an individual's strategy is influenced by how well his opponent is playing.
 \\
 \\
 We tried to achieve these aims by pursuing the following objectives:
@@ -154,7 +154,7 @@ In \textit{Dice Games Properly Explained}, R. Knizia takes the view of each roll
 \end{figure}
 
 \subsection{Optimal strategy}
-An optimal strategy is the strategy that, when played against all other strategies, is the best all-rounder. It will beat most others more than half the time, but may have a few weaknesses. As an example, in a game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time. However it can occur that an optimal is to play to a draw as to minimise your ability to lose, for example in chess. An optimal could arise whereby a win is all but impossible but going for a stalemate is possible and the best solution. The optimum is not set out to get the best win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
+The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. As an example, in a game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time. However it can occur that an optimal is to play to a draw as to minimise your ability to lose, for example a stalemate in chess. An optimal could arise whereby a win is all but impossible but going for a stalemate is possible and the best solution. The optimum is not set out to get the best win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
 \\
 \\
 One of the papers that T. Neller has published looks at finding the optimal strategy for Pig. As such the program looked at all possible game-states within the Pig dimension and at each node picks the one with the highest win likelihood. It does this, simply by having the entire state space for the game as a matix of 1's and 0's to which it evaluates whether a 1 (roll) or a 0 (bank) is the best choice to maximise a win. With each of these game states are a series of equations that require solving. These In exploring this, we sought to reach Neller's optimal strategy using our own approach or, ideally, find a strategy that surpasses it.
@@ -172,7 +172,7 @@ We can see from this diagram that the best outcome for each player is not to con
 The first step we took to familiarise ourselves with Pig was to do some tests of the game . We began by testing a few basic strategies, such as 'Bank at $20$'. We then tried to formulate our own strategies in an attempt to beat the aforementioned strategies. We were very successful in beating the previously defined strategies, which led us to believe that there are many strategies that in theory would be optimal but in practice are easily beaten.
 \\
 \\
-Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Hold at $21$'. \textbf{[Is this true?]} Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
+Next, we started testing strategies on MATLAB using a script to simulate thousands of games between two strategies. R. Kniza theorised that banking at $20$ would be one of the most optimal ways to play in 'Dice Games Properly Explained'. However, we were quickly able to show that this was false, given that it was a worse strategy to play than 'Bank at $25$'. Even though it was a marginal victory it was enough for us to be sure it was a better strategy.
 \\
 \\
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
