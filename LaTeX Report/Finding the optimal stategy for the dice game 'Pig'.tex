@@ -161,10 +161,10 @@ In \textit{Dice Games Properly Explained}, R. Knizia takes the view of each roll
 \end{figure}
 
 \subsection{Optimal strategy}
-<<<<<<< HEAD
+
 The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. As an example, in a game of rock, paper, scissors, the optimum is to play each of the three choices about a third of the time. However it can occur that an optimal is to play to a draw as to minimise your ability to lose, for example a stalemate in chess. An optimal could arise whereby a win is all but impossible but going for a stalemate is possible and the best solution. The optimum is not set out to get the best win ratio but instead it wants to minimise the maximum loss an opponent can impose on it.
 
-One of the papers that T. Neller has published looks at finding the optimal strategy for Pig. As such the program looked at all possible game-states within the Pig dimension and at each node picks the one with the highest win likelihood. It does this, simply by having the entire state space for the game as a matix of 1's and 0's to which it evaluates whether a 1 (roll) or a 0 (bank) is the best choice to maximise a win. With each of these game states are a series of equations that require solving. These In exploring this, we sought to reach Neller's optimal strategy using our own approach or, ideally, find a strategy that surpasses it.
+One of the papers that T. Neller has published looks at finding the optimal strategy for Pig. As such the program looked at all possible game states within the Pig dimension and at each node picks the one with the highest win likelihood. It does this, simply by having the entire state space for the game as a matix of 1's and 0's to which it evaluates whether a 1 (roll) or a 0 (bank) is the best choice to maximise a win. With each of these game states are a series of equations that require solving. These In exploring this, we sought to reach Neller's optimal strategy using our own approach or, ideally, find a strategy that surpasses it.
 
 Another possible outcome when looking into the optimal strategy (or optimal strategies) is that we find a pair of strategies that, when played against one another, exist in a Nash equilibrium. A Nash equilibrium\cite{nash} is a point in a game space at which two strategies have to get worse against their opponent in order to adapt from their current position. Because of this, it would not be optimal to follow such a path so they remain in that state. This situation is demonstrated well in the prisoner's dilemma. It is defined as the following: \ \textit{If player A confesses and player B fails to confess, then player A goes free. If player A fails to confess but player B confesses, then player A will be convicted and sentenced for the maximum term in jail and player B goes free. If both players confess, then both players will be convicted, but the maximum sentence will not be imposed. If neither player confesses, both players will be framed for another crime in which a conviction is certain.}
 \\
@@ -529,12 +529,7 @@ Now we can fill in the coefficient matrix and the constant value matrix. This is
 	\end{bmatrix}
 \end{align*}
 
-<<<<<<< HEAD
-We then run through every gamestate backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher gamestates, so  whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
-=======
-
-We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so  whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
->>>>>>> 8a1d711dc5a5ae480621152a13b2ffe3588111b2
+We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
 
 For pig, Matlab completes all 1 million sets in 5 seconds, must faster than we could have by hand! Although we have every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$. The main outputs that we are interested in, is $P_{0,0,0}$ and $Q_{0,0,0}$; the probability each strategy has of winning, when going first.
 
