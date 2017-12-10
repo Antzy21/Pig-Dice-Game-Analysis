@@ -520,7 +520,6 @@ Now we can fill in the coefficient matrix and the constant value matrix. This is
 	\end{bmatrix}
 \end{align*}
 
-
 We then run through every gamestate backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher gamestates, so  whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
 
 For pig, Matlab completes all 1 million sets in 5 seconds, must faster than we could have by hand! Although we have every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$. The main outputs that we are interested in, is $P_{0,0,0}$ and $Q_{0,0,0}$; the probability each strategy has of winning, when going first.
@@ -633,10 +632,21 @@ Throughout these test we will keep to our definition of whether a strategy is be
 
 \section{Findings}
 
-Anthony does this bit
+Need general brief on overall findings here
 
 \subsection{Pig}
+
+From the two functions we built in matlab, we were able to run many tests and find lots of results. The main objective from these finding was to produce an absolute optimal for Pig.
+
 \subsubsection{Did we solve Pig}
+
+From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same proccess again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this proccess we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final Optimal?
+
+We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Nella's optimal, to which both it and Nella's optimal has the same probability of winning when each going first. From previous testings, we had learnt that if these probabilities were the same, it was highely likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in matlab with the command \textbf{matlab code here}. This confirmed this idea, as every element in our strategy was the same as Nellas.
+
+When Optimising against Nella's strategy, the strategy produced is an exact copy of Nella's. This is the same as how repeated implications of the optimal finder eventualy converges and doesnt change, meaning that it reached Nella's optimal.
+
+To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by matlab as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Nella. However we could take the fact that the optimal against Nella is itself, therefore meaning no strategy could do any better than its optimal, and so Nella will beat every other strategy. We have found the optimal!
 
 \subsection{Behavioural Economics}
 \subsubsection{Do players stick to their stated risk preference}
