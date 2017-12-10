@@ -1,5 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{what_is_risk_2017}
+IGI Global.
+\newblock \url{https://www.igi-global.com/dictionary/risk/25414}, 2017.
+
+\bibitem{kahneman2013prospect}
+Daniel Kahneman and Amos Tversky.
+\newblock Prospect theory: An analysis of decision under risk.
+\newblock In {\em HANDBOOK OF THE FUNDAMENTALS OF FINANCIAL DECISION MAKING:
+  Part I}, pages 99--127. World Scientific, 2013.
+
 \bibitem{knizia2010dice}
 Reiner Knizia.
 \newblock {\em Dice Games Properly Explained}.
@@ -14,5 +24,15 @@ Todd~W Neller and Clifton~GM Presser.
 Todd~W Neller and Clifton~GM Presser.
 \newblock Practical play of the dice game pig.
 \newblock {\em The UMAP Journal}, 31(1), 2010.
+
+\bibitem{roger1991game}
+B~Myerson Roger.
+\newblock Game theory: analysis of conflict, 1991.
+
+\bibitem{turocy2001texas}
+Theodore~L Turocy.
+\newblock Texas a\&m university.
+\newblock {\em Bernhard von Stengel, London School of Economics “Game
+  Theory” CDAM Research Report (October 2001)}, 2001.
 
 \end{thebibliography}
