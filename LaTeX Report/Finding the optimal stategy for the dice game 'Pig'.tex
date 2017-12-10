@@ -237,9 +237,9 @@ After this had been determined, the next step was to decide the number of tests 
 This section discusses the methods used to organise all members of the group and to ensure that the project progressed smoothly.
 
 \subsubsection{Meetings}
-To ensure all 9 members of the group where able to meet up we created an Excel Google Sheets page and inputted our timetable schedules into it to highlight all of our availabilities. Creating a Google Sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week one we scheduled a weekly meeting on Wednesday morning for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
+To ensure all 9 members of the group were able to meet up we created an Excel Google Sheets page and then input our timetable schedules into it to highlight all of our availabilities. Creating a Google Sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week one we scheduled a weekly meeting on Wednesday morning for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
 
-In our first meeting after creating our project, we were able to assign aspects of the project to each individual member. We firstly went round and every member expressed their personal strengths and weaknesses, therefore ensuring everyones strongest attributes were utilised throughout the project. We decided on splitting the project into three sections: coding, human interactions and statistical testing, and assigned these accordingly to sub groups.
+In our first meeting, we were able to assign aspects of the project to each individual member. We firstly went round and every member expressed their personal strengths and weaknesses, therefore ensuring everyone's strongest attributes were utilised throughout the project. We decided on splitting the project into three sections: coding, human interactions and statistical testing, and assigned these accordingly to sub groups.
 
 Communication was also key, and through the use of WhatsApp - a freeware and cross-platform instant messaging service - we were able to stay in constant communication and send documents safely. This also provided a platform to keep all documents in one place so that they were accessible to all members. An advantage of being able to share documents through WhatsApp is that it minimised the possibility of data loss and also made all information accessible at all times.
 
@@ -249,21 +249,21 @@ In addition to this, we made sure to mitigate the risks identified in our projec
 
 \subsection{Understanding the equations}
 
-As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. As in the introduction, we let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turnscore of the player whos turn it it.
+As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. We let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turn score of the player whos turn it it.
 
-Firstly, let us look at the probability A has of winning when it banks, denoted $P^{bank}_{i,j,k}$. A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability that player B has of winning on their turn at their game state $j,i,k$. As long as the game is finite, Pig will always have a winner. Therefore, the sum of the probabilities from both players at any point in the game will be $1$. Note, that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we conclude that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus, we can define the probability A has at any game state by banking as
+Firstly, we looked at the probability A had of winning when it banks, denoted $P^{bank}_{i,j,k}$. A passes to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability that player B has of winning on their turn at their game state $j,i,k$. As long as the game is finite, Pig will always have a winner. Therefore, the sum of the probabilities from both players at any point in the game will be $1$. Note, that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we concluded that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus, we define the probability A has at any game state of banking as
 
 \begin{align*}
 P^{Bank}_{i,j,k} = 1-Q_{j,i+k,0}
 \end{align*}
 
-Secondly, let us look at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similar to banking, the probability will rely on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turnscore is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilites all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all summed together.
+Secondly, we looked at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similar to banking, the probability relies on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turn score is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilities all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all summed together.
 
 \begin{align*}
 P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{j,i,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
 \end{align*}
 
-How do we find out the useful probabilities that we have produced notation for? To explain it clearly, we will look at trivial probabilities and very simple calculations. The following equation gives the probability of winning from the game state where the banked score of player A is 100. By the rules of the game, A has won, meaning this probability is equal to $1$.
+How do we find out the useful probabilities that we have produced notation for? To find the useful probabilities that we have produced notation for , we looked at trivial probabilities and very simple calculations. The following equation gives the probability of winning from the game state where the banked score of player A is 100. By the rules of the game, A has won, meaning this probability is equal to $1$.
 
 \begin{align*}
 	P_{100,0,0}=1
@@ -283,10 +283,10 @@ In this case, strategy A has accumulated a big enough turn score to immediately 
 
 This game state is where the opponent has won the game, so strategy A has $0$ probability of winning. Generally, if $i<100$ and $j\geq100$, then the probability at that game state is $0$, as it means the other player has won.
 
-These trivial game state probabilities allow us to calculate the non-trivial probabilities of a game, which we will look at next.
+These trivial game state probabilities allowed us to calculate the non-trivial probabilities of a game. We looked at this next. 
 
 \subsubsection{Simultaneous equations}
-Let us start with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
+Firstly, we started with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
@@ -656,7 +656,7 @@ Throughout these tests we will keep to our definition of whether a strategy is b
 
 \section{Findings}
 
-Need general brief on overall findings here [IS THIS MEANT TO BE HERE?]
+Need general brief on overall findings here
 
 \subsection{Pig}
 
