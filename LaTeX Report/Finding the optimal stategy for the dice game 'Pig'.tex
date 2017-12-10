@@ -40,7 +40,7 @@
 
 	\HRule\\[0.4cm]
 
-	{\huge\bfseries Finding the optimal strategy for the dice game `Pig'}\\[0.4cm]
+	{\huge\bfseries Finding the optimal strategy for the dice game Pig}\\[0.4cm]
 
 	\HRule\\[1.5cm]
 
@@ -133,19 +133,19 @@ The dice game Pig has many variations, so we chose to focus on the two-player si
 
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
 
-A game state is defined by the current position of the game, player P's banked score, player Q's banked score and player P's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+A game state is defined by the current position of the game, player A's banked score, player B's banked score and player A's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
 
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
 
-At any game state it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that game state. Suppose there are two strategies A and B. Consider that it is P's turn and they are in position ($i,j,k$) where $i$ is P's banked points, $j$ is Q's banked points, and $k$ is B's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of P winning from the current position and $Q_{jik}$ denote probability of Q winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is from the perspective of each player). Then,
+At any game state it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that game state. Suppose there are two strategies A and B. Consider that it is A's turn and they are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is B's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{jik}$ denote probability of B winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is from the perspective of each player). Then,
 \begin{equation}\label{1.2.1.a}
-P_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
+P_{ijk} = \dfrac{1}{6} (1-Q_{ji0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
-if P rolls and
+if A rolls and
 \begin{equation}\label{1.2.1.b}
 P_{ijk} = 1-Q_{jik}
 \end{equation}
-if P banks their points.
+if A banks their points.
 \subsubsection{Neller's work}
 In \textit{Dice Games Properly Explained}, R. Knizia takes the view of each roll of the die in Pig as a bet of not rolling a $1$. He said of the best strategy, ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}. The issue with this claim is, as T. Neller stated, ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal} From this, T. Neller attempted to find a more optimal solution for Pig by maximising equations \ref{1.2.1.a} and \ref{1.2.1.b}. However this was not possible as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result, T. Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows a visual interpretation of the resulting optimal strategy. Figure 1 shows that you should roll if the current game state is within the surface of the graph, and bank otherwise.
 
@@ -237,9 +237,9 @@ After this had been determined, the next step was to decide the number of tests 
 This section discusses the methods used to organise all members of the group and to ensure that the project progressed smoothly.
 
 \subsubsection{Meetings}
-To ensure all 9 members of the group where able to meet up we created an Excel Google Sheets page and inputted our timetable schedules into it to highlight all of our availabilities. Creating a Google Sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week one we scheduled a weekly meeting on Wednesday morning for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
+To ensure all 9 members of the group were able to meet up we created an Excel Google Sheets page and then input our timetable schedules into it to highlight all of our availabilities. Creating a Google Sheet meant all members could access and edit the timetable to ensure we were always aware of availability. We found that Wednesday morning was always a free space, so from week one we scheduled a weekly meeting on Wednesday morning for two hours where we could discuss current matters, updates on the project and delegate future tasks. This ensured that we kept in strong communication with each other to ensure all group members were up to date with our progress and most importantly make sure all information remained consistent across all group members.
 
-In our first meeting after creating our project, we were able to assign aspects of the project to each individual member. We firstly went round and every member expressed their personal strengths and weaknesses, therefore ensuring everyones strongest attributes were utilised throughout the project. We decided on splitting the project into three sections: coding, human interactions and statistical testing, and assigned these accordingly to sub groups.
+In our first meeting, we were able to assign aspects of the project to each individual member. We firstly went round and every member expressed their personal strengths and weaknesses, therefore ensuring everyone's strongest attributes were utilised throughout the project. We decided on splitting the project into three sections: coding, human interactions and statistical testing, and assigned these accordingly to sub groups.
 
 Communication was also key, and through the use of WhatsApp - a freeware and cross-platform instant messaging service - we were able to stay in constant communication and send documents safely. This also provided a platform to keep all documents in one place so that they were accessible to all members. An advantage of being able to share documents through WhatsApp is that it minimised the possibility of data loss and also made all information accessible at all times.
 
@@ -249,21 +249,21 @@ In addition to this, we made sure to mitigate the risks identified in our projec
 
 \subsection{Understanding the equations}
 
-As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. As in the introduction, we let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turnscore of the player whos turn it it.
+As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. We let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turn score of the player whos turn it it.
 
-Firstly, let us look at the probability A has of winning when it banks, denoted $P^{bank}_{i,j,k}$. A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability that player B has of winning on their turn at their game state $j,i,k$. As long as the game is finite, Pig will always have a winner. Therefore, the sum of the probabilities from both players at any point in the game will be $1$. Note, that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we conclude that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus, we can define the probability A has at any game state by banking as
+Firstly, we looked at the probability A had of winning when it banks, denoted $P^{bank}_{i,j,k}$. A passes to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability that player B has of winning on their turn at their game state $j,i,k$. As long as the game is finite, Pig will always have a winner. Therefore, the sum of the probabilities from both players at any point in the game will be $1$. Note, that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we concluded that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus, we define the probability A has at any game state of banking as
 
 \begin{align*}
 P^{Bank}_{i,j,k} = 1-Q_{j,i+k,0}
 \end{align*}
 
-Secondly, let us look at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similar to banking, the probability will rely on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turnscore is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilites all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all summed together.
+Secondly, we looked at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similar to banking, the probability relies on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turn score is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilities all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all summed together.
 
 \begin{align*}
 P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{j,i,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
 \end{align*}
 
-How do we find out the useful probabilities that we have produced notation for? To explain it clearly, we will look at trivial probabilities and very simple calculations. The following equation gives the probability of winning from the game state where the banked score of player A is 100. By the rules of the game, A has won, meaning this probability is equal to $1$.
+How do we find out the useful probabilities that we have produced notation for? To find the useful probabilities that we have produced notation for , we looked at trivial probabilities and very simple calculations. The following equation gives the probability of winning from the game state where the banked score of player A is 100. By the rules of the game, A has won, meaning this probability is equal to $1$.
 
 \begin{align*}
 	P_{100,0,0}=1
@@ -283,10 +283,10 @@ In this case, strategy A has accumulated a big enough turn score to immediately 
 
 This game state is where the opponent has won the game, so strategy A has $0$ probability of winning. Generally, if $i<100$ and $j\geq100$, then the probability at that game state is $0$, as it means the other player has won.
 
-These trivial game state probabilities allow us to calculate the non-trivial probabilities of a game, which we will look at next.
+These trivial game state probabilities allowed us to calculate the non-trivial probabilities of a game. We looked at this next. 
 
 \subsubsection{Simultaneous equations}
-Let us start with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
+Firstly, we started with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
@@ -656,6 +656,11 @@ Throughout these tests we will keep to our definition of whether a strategy is b
 
 \section{Findings}
 
+<<<<<<< HEAD
+=======
+Need general brief on overall findings here
+
+>>>>>>> 7118070290f5f3868de2e84b7d59c135ba9ccead
 \subsection{Pig}
 
 From the two functions we built in matlab, we were able to run many tests and find lots of results. The main objective from these finding was to produce an absolute optimal for Pig.
@@ -824,13 +829,13 @@ We then tested our optimal strategy against that of Neller’s. These simulation
 \section{Conclusions}
 \subsection{Overall findings}
 \subsection{Humans playing pig and their interactions}
-\textbf{Do players stick to their stated risk preferences?}\\No, we found out that players don’t actually play in align with their stated risk preferences. It seems that on average, once participants play Pig they align with a different risk preference. We found that a lot more people are risk seeking than they originally stated. As we can see with the risk preference graphs, we expected them to look like the Figure \ref{figure4}, as shown in the introduction. However we found that this wasn’t the case. We explained this as the risk preferences are evened out during the process of a game.
+\textbf{Do players stick to their stated risk preferences?}\\No, we found that players don't actually play in align with their stated risk preferences. It seems that on average, once participants play Pig they align with a different risk preference. We found that a lot more people are risk seeking than they originally stated. As we can see with the risk preference graphs, we expected them to look like the Figure \ref{figure4}, as shown in the introduction. However we found that this wasn’t the case. We explained this as the risk preferences are evened out during the process of a game.
 
- \textbf{Player interactions}\\We have concluded that an individual’s strategy is definitely influenced by their opponents. Game 11 (Figure \ref{figure13}) and game 14 (Figure \ref{figure14}) best represent our overall results found. In summary, we found that players change their strategy and do not stick to their stated risk preference and players copy their opponents strategy. If people stick to mirroring each other they actually have a more equal chance of winning, whereas if they change their strategies later on in the game it causes a worse outcome.
+ \textbf{Player interactions}\\We have concluded that an individual’s strategy is definitely influenced by their opponents. Game 11 (Figure \ref{figure13}) and Game 14 (Figure \ref{figure14}) best represent our overall results found. In summary, we found that players change their strategy and do not stick to their stated risk preference and players copy their opponents strategy. If people stick to mirroring each other they actually have a more equal chance of winning, whereas if they change their strategies later on in the game it causes a worse outcome.
 
  \textbf{Limitations}\\ Our sample size was fairly small. Therefore, if this experiment was to repeated, we would want to ensure that we collected data from a greater number of participants, so that we could be more confident in our conclusions.
 
-\subsection{Statsical analysis}
+\subsection{Statistical analysis}
 To conclude statistical analysis, we first had to acknowledge that probabilities for our strategies winning could be measured both practically and theoretically and these can often differ greatly. In order to ensure that these were as close as they could be, we needed to create some rules for a fair test by which we would have to follow when playing two strategies against each other, in order to accurately compare them.
 
 We first noted that a particular strategy will win against itself with a general probability of $0.5$. We then constructed a confidence interval at the $95\%$ significance level with the idea that we didn’t want $p$ to differ more than $0.025$ away from $0.5$, where $p$ denotes the probability of a strategy winning against itself. From this, we could work backwards from our confidence interval and find the optimal number of games, $n$, required for one single fair test. This method produced $n=1537$. However, we saw from Figure \ref{figure15} that this value of $n$ gave too many outliers in the data, so we instead chose $n=3000$ as it appeared accurate for our particular confidence interval. As this number still produced some outlying data, we decided to run $100$ fair tests in order to minimise the error as much as we could in order to obtain accurate practical probabilities against theoretical ones.
