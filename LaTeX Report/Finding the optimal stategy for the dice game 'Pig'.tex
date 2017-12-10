@@ -238,7 +238,7 @@ In addition to this, we made sure to mitigate the risks identified in our projec
 
 \subsection{Understanding the equations}
 
-As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. This is a powerful method of calculation that Neller used to produce his optimal and we used for all of the programmed strategies we produced. As in the introduction, we let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$. Where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turnscore of the player whos turn it it.
+As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. As in the introduction, we let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turnscore of the player whos turn it it.
 
 Firstly, let us look at the probability A has of winning when it banks, denoted $P^{bank}_{i,j,k}$. A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability the player B has of winning on their turn at their game state $j,i,k$. So long as the game is finite, Pig will always have a winner. Therefore the sum of the probabilities from both players at any point in the game will be $1$. Note that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we conclude that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus we can define the probability A has at any game state by banking as
 
@@ -588,7 +588,7 @@ When strategy A looks at a $P^{Roll}_{i,j,k}$, it relies on future $P_{i,j,k+r}$
 
 Coding this was a lot harder than finding the probabilities, it also takes matlab a lot longer to run for a full game of pig, a few minutes compared to the few second for calculating probabilities. The results were always promising however, it always produced a new strategy that beat what it was optimised against by a large margin.
 
-\subsection{Behavioural Economics}
+\subsection{Human interactions}
 To investigate if players aligned game play with their stated risk preference and see if players were influenced by how well their opponent is doing, we decided to get a sample of people from the ECM3735 (Mathematical Group Project) module to play pig. We gathered 15 samples, which was 15 games played with 30 people’s risk preference and game strategies gathered.
 \subsubsection{Method}
 \begin{enumerate}
