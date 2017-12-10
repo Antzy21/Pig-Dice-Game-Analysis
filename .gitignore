@@ -13,3 +13,5 @@
 *.toc
 *.synctex(busy)
 *.lof
+*.bbl
+*.pdf
