@@ -177,7 +177,7 @@ Next, we started testing strategies on MATLAB using a script to simulate thousan
 \\
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
 \subsection{Human Interactions in Pig}
-Developing a strategy that maximises the probability of winning can be determined through the use of MATLAB. However, through the analysis of playing Pig ourselves we also wanted to look into the human interactions that occur when playing Pig. 
+Developing a strategy that maximises the probability of winning can be determined through the use of MATLAB. However, through the analysis of playing Pig ourselves we also wanted to look into the human interactions that occur when playing Pig.
 \\
 \\
 Therefore, we decided to investigate the following two questions:
@@ -581,14 +581,13 @@ Adjusting the script for simulating series of games to output the number of stal
 Another piece of code that we produced, was one that could produce an optimal strategy against any other strategy. Note that this is not the overall optimal for Pig, but we used this code to find it. With the foundations that we have explained so far, regarding equations, matrices and strategies, we can explain how we produced this code.
 \\
 \\
-As a brief explanation of how it works, the code takes two important inputs (Not including a general to win score and dice probability, which is also implimented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continualy get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will make use of "strategies to matrices" to get them in our prefered matix form. The code then runs through similtaneous sets again, calculating probabilities for both choices bank and roll for A at each gamestate. It will modify A as it works down, recalculating probabilties when it makes changes to the strategy.
-Once it has finished every set, A will have been completely modified to choose the best choice at every gme-state against B.
+As a brief explanation of how it works, the code takes two important inputs (Not including a general to win score and dice probability, which is also implimented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continualy get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will make use of "strategies to matrices" to get them in our prefered matix form. The code then runs through similtaneous sets again, modifying A to be the best it possibly can be against B.
 \\
 \\
 As we did for calculating the probabilities, we will be building matrices, this time a little differently. Whereas in the probability matrices we were looking up what the strategy does and building the matrices around what the choice was, this time we want to consider both rolling and banking at each gamestate. We can then see which out of rolling and banking has the highest probability of winning. If the strategy's choice is not one with the highest chance of it winning, we then change the choice the strategy makes at that gamestate and also the probability it has.
 \\
 \\
-The method behind this is a little more complicated however as all the probabilities are interlinked. By changing one probability, it will change all the others, potentialy making rolling or banking at another game-state a better choice. This is why we have to start at a strategy A and change it, rather than build an optimal against B straight away.
+The method behind this is a little more complicated however as all the probabilities are interlinked. By changing one probability, it will change all the others, potentialy making rolling or banking at another game-state a better choice. This means we may have to change strategy A multiple times before it stabablises at each set.
 
 The Probability matrix at each set now looks like this.
 
@@ -614,7 +613,10 @@ The Probability matrix at each set now looks like this.
 
 where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
 
-
+When strategy A looks at a $P^{Roll}_{i,j,k}$, it relies on future $P_{i,j,k+r}$s. The question now is how do we choose which future $P_{i,j,k+r}$ to rely on, as we have a rolling version and a banking version. This is where we use the current version of A to choose. We then build the matrices accordingly, solving them again to get our new probabilities. At this point we compare rolling and banking, and see if A needs to change. If A does change, then we must run through the same process again, recalculating probabilities and changing A. This wil converge for each set. This process will modify A as it works down, recalculating probabilties when it makes changes to the strategy. Once it has finished every set, A will have been completely modified to choose the best choice at every game-state against B.
+\\
+\\
+Coding this was a lot harder than finding the probabilities, it also takes matlab a lot longer to run for a full game of pig, a few minutes compared to the few second for calculating probabilities. The results were always promising however, it always produced a new strategy that beat what it was optimised against by a large margin.
 
 \subsection{Behavioural Economics}
 To investigate if players aligned game play with their stated risk preference and see if players were influenced by how well their opponent is doing, we decided to get a sample of people from the ECM3735 (Mathematical Group Project) module to play pig. We gathered 15 samples, which was 15 games played with 30 people’s risk preference and game strategies gathered.
