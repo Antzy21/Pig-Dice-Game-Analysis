@@ -544,15 +544,15 @@ This problem has a suprisingly elegant solution. The definition of an impossible
 Now we can fill in the coefficient matrix and the constant value matrix. This is done by checking what the strategy does at each gamestate, either rolling or banking. This is much easier with strategies in matrix form. By making use of Matlab's variables, for loops and general programming techniques, we successfully put all the needed values into the matrices.
 
 \begin{align*}
-	\setcounter{MaxMatrixCols}{30}
+	\setcounter{MaxMatrixCols}{40}
 	\begin{bmatrix}
 		  1 &&&&&&&&&&&&&&&&&&&&&&&&&&\\
-		  0 & 1 &&&&&&&&&&&&&&&&&&&&&&&&&&\\
-		  0 & 0 & 1 &&&&&&&&&&&&&&&&&&&&&&&&&&\\
-		  0 & 0 & 0 & 1 & 0 & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & 1 & 0 \\
-		  0 & 0 & 0 & 0 & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
-		  0 & 0 & 0 & & 0 & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
-		  0 & 0 & 0 & & 0 & 0 & 0 & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
+		    & 1 &&&&&&&&&&&&&&&&&&&&&&&&&&\\
+		    &   & 1 &&&&&&&&&&&&&&&&&&&&&&&&&&\\
+		  0 & 0 & 0 & 1 & 0 & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		    &   &   &   & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
+		    &   &   &   &   & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
+		    &   &   &   &   &   & 1 &&&&&&&&&&&&&&&&&&&&&&&&&& \\
 	\end{bmatrix}
 \end{align*}
 
