@@ -52,5 +52,5 @@ while isequal(old_NellaVI,NellaVI) == 0 % Run iterations Untill full convergence
     [~,~]=Probability_Matrices(NellaVI,Strategy,To_win,Dice_prob);
     
 end
-
+semilogy(Change)
 end
