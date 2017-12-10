@@ -656,21 +656,19 @@ Throughout these tests we will keep to our definition of whether a strategy is b
 
 \section{Findings}
 
-Need general brief on overall findings here [IS THIS MEANT TO BE HERE?]
-
 \subsection{Pig}
 
 From the two functions we built in matlab, we were able to run many tests and find lots of results. The main objective from these finding was to produce an absolute optimal for Pig.
 
 \subsubsection{Did we solve Pig}
 
-From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same proccess again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this proccess we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final Optimal?
+From any strategy A, we produced an optimal against it. We called this a first order optimal against A. From this optimal, we ran the same proccess again, thus producing an optimal against our first order optimal. We called this the second order optimal against A. By repeating this proccess we got higher and higher ordered optimals against any strategy. We found that this converged to a single strategy, from most starting strategies.
 
-We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Nella's optimal, to which both it and Nella's optimal has the same probability of winning when each going first. From previous testings, we had learnt that if these probabilities were the same, it was highely likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in matlab with the command \textbf{matlab code here}. This confirmed this idea, as every element in our strategy was the same as Nellas.
+We then used our probability calculator to test it against all other strategies. It beat all strategies that we had produced. We then tested it against Nella's optimal, to which both it and Nella's optimal had the same probability of winning when each going first. From previous testings, we had learnt that if these probabilities were the same, it was highely likely that the strategies were the same. We tested to see if the strategies were the same by simply comparing them in Matlab with the command \textbf{matlab code here}. This confirmed this idea, as every element in our strategy was the same as Nellas.
 
 When Optimising against Nella's strategy, the strategy produced is an exact copy of Nella's. This is the same as how repeated implications of the optimal finder eventualy converges and doesnt change, meaning that it reached Nella's optimal.
 
-To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by matlab as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Nella. However we could take the fact that the optimal against Nella is itself, therefore meaning no strategy could do any better than its optimal, and so Nella will beat every other strategy. We have found the optimal!
+To check that it cannot be beaten by any strategies by brute force, we thought about testing it against every strategy. This was not even possible by Matlab as there are roughly $2^{100\times100\times100}$ possible strategies to which it was not possible to test all against Nella. However we took the fact that the optimal against Nella is itself, therefore meaning no strategy could do any better than it's optimal, and so Nella would beat every other strategy. We had found the optimal.
 
 \subsection{Behavioural Economics}
 \subsubsection{Do players stick to their stated risk preference}
@@ -716,7 +714,6 @@ A risk seeker would potentially believe the outcome of rolling and scoring a gre
 In addition, we expected the risk neutral gradient to be equally between the risk seekers gradient and risk averse gradient. Conversely, it’s the lowest gradient of the three. This could be due to experimental error as the difference between the greatest and lowest gradient is only $2\%$.
 
 Moreover, looking at all three graphs the points plotted at turn number 15-16 are all below the average gradient by a significant amount. This could be because at this point in the game the players opponent is close to winning and therefore the player begins to panic and roll too each turn number, causing them to roll a 1 and lose. This links back to the ideas exposed in Prospect theory\cite{kahneman2013prospect} as humans compensate to win by taking extra risks which they usually wouldn’t. In this case the player is rolling excessively in order to rebuild up a greater score to bank on. This therefore shows, that for our results gathered, that at around the turn number 14, on average, players strategies change dependent on the opponents play.
->>>>>>> c95b138e788e0fc585b41586451b32f6d1ea47f9
 
 Overall, a possible explanation for the similarity of the gradients is that in the long run of playing pig, players preferences are ‘evened out’ by the game, much like the stock market evens out returns in the long run.
 \subsubsection{Players Interactions}
