@@ -66,7 +66,7 @@
 		     \textsc{650000725}\\
 			 \textsc{650008126}\\
 			 \textsc{650009496}\\
-			 \textsc{650015588}
+			 \textsc{650015588}\\
 			\vspace*{10pt§}
 		\end{flushright}
 	\end{minipage}
@@ -741,7 +741,7 @@ This would imply that playing a game of pig $1537$ times would end up giving a p
 \begin{figure}
 \centering
 \includegraphics[height=24cm]{stats_testing}
-\caption{stats testing\label{figure15}}
+\caption{The distribution of $p$-values against the number of games played between a strategy and itself\label{figure15}}
 \end{figure}
 Figure \ref{figure15} shows the distribution of the $p$-values over the number of games played. Each point on the $x$-axis has $100$ values for the $y$-axis. The two lines on the $y$ axis at $y=0.475$ and $y=0.525$ show the confidence interval we want for $p$. The orange colour that runs through the graph shows a higher concentration of values. This graph shows that the distribution for $p$ is scattered greatly for small number of games played and converges as the number of games increases. We can see that around the $1500$ number of games played, the orange centre is located within the interval for $p$, but there are still a lot of stray values. These stray values still occur, but less often, even when the number of games is increased. By looking at the graph we can chose a value at which the majority of points lie within the interval.
 
@@ -750,7 +750,7 @@ After the number of games passes $2500$, there doesn’t appear to be much decre
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{stats_2}
-\caption{stats\label{figure16}}
+\caption{$p$-values calculated when running a strategy against itself in 100 fair tests\label{figure16}}
 \end{figure}
 In matlab, we tested the fair test numerous times by creating a code which ran the test $100$ times, that is, $100$ results $3000$ games played $100$ times with the average computed. Figure \ref{figure16} illustrates $1$ of the results of running this code. You can see that for $100$ results of the test, the distribution of $p$ is still very small. For this particular result, $p$ ranged from $0.4974$ and $0.5020$ which is well within our confidence interval for $p$. The mean of the results was (coincidently) $0.5$ exactly.
 
@@ -760,7 +760,7 @@ We have showed that for a strategy playing against itself, playing $3000$ games 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{stats_table}
-\caption{stats\label{figure17}}
+\caption{Examples of probabilities between various hold at strategies\label{figure17}}
 \end{figure}
 Figure \ref{figure17} shows the result from $10$ different games of $2$ different strategies under the fair test. The last column shows the deviation from the theoretical values of the probability and the practical values obtained from the test. By our conditions, if the deviation is greater than $0.025$ then this would imply that the practical results aren’t consistent with the theoretical results implying that the test wasn’t reliable. As you can see the results are all less, and comfortably so, than $0.025$, therefore we can say that the test conducted gives reliable results and is therefore fair.
 \subsubsection{Determining whether a strategy is better than another}
