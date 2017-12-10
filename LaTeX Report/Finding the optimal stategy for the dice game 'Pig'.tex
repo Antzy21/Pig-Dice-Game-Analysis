@@ -579,6 +579,46 @@ The goal was that a stalemate would be counted as a loss for both players, since
 \\
 Adjusting the script for simulating series of games to output the number of stalemates, we could then accurately test the $P_{0,0,0}$ and $Q_{0,0,0}$ values for strategies involving skips. Now satisfied that our code gave reliable outputs for any input strategies, we were ready to use this script to compare optimal strategies.
 
+\subsection{Coding for an Optimal}
+
+Another piece of code that we produced, was one that could produce an optimal strategy against any other strategy. Note that this is not the overall optimal for Pig, but we used this code to find it. With the foundations that we have explained so far, regarding equations, matrices and strategies, we can explain how we produced this code.
+\\
+\\
+As a brief explanation of how it works, the code takes two important inputs (Not including a general to win score and dice probability, which is also implimented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continualy get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will make use of "strategies to matrices" to get them in our prefered matix form. The code then runs through similtaneous sets again, calculating probabilities for both choices bank and roll for A at each gamestate. It will modify A as it works down, recalculating probabilties when it makes changes to the strategy.
+Once it has finished every set, A will have been completely modified to choose the best choice at every gme-state against B.
+\\
+\\
+As we did for calculating the probabilities, we will be building matrices, this time a little differently. Whereas in the probability matrices we were looking up what the strategy does and building the matrices around what the choice was, this time we want to consider both rolling and banking at each gamestate. We can then see which out of rolling and banking has the highest probability of winning. If the strategy's choice is not one with the highest chance of it winning, we then change the choice the strategy makes at that gamestate and also the probability it has.
+\\
+\\
+The method behind this is a little more complicated however as all the probabilities are interlinked. By changing one probability, it will change all the others, potentialy making rolling or banking at another game-state a better choice. This is why we have to start at a strategy A and change it, rather than build an optimal against B straight away.
+
+The Probability matrix at each set now looks like this.
+
+\begin{align}
+	\begin{bmatrix}
+		P^{Roll}_{i,j,0}\\
+		P^{Roll}_{i,j,1}\\
+		...\\
+		P^{Roll}_{i,j,n-1}\\
+		P^{Roll}_{i,j,n}\\
+		P^{Bank}_{i,j,0}\\
+		P^{Bank}_{i,j,1}\\
+		...\\
+		P^{Bank}_{i,j,n-1}\\
+		P^{Bank}_{i,j,n}\\
+		Q_{j,i,0}\\
+		Q_{j,i,1}\\
+		...\\
+		Q_{j,i,m-1}\\
+		Q_{j,i,m}\\
+	\end{bmatrix}
+\end{align}
+
+where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
+
+
+
 \subsection{Behavioural Economics}
 To investigate if players aligned game play with their stated risk preference and see if players were influenced by how well their opponent is doing, we decided to get a sample of people from the ECM3735 (Mathematical Group Project) module to play pig. We gathered 15 samples, which was 15 games played with 30 people’s risk preference and game strategies gathered.
 \subsubsection{Method}
