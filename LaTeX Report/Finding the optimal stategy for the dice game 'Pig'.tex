@@ -243,13 +243,13 @@ In addition to this, we made sure to mitigate the risks identified in our projec
 
 As discussed briefly in the introduction, linear equations can describe the probability of winning from any given game state. As in the introduction, we let $P_{i,j,k}$ denote the probability of player A winning from the game state $i,j,k$ and $Q_{j,i,k}$ denote the probability of player B winning from the game state $j,i,k$ where $i$ is A's banked score, $j$ is B's banked score, and $k$ is the turnscore of the player whos turn it it.
 
-Firstly, let us look at the probability A has of winning when it banks, denoted $P^{bank}_{i,j,k}$. A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability the player B has of winning on their turn at their game state $j,i,k$. So long as the game is finite, Pig will always have a winner. Therefore the sum of the probabilities from both players at any point in the game will be $1$. Note that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we conclude that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus we can define the probability A has at any game state by banking as
+Firstly, let us look at the probability A has of winning when it banks, denoted $P^{bank}_{i,j,k}$. A is passing to B's turn by banking. So $P^{bank}_{i,j,k}$ will be equal to the probability A has on B's turn. The probability $Q_{j,i,k}$ is the probability that player B has of winning on their turn at their game state $j,i,k$. As long as the game is finite, Pig will always have a winner. Therefore, the sum of the probabilities from both players at any point in the game will be $1$. Note, that this is from any point in the game, not at any game state, as a game state is specific to a player. From this we conclude that when it is player B's turn at game state $j,i,k$, player A will have a probability of winning that is $1-Q_{j,i,k}$. By banking, A adds their turn score to their banked score, and B's turn starts with a turn score of zero. Thus, we can define the probability A has at any game state by banking as
 
 \begin{align*}
 P^{Bank}_{i,j,k} = 1-Q_{j,i+k,0}
 \end{align*}
 
-Secondly, let us look at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similarly to banking, the probability will rely on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turnscore is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilites all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all grouped together in a sum.
+Secondly, let us look at the probability A has of winning when it rolls, denoted $P^{roll}_{i,j,k}$. Similar to banking, the probability will rely on a probability from B, $Q_{j,i,0}$, because when a $1$ is rolled the game passes to B's turn. The main difference is that the turnscore is not added to the banked score, as can be seen in the game state, and there is only a $\frac{1}{6}^\text{th}$ chance of it happening. $P^{roll}_{i,j,k}$ will also rely on the other successful outcomes of rolling each with a $\frac{1}{6}^\text{th}$ chance of happening. These other probabilites all have a higher turn score. $r$ represents the scores that can be added, ranging from $2$ to $6$ depending on the number rolled. These probabilities are all summed together.
 
 \begin{align*}
 P^{Roll}_{i,j,k} = \dfrac{1}{6} (1-Q_{j,i,0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{i,j,k+r}
@@ -267,7 +267,7 @@ This is one of many trivial game state probabilities that are important to under
 	P_{82,0,20}=1
 \end{align*}
 
-In this case, strategy A has accumulated enough turn score to immediately bank and win. Generally, if $i+k\geq100$ and $j<100$ then the probability of that game state is $1$, as it means the strategy has won. On the other hand, take the following game state probability from A's perspective.
+In this case, strategy A has accumulated a big enough turn score to immediately bank and win. Generally, if $i+k\geq100$ and $j<100$ then the probability of that game state is $1$, as it means the strategy has won. On the other hand, take the following game state probability from A's perspective:
 
 \begin{align*}
 	P_{99,100,0}=0
@@ -278,7 +278,7 @@ This game state is where the opponent has won the game, so strategy A has $0$ pr
 These trivial game state probabilities allow us to calculate the non-trivial probabilities of a game, which we will look at next.
 
 \subsubsection{Simultaneous equations}
-Let us start with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. Let us assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
+Let us start with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
@@ -308,20 +308,20 @@ Now the two equations can be solved simultaneously, giving the results:
 	Q_{99,99,0} &= \frac{6}{7}
 \end{align*}
 
-This example is one complete set of simultaneous equations. It turns out that every probability can be collected into a set of equations to be calculated. Whereas this one only contained two unknowns to be solved together, others may be much larger. A more complex simultaneous set can be seen if we start from A's turn at game state $97,99,0$. Let A's strategy be to roll at this game state.
+This example is one complete set of simultaneous equations. It turns out that every probability can be collected into a set of equations to be calculated. While this one only contained two unknowns to be solved together, others may be much larger. A more complex simultaneous set can be seen if we start from A's turn at game state $97,99,0$. Let A's strategy be to roll at this game state.
 
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 \end{align*}
 
-After writting this out, we see the other probabilities it relies on. The method now is to see what the strategies do at these game states and then write out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
+After writting this out, we can see the other probabilities it relies on. Now the method is to see what the strategies do at these game states and then write out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
 
 \begin{align*}
 	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
 
-Now we have all three simultaneous equations that can be solved.
+Now we have all three simultaneous equations that can be solved:
 
 \begin{align*}
 	P_{97,99,0} &= 0.8325\\
@@ -329,7 +329,7 @@ Now we have all three simultaneous equations that can be solved.
 	Q_{99,97,0} &= 0.8612
 \end{align*}
 
-This method of calculation works well. Before we run through every set of equations, we must look at the interesting case of banking. Say for example instead of rolling at $97,99,2$, A banks. The equations are now:
+This method of calculation works well. Before we run through every set of equations, we must look at the interesting case of banking. For example, instead of rolling at $97,99,2$, A banks. The equations are now:
 
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
@@ -337,7 +337,7 @@ This method of calculation works well. Before we run through every set of equati
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
 
-We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example. Its value was $\frac{6}{7}$. So with this we can again solve the equations, getting a much different result.
+We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example. Its value was $\frac{6}{7}$. So with this we can again solve the equations, getting a much different result:
 
 \begin{align*}
 	P_{97,99,0} &= 0.7102\\
@@ -345,14 +345,14 @@ We do not need to write out the equation for $Q_{99,99,0}$ because we already ca
 	Q_{99,97,0} &= 0.8816
 \end{align*}
 
-From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores then itself, which we shall call "higher game states". Note that it will not rely on game states "lower" than it as the game will always be progressing forward and a player cannot lose banked points. As long as we solve the sets containing higher game states first, we can to run through and solve them all successfully.
+From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores then itself, which we shall call "higher game states". Note that it will not rely on game states "lower" than it as the game will always be progressing forward and a player cannot lose banked points. As long as we solve the sets containing higher game states first, we can run through and solve them all successfully.
 
-Solving these equations means we can calculate every probability of winning from every game state for any given strategy. From this we can check $P_{0,0,0}$, the probabiity of any strategy has of winning the game. Actually doing these calculations by hand is a ridiculous task however. Computational power is required to give us the probability values we want to calculate. This is where we turn to MATLAB for assistance.
+Solving these equations means we can calculate every probability of winning from every game state for any given strategy. From this we can check $P_{0,0,0}$, which is the probabiity that any strategy has of winning the game. Computational power is required to give us the probability values we want to calculate. This is where we turn to MATLAB for assistance.
 
 \subsubsection{Matrices}
 To make use of MATLAB, we needed to write the equations in terms of matrices. Every set of equations can be written in the form $CX=D$, where $C$, $X$ and $D$ are matrices containing the coefficients, the probabilities, and the constant values respectively. To see how these matrices are built, we will look at the examples used above.
 
-The first important part is to simplify the equations. We want them in terms of separated probabilities and their coefficient values on the left-hand side of the equation, and a combined constant value on the right. This usually involves expanding brackets and adding constants together.
+The first important part is to simplify the equations. We want them in terms of separated probabilities and with the coefficient values on the left-hand side of the equation, and a combined constant value on the right. This usually involves expanding brackets and adding constants together.
 
  We have:
 
