@@ -557,11 +557,7 @@ For Pig, Matlab completes all 1 million sets in 5 seconds. Although we have ever
 
 To test the output of the code, we compared the calculated probabilities to experimental results. It was sufficient to test only the value in the lowest position in the matrix, $P_{0,0,0}$, since this value relies on the higher game states (and therefore any errors in higher positions should be reflected in this output).
 
-<<<<<<< HEAD
 $P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, the $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in figure %ummm number?
-=======
-$P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, our $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in Figure %ummm number?
->>>>>>> 193296285d6111bee468d3b247148de40bd738d3
 . The median on the boxplot is very close to the projected probability which indicated that our code had correctly calculated $P_{0,0,0}$.
 
 
