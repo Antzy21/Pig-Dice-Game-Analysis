@@ -478,7 +478,7 @@ function choice = Bank20(myscore,yourscore,turnscore)
 	else
 		choice = 0; % Bank
 	end
-end 
+end
 \end{lstlisting}\label{bank20}
 
 This way of defining a strategy was used when running the code for the game pig, which called the function strategies within it. However, it limited the way that more abstract strategies could be represented. Take a strategy that rolls in very specific locations for example, the function strategy would have to include many if statements to handle this, leading to a very big and hard to read function. An array of choices on the otherhand would always be the same size, and importantly it is easy to change if we wanted to. It is easy to locate the choice at a given game state too.
