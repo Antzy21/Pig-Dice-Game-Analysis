@@ -286,13 +286,13 @@ This game state is where the opponent has won the game, so strategy A has $0$ pr
 These trivial game state probabilities allowed us to calculate the non-trivial probabilities of a game. We looked at this next. 
 
 \subsubsection{Simultaneous equations}
-Firstly, we started with a simple pair of equations, near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we shall be investigating further.
+Firstly, we started with a simple pair of equations which describe the probabilities of game states near the very end of the game. Both of the strategies are on $99$ points, and it is the beginning of strategy A's turn. We assume that both A and B roll on game state $99,99,0$. It may seem an obvious choice, as they have no turn score to lose, but the idea of banking on a turn score of zero is something we investigated further later on in this paper. 
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + P_{99,100,2} + P_{99,100,3} + P_{99,100,4} + P_{99,100,5} + P_{99,100,6}\bigg)
 \end{align*}
 
-From what we know about trivial probabilities, we see that if A successfully rolls, i.e. doesn't roll a 1, they win the game. So we can write the probabilities as followed, filling in the trivial probabilities.
+From what we know about trivial probabilities, we see that if A successfully rolls, i.e. doesn't roll a 1, they win the game. Therefore, the probabilities can be written as follows filling in the trivial probabilities:
 
 \begin{align*}
 	P_{99,99,0} &= \frac{1}{6}\bigg((1 - Q_{99,99,0}) + (1) + (1) + (1) + (1) + (1)\bigg)\\
@@ -322,7 +322,7 @@ This example is one complete set of simultaneous equations. It turns out that ev
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 \end{align*}
 
-After writting this out, we can see the other probabilities it relies on. Now the method is to see what the strategies do at these game states and then write out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
+After writing this out, we saw the other probabilities it relies on. Next, we wanted to see what the strategies do at these game states and then we wrote out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
 
 \begin{align*}
 	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
@@ -337,7 +337,7 @@ Now we have all three simultaneous equations that can be solved:
 	Q_{99,97,0} &= 0.8612
 \end{align*}
 
-This method of calculation works well. Before we run through every set of equations, we must look at the interesting case of banking. For example, instead of rolling at $97,99,2$, A banks. The equations are now:
+This method of calculation worked well. However, before we ran through every set of equations, we had to look at the interesting case of banking. For example, instead of rolling at $97,99,2$, A banks. The equations are now:
 
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
@@ -345,7 +345,7 @@ This method of calculation works well. Before we run through every set of equati
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
 
-We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example. Its value was $\frac{6}{7}$. So with this we can again solve the equations, getting a much different result:
+We did not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example. Its value was $\frac{6}{7}$. So with this we managed to solve the equations, getting a much different result:
 
 \begin{align*}
 	P_{97,99,0} &= 0.7102\\
@@ -353,14 +353,14 @@ We do not need to write out the equation for $Q_{99,99,0}$ because we already ca
 	Q_{99,97,0} &= 0.8816
 \end{align*}
 
-From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores then itself, which we shall call "higher game states". Note that it will not rely on game states "lower" than it as the game will always be progressing forward and a player cannot lose banked points. As long as we solve the sets containing higher game states first, we can run through and solve them all successfully.
+From this we concluded that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores than itself, which we shall be called "higher game states" from this point onwards. Note that it will not rely on game states "lower" than it as the game will always be progressing forward and a player cannot lose banked points. Once we had solved the sets containing higher game states first, we could run through the rest of the sets and solve them all successfully.
 
-Solving these equations means we can calculate every probability of winning from every game state for any given strategy. From this we can check $P_{0,0,0}$, which is the probabiity that any strategy has of winning the game. Computational power is required to give us the probability values we want to calculate. This is where we turn to MATLAB for assistance.
+Solving these equations meant we could calculate every probability of winning from every game state for any given strategy. From this we could check $P_{0,0,0}$, which is the probability that any strategy has of winning the game. Computational power was required to give us the probability values that we wanted to calculate. This is where we turned to MATLAB for assistance.
 
 \subsubsection{Matrices}
-To make use of MATLAB, we needed to write the equations in terms of matrices. Every set of equations can be written in the form $CX=D$, where $C$, $X$ and $D$ are matrices containing the coefficients, the probabilities, and the constant values respectively. To see how these matrices are built, we will look at the examples used above.
+To make use of MATLAB, we wrote the equations in terms of matrices. Every set of equations can be written in the form $CX=D$, where $C$, $X$ and $D$ are matrices containing the coefficients, the probabilities, and the constant values respectively. We looked at the examples above to build these matrices. 
 
-The first important part is to simplify the equations. We want them in terms of separated probabilities and with the coefficient values on the left-hand side of the equation, and a combined constant value on the right. This usually involves expanding brackets and adding constants together.
+The first part was to simplify the equations. We wanted them in terms of separated probabilities with the coefficient values on the left-hand side of the equation, and a combined constant value on the right. This involved expanding brackets and adding constants together.
 
  We have:
 
@@ -376,7 +376,7 @@ This becomes:
 	Q_{99,99,0} + \frac{1}{6}P_{99,99,0} &= 1
 \end{align*}
 
-Using basic ideas of matrix multiplication, we can construct a matrix,
+Using basic ideas of matrix multiplication, we can construct a matrix:
 
 \begin{align*}
 	\begin{bmatrix}
@@ -394,14 +394,14 @@ Using basic ideas of matrix multiplication, we can construct a matrix,
 	\end{bmatrix}
 \end{align*}
 
-This is useful as we can now take the inverse of the coefficients matrix, using it in left matrix multiplication to find the probabilities.
+This was useful as we could then take the inverse of the coefficients matrix, using it in left matrix multiplication to find the probabilities.
 
 \begin{align*}
 	C^{-1}CX &= C^{-1}D\\
 	X        &= C^{-1}D
 \end{align*}
 
-Matlab has a function that does this for us, giving the probability values in the matrix $X$. Looking at the other two examples:\\
+Matlab has a function that did this for us, giving the probability values in the matrix $X$. Looking at the other two examples:\\
 Example where A rolled on $97,99,2$.
 
 \begin{align*}
@@ -455,13 +455,13 @@ Notice how $Q_{99,99,0}$ is in the constant values matrix. As discussed before, 
 \subsubsection{Piglet}
 To simplify the task, we first attempted to construct the matrices for a variant of Pig known as Piglet. In this game, players take it in turns to flip a coin until either a tail is flipped, or the player banks their turn score.
 
-This simpler game contained all the same elements as Pig but on a smaller scale. Plainly, it is played with a coin rather than a die, so that probabilities are generated by $\frac{1}{2}$ , instead of the $\frac{1}{6}$ given by a die. The other difference is that you typically play to a much lower score than the $100$ in Pig. This score can be chosen to be whatever we want, often $10$ but sometimes as low as $2$ or $3$ for the most simple games.
+This simpler game contained all the same elements as Pig but on a smaller scale. Plainly, it is played with a coin rather than a die, so that probabilities are generated by $\frac{1}{2}$ , instead of the $\frac{1}{6}$ given by a die. The other difference is that you typically play to a much lower score than the $100$ in Pig. This score could be chosen to be whatever we wanted, often $10$ but sometimes as low as $2$ or $3$ for the most simple games.
 
-A subtle yet vital difference is that $1$ is added for a successful flip. Consider if the coin was a two-sided die, with $1$ and $2$ rather than tails and heads respectively. If it was the same as Pig, the face value of the roll would be added to the turn score, so $2$, not $1$. We know that it is not possible to gain $1$ in Pig from a roll, as $1$ is reserved for a loss. \textbf{[Not sure how relevant this bit is]} This leads to a long list of questions regarding the rules of Pig. What if instead of losing on a roll of $1$, it was a roll of $6$ that loses the turn score or any other number? This was one of many points throughout our project where we found other areas to investigate, but decided to stay focussed on our set goals. For now we accept that Piglet adds $1$ to the turnscore on a flip of a head.
+A subtle yet vital difference is that $1$ is added for a successful flip. Consider if the coin was a two-sided die, with $1$ and $2$ rather than tails and heads respectively. If it was the same as Pig, the face value of the roll would be added to the turn score, so $2$, not $1$.  We accepted that Piglet adds $1$ to the turn score on a flip of a head.
 
-With a coin you may only score $1$ per flip, meaning you must flip a minimum of $10$ times for you to reach your end goal. In Pig this is not the case, as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves.
+With a coin you can only score $1$ per flip, meaning you must flip a minimum of $10$ times for you to reach your end goal. In Pig this is not the case, as you can roll anywhere from $2$ to $6$ points on a successful roll, giving you a minimum of $17$ rolls to achieve your goal. Having a change in the minimum number of flips allows luck to have a much greater presence in the outcome of the game, as we observed upon playing it ourselves.
 
-Our goal was to find the probability of a strategy winning when going first. For a strategy A, the probability of winning is $P_{0,0,0}$, as this is the starting point of the game on A's turn. Piglet's simplicity made it the perfect first stepping stone to solving this.
+Our goal was to find the probability of a strategy winning when going first. For strategy A, the probability of winning is $P_{0,0,0}$, as this is the starting point of the game on A's turn. Piglet's simplicity made it the perfect first stepping stone to solving this.
 
 \subsubsection{Handwritten notes}
 We first played Piglet to a total score of $3$, taking strategy A as banking on a turn score of $1$ and strategy B as banking on a turn score of $2$. (Both strategies would bank by default as soon as they got to the winning score.) From this we wrote out all the simultaneous equations by hand. This starts at the set that considers the probability $P_{2,2,0}$ and $Q_{2,2,0}$ whereby each strategy wins on its next go, similar to our first example in Pig. Once we had these equations written in terms of matrices, we manually put them into MATLAB and got it to solve them. From this we worked down through all simultaneous sets to obtain the probabilities of each strategy winning from game state $0,0,0$.
@@ -827,13 +827,13 @@ We then tested our optimal strategy against that of Neller’s. These simulation
 \section{Conclusions}
 \subsection{Overall findings}
 \subsection{Humans playing pig and their interactions}
-\textbf{Do players stick to their stated risk preferences?}\\No, we found that players don't actually play in align with their stated risk preferences. It seems that on average, once participants play Pig they align with a different risk preference. We found that a lot more people are risk seeking than they originally stated. As we can see with the risk preference graphs, we expected them to look like the Figure \ref{figure4}, as shown in the introduction. However we found that this wasn’t the case. We explained this as the risk preferences are evened out during the process of a game.
+\textbf{Do players stick to their stated risk preferences?}\\No, we found out that players don’t actually play in align with their stated risk preferences. It seems that on average, once participants play Pig they align with a different risk preference. We found that a lot more people are risk seeking than they originally stated. As we can see with the risk preference graphs, we expected them to look like the Figure \ref{figure4}, as shown in the introduction. However we found that this wasn’t the case. We explained this as the risk preferences are evened out during the process of a game.
 
- \textbf{Player interactions}\\We have concluded that an individual’s strategy is definitely influenced by their opponents. Game 11 (Figure \ref{figure13}) and Game 14 (Figure \ref{figure14}) best represent our overall results found. In summary, we found that players change their strategy and do not stick to their stated risk preference and players copy their opponents strategy. If people stick to mirroring each other they actually have a more equal chance of winning, whereas if they change their strategies later on in the game it causes a worse outcome.
+ \textbf{Player interactions}\\We have concluded that an individual’s strategy is definitely influenced by their opponents. Game 11 (Figure \ref{figure13}) and game 14 (Figure \ref{figure14}) best represent our overall results found. In summary, we found that players change their strategy and do not stick to their stated risk preference and players copy their opponents strategy. If people stick to mirroring each other they actually have a more equal chance of winning, whereas if they change their strategies later on in the game it causes a worse outcome.
 
  \textbf{Limitations}\\ Our sample size was fairly small. Therefore, if this experiment was to repeated, we would want to ensure that we collected data from a greater number of participants, so that we could be more confident in our conclusions.
 
-\subsection{Statistical analysis}
+\subsection{Statsical analysis}
 To conclude statistical analysis, we first had to acknowledge that probabilities for our strategies winning could be measured both practically and theoretically and these can often differ greatly. In order to ensure that these were as close as they could be, we needed to create some rules for a fair test by which we would have to follow when playing two strategies against each other, in order to accurately compare them.
 
 We first noted that a particular strategy will win against itself with a general probability of $0.5$. We then constructed a confidence interval at the $95\%$ significance level with the idea that we didn’t want $p$ to differ more than $0.025$ away from $0.5$, where $p$ denotes the probability of a strategy winning against itself. From this, we could work backwards from our confidence interval and find the optimal number of games, $n$, required for one single fair test. This method produced $n=1537$. However, we saw from Figure \ref{figure15} that this value of $n$ gave too many outliers in the data, so we instead chose $n=3000$ as it appeared accurate for our particular confidence interval. As this number still produced some outlying data, we decided to run $100$ fair tests in order to minimise the error as much as we could in order to obtain accurate practical probabilities against theoretical ones.
