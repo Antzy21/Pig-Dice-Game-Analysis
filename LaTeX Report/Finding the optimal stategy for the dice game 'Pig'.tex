@@ -115,7 +115,20 @@ The ultimate aim of this project was to find an optimal strategy (or optimal str
 
 \subsection{A brief history of Pig}
 \subsubsection{Basics of Pig}
-The dice game Pig has many variations, so we chose to focus on the two-player single-die variant. When it is a player's turn, they can repeatedly roll the die as many times as they wish. The number on each roll signifies the points gained on that roll, which is added to a running total of points for the turn. These points can be banked to bring a player's turn to an end. However, all of the points in this running total are lost if the player rolls a $1$ before banking, immediately bringing their turn to an end. The aim of the game is to be the first player to have a banked total of at least $100$ points.\\ \\The probabilities of winning the game from any position can be simplified down into sets of linear equations. Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's running total of points so far for this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{ijk}$ denote probability of B winning from the equivalent position (where $i$ then represents B's banked points etc.). Then, \begin{equation}\label{1.2.1.a}
+The dice game Pig has many variations, so we chose to focus on the two-player single-die variant. When it is a player's turn, they can repeatedly roll the die as many times as they wish. The number on each roll signifies the points gained on that roll, which is added to a running total of points for the turn. These points can be banked to bring a player's turn to an end. However, all of the points in this running total are lost if the player rolls a $1$ before banking, immediately bringing their turn to an end. The aim of the game is to be the first player to have a banked total of at least $100$ points.
+\\
+\\
+Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
+\\
+\\
+A game state is defined by the current position of the game, my banked score, your banked score, and my turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+\\
+\\
+Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
+\\
+\\
+At any gamestate it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that gamestate. Suppose I have 2 strategies A and B. Consider that it is A's turn and we are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is A's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{jik}$ denote probability of B winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is from the perspective of each player). Then,
+\begin{equation}\label{1.2.1.a}
 P_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
 if A rolls and
@@ -418,11 +431,68 @@ We could however run to any winning score.
 By using the hand calculated simple Piglet probabilities, we could check to see if our coded matrices were correct and fix any bugs. We even found that we could use the MATLAB-produed matrices to correct our handwritten mistakes. \textbf{[What does this mean?]} Once this was working we had our first runnable code to get us going. We just had to fully generalise the code. There were two steps to doing this: taking any strategy as an input, and having any dice probability working in the code. The former was easier; an independent problem that we made a function to do for us. The later was a little trickier but was a fundamental part of building the matrices.
 
 \subsubsection{Strategies to matrices}
+In our introduction, we defined a strategy as a 3 dimensional array of choices. Another way, and the way that we were introduced to strategies, is by a matlab function. These functions take inputs of "my score","your score", and "turn score", then output a "choice" that is a logical value of $1$ or $0$. Below is an example of Bank on 20.
 
+% Inset Bank20 code
+  
+This way of defining a strategy was used when running the code for the game pig, which called the function strategies within it. However, it limited the way that more abstract strategies could be represented. Take a strategy that rolls in very specific locations for example, the function strategy would have to include many if statements to handle this, leading to a very big and hard to read function. An array of choices on the otherhand would always be the same size, and importantly it is easy to change if we wanted to. It is easy to locate the choice at a given gamestate too.
+\\
+\\
+It makes sense to work with matrix strategies, but we still wanted to use function strategies in our code if we wanted to. So we devised a function \textit{Strategies to Matrices} that could convert functions to matrices but leave the strategy alone if it is already a matrix. First of all checked that the input was a function handle, then it runs through every gamestate, outputting the choice that the function produces, then stores that value in the corresponding matrix. We also used this function to check that the Matrix was the correct size for the game. Unlike function strategies, the matrix strategies only work for a certain game length.
 
-...
+% Inset Strategies to Matrices code
 
-Once we had done this, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
+This allowed us to check what the strategy wanted to do at any gamestate, which was important for the type of equation to use when building the matrices.
+
+\subsubsection{Coding Matrices}
+
+This section covers how to build general matrices for any set of similtaneous equations. First of all, we need to consider what Probability values realy on eachother to produce a single set. Take $P_{i,j,0}$ the probability of A winning at the begginning of their turn. Assuming A rolls (we will look at banking on 0 later), $P_{i,j,0}$ will rely on other probabilities. On a successful roll, the new probabilities have different turnscores $k$, but same banked score $i$ and $j$. On an unsuccessful roll, a new probability from B's perspective is required; $Q_{j,i,0}$. This has not been previously calculated as it is not from a higher gamestate, therefore must be considered. Continuing on from the probabilities from A's perspective that we must now also consider, they can either bank or roll again. If A banks, that probability will be equal to $1-Q_{j,i+k,0}$, where $k$ is the now non zero turnscore. As $Q_{j,i+k,0}$ is for a higher gamestate, it would have already been calculated, so there are no new probabilities to consider. Banking is an easy choice to deal with for this reason. If A rolls again at the new gamestates with a higher turnscore, more probabilities must also be considered. The important fact however is that only the turnscore has changed again. They also rely too on $Q_{j,i,0}$ if the roll is unsuccessful, which is one we are already considering. It seems then that we must consider all $P$ probabilities containing a higher turnscore but the same banked scores, as our orignial $P_{i,j,0}$, up until the turnscore has won A the game.
+\\
+\\
+We have only considered $P$ probabilities from A's perspective so far, but we also rely on $Q_{j,i,0}$. Similarly to what we have discussed with repects to A's probabilies $P$, we must consider all $Q$ probabilities with higher turnscores up until the turnscore has won B the game. Again however, only the turnscore is changing. It can be concluded then that each set of similtaneous equations is built around fixed banked scores $i$ and $j$. This fact could also have been reached by realising that any higher game state (higher banked values) than the current one would have already been calculated so would not produce another equation, and no lower game state (lower banked values) would ever be called because the players cannot loose banked score.
+% This is kind of like a theorem that i have just proved
+% The main point of the last two pareagraphs was to prove "It can be concluded then that each set of similtaneous equations is built around fixed banked scores $i$ and $j$."
+% How can we highlight that sentence to make it stand our as the whole point
+\\
+\\
+From this % from theorem above
+we see that there must be a similtaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why that is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig... $100\times100\times100=1$ million.
+\\
+\\
+Now we have a rough idea of every equation in any similtaneous set. For clarity, we will order them as follows in the probabilities matrix, $X$.
+\begin{align}
+	\begin{bmatrix}
+		P_{i,j,0}\\
+		P_{i,j,1}\\
+		...\\
+		P_{i,j,n-1}\\
+		P_{i,j,n}\\
+		Q_{j,i,0}\\
+		Q_{j,i,1}\\
+		...\\
+		Q_{j,i,m-1}\\
+		Q_{j,i,m}\\
+	\end{bmatrix}
+\end{align}
+where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
+\\
+\\
+The first problem to our assumptions so far is that we will need all of these equations. This only outlines all of the ones that could be needed. Take for example, the set built around $0,0$, where A is banking on $20$. $P_{0,0,50}$ for example would never be considered, as the strategy would have banked many rolls ago. For banking on 20 strategy, the gamestate $0,0,50$ and many others would be impossible. This idea of impossible gamestates was touched on in the introduction, the difference here is that this one is specific to a strategy. As discussed in the introduction, a turnscore of 1 is also not possible for pig.
+\\
+\\
+This problem has a suprisingly elegant solution. The definition of an impossible gamestate is one that cannot be reached from other gamestates. The coefficient's matrix will be filled from top to bottom, meaning lower turnscore probabilities are completed first. So if we get to any probability that is an impossible game state, it would not have been called by any other gamestates before it. Therefore all the coefficient values for it would be zero. This is a simple to check in our program. We then go on to ignore this row of the matrix, which is the same as it not being there. With this problem solved, we can use the set probability matrix described above, without worrying if the probability is relevant or not.
+\\
+\\
+Now we can fill in the coefficient matrix and the constant value matrix. This is done by checking what the strategy does at each gamestate, either rolling or banking. This is much easier with the matrix strategies. By making use of Matlab's variables, for loops and general programming techniques, we successfully put all the needed values into the matrices. We produced truly remarkable code for this function which this margin is too small to contain. % Banter
+% Na seriously not sure if i should put the whole code in there, I think i've explained how it works pretty well without the code itself and that might confuse the reader
+% Gonna put in a matrix example here though so that should do, including roll examples, bank examples, and impossible GS examples.
+\\
+\\
+We then run through every gamestate backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher gamestates, so  whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
+\\
+\\
+For pig, Matlab completes all 1 million sets in 5 seconds, must faster than we could have by hand! Although we have every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$. The main outputs that we are interested in, is $P_{0,0,0}$ and $Q_{0,0,0}$; the probability each strategy has of winning, when going first.
+
 \subsubsection{Testing the code}
 
 % Rhodri
