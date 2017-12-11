@@ -500,19 +500,12 @@ This allowed us to check what the strategy wanted to do at any game state, which
 
 Firstly, we needed to consider which probability values rely on each other to produce a single set. Take $P_{i,j,0}$ the probability of A winning at the beginning of their turn. Assuming A rolls (we looked at banking on 0 later on in this paper), $P_{i,j,0}$ will rely on other probabilities. On a successful roll, the new probabilities have different turn scores $k$, but same banked score $i$ and $j$. On an unsuccessful roll, a new probability from B's perspective is required; $Q_{j,i,0}$. This has not been previously calculated as it is not from a higher game state, therefore must be considered. Continuing on from the probabilities from A's perspective that we must now also consider, they can either bank or roll again. If A banks, that probability will be equal to $1-Q_{j,i+k,0}$, where $k$ is the now non zero turn score. As $Q_{j,i+k,0}$ is for a higher game state, it would have already been calculated, so there were no new probabilities to consider. Banking was an easy choice to deal with for this reason. If A rolls again at the new game states with a higher turn score, more probabilities must also be considered. The important fact however is that only the turn score has changed again. They also rely on $Q_{j,i,0}$ if the roll is unsuccessful, which is one we are already considering. It seems then that we must consider all $P$ probabilities containing a higher turn score but the same banked scores, as our original $P_{i,j,0}$, up until the turn score has won A the game.
 
-<<<<<<< HEAD
-So far we have only considered $P$ probabilities from A's perspective, but we also rely on $Q_{j,i,0}$. Similarly to what we have discussed with repeats to A's probabilities $P$, we also had to consider all $Q$ probabilities with higher turnscores up until the turnscore where B had won the game. Again however, only the turnscore is changing. It can be concluded then that each set of simultaneous equations is built around fixed banked scores $i$ and $j$. This fact could also have been reached by realising that any higher game state (higher banked values) than the current one would have already been calculated so would not produce another equation, and no lower game state (lower banked values) would ever be called because the players cannot lose their banked score.
-
-From this we can see that there must be a simultaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why this is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig: $100\times100\times100=1$ million.
-
-At this point we had a rough idea of every equation in any simultaneous set. For clarity, we ordered them as follows in the probabilities matrix, $X$.
-=======
 So far we have only considered $P$ probabilities from A's perspective, but we also rely on $Q_{j,i,0}$. Similarly to what we have discussed with repeats to A's probabilities $P$, we also had to consider all $Q$ probabilities with higher turn scores up until the turn score where B had won the game. Again however, only the turn score is changing. It can be concluded then that each set of simultaneous equations is built around fixed banked scores $i$ and $j$. This fact could also have been reached by realising that any higher game state (higher banked values) than the current one would have already been calculated so would not produce another equation, and no lower game state (lower banked values) would ever be called because the players cannot lose their banked score.
 
 From this we can see that there must be a simultaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why this is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig: $100\times100\times100=1$ million.
 
 Now we have a rough idea of every equation in any simultaneous set. For clarity, we will order them as follows in the probabilities matrix, $X$.
->>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
+
 \begin{align}
 	\begin{bmatrix}
 		P_{i,j,0}\\
@@ -529,15 +522,9 @@ Now we have a rough idea of every equation in any simultaneous set. For clarity,
 \end{align}
 where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
 
-<<<<<<< HEAD
 The first problem to our assumptions was that we needed all of these equations. This only outlines all of the ones that could be needed. Take for example, the set built around $0,0$, where A is banking on $20$. $P_{0,0,50}$ for example would never be considered, as the strategy would have banked many rolls ago. For banking on 20 strategy, the game state $0,0,50$ and many others would be impossible. This idea of impossible game states was touched on in the introduction, the difference here is that this one is specific to a strategy. As discussed in the introduction, a turnscore of 1 is also not possible for pig.
 
 We found that this problem had an elegant solution. The definition of an impossible game state is one that cannot be reached from other game states. The coefficient's matrix is filled from top to bottom, meaning lower turnscore probabilities are completed first. Therefore, if we got to any probability that is an impossible game state, it would not have been called by any other game states before it. Therefore all the coefficient values for it would be zero. This is a simple to check in our program. We then decided to ignore this row of the matrix, which is the same as it not being there. With this problem solved, we could use the set probability matrix described above, without worrying if the probability is relevant or not.
-=======
-The first problem to our assumptions so far is that we will need all of these equations. This only outlines all of the ones that could be needed. Take for example, the set built around $0,0$, where A is banking on $20$. $P_{0,0,50}$ for example would never be considered, as the strategy would have banked many rolls ago. For banking on 20 strategy, the game state $0,0,50$ and many others would be impossible. This idea of impossible game states was touched on in the introduction, the difference here is that this one is specific to a strategy. As discussed in the introduction, a turn score of 1 is also not possible for pig.
-
-This problem has a surprisingly elegant solution. The definition of an impossible game state is one that cannot be reached from other game states. The coefficient's matrix will be filled from top to bottom, meaning lower turn score probabilities are completed first. So if we get to any probability that is an impossible game state, it would not have been called by any other game states before it. Therefore all the coefficient values for it would be zero. This is a simple to check in our program. We then go on to ignore this row of the matrix, which is the same as it not being there. With this problem solved, we can use the set probability matrix described above, without worrying if the probability is relevant or not.
->>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 Next we could fill in the coefficient matrix and the constant value matrix. This was done by checking what the strategy does at each game state, either rolling or banking. This wasnmuch easier with strategies in matrix form. By making use of Matlab's variables, for loops and general programming techniques, we successfully put all the needed values into the matrices.
 
@@ -578,12 +565,8 @@ Next we could fill in the coefficient matrix and the constant value matrix. This
 	\end{bmatrix}
 \end{align*}
 
-<<<<<<< HEAD
-We then ran through every game state backwards, collecting the probabilities as we solved them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we built our collection of probabilities, we will had to call upon them as we worked down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice probability and to any winning score.
-=======
-<<<<<<< HEAD
-We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice probability and to any winning score.
-=======
+We then ran through every game state backwards, collecting the probabilities as we solved them. Remembering that matrices might need the probabilities calculated from higher game states, so whilst we built our collection of probabilities, we had to call upon them as we worked down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice probability and to any winning score.
+
 The matrices above are a very generalised version used for Pig. Although the number of line can vary, each written out row in this example shows a different situation that is dealt with from both strategies perspective. The dotted lines show the seperation between $P$s and $Q$s.
 
 \begin{itemize}
@@ -595,26 +578,16 @@ The matrices above are a very generalised version used for Pig. Although the num
 
 \end{itemize}
 
-We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
->>>>>>> 52a1555d5abba7c28c28b8143944e32166960b09
->>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
-
 For Pig, Matlab completes all 1 million sets in 5 seconds. Although we had every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$, the main outputs that we were interested in, were $P_{0,0,0}$ and $Q_{0,0,0}$. These are the probabilities each strategy has of winning, when going first.
 
 \subsubsection{Testing the code}
 
 To test the output of the code, we compared the calculated probabilities to experimental results. It was sufficient to test only the value in the lowest position in the matrix, $P_{0,0,0}$, since this value relies on the higher game states (and therefore any errors in higher positions should be reflected in this output).
 
-<<<<<<< HEAD
-$P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, the $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in section \ref{bank20}. The median on the box plot is very close to the projected probability which indicated that our code had correctly calculated $P_{0,0,0}$.
-
-We similarly tested some more simple strategies with successful results. Then we tried to create awkward strategies that would test the limitations of our program. Of special interest were strategies that involved banking at turnscore 0, i.e. ``skipping'' a turn. In certain circumstances this decision could theoretically lead to a stalemate, where both strategies refused to roll. While this would never happen in practical play, it was important to equip our Matlab script to deal with these scenarios so that it wouldn't cause issues when we later come to computer-generated strategies.
-=======
 $P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, the $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in section \ref{bank20}
 . The median on the box-plot is very close to the projected probability which indicated that our code had correctly calculated $P_{0,0,0}$.
 
 We similarly tested some more simple strategies with successful results. Then we tried to create awkward strategies that would test the limitations of our program. Of special interest were strategies that involved banking at turn score 0, i.e. ``skipping'' a turn. In certain circumstances this decision could theoretically lead to a stalemate, where both strategies refuse to roll. While this would never happen in practical play, it was important to equip our Matlab script to deal with these scenarios so that it wouldn't cause issues when we later come to computer-generated strategies.
->>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 A particularly interesting example is a strategy which skips a turn whenever the two players' banked scores are equal. (For convenience we excluded the starting game state where both players have score 0.) When this strategy plays against itself, around a quarter of games result in stalemates. But because the majority of games resulted in victories for one player, we still wanted to be able to analyse this strategy, and therefore had to update the code to accommodate stalemates.
 
@@ -626,11 +599,7 @@ Adjusting the script for simulating series of games to output the number of stal
 
 The piece of code that we produced, was one that could produce an optimal strategy against any other strategy. Note that this is not the overall optimal for Pig, but we used this code to find it. With the foundations that we have explained so far, regarding equations, matrices and strategies, we can explain how we produced this code.
 
-<<<<<<< HEAD
-As a brief explanation of how it works, the code takes two important inputs (not including a general 'to win' score and dice probability, which is also implemented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continually get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will mad use of "strategies to matrices" to get them in our preferred matrix form. The code then runs through the simultaneous sets again, modifying A to be the best it possibly can against B.
-=======
-As a brief explanation of how it works, the code takes two important inputs (not including a general 'to win' score and dice probability, which is also implemented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continually get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will make use of "strategies to matrices" to get them in our preferred matrix form. The code then runs through the simultaneous sets again, modifying A to be the best it possibly can be against B.
->>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
+As a brief explanation of how it works, the code takes two important inputs (not including a general 'to win' score and dice probability, which is also implemented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continually get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we make use of "strategies to matrices" to get them in our preferred matrix form. The code then runs through the simultaneous sets again, modifying A to be the best it possibly can against B.
 
 As we did for calculating the probabilities, we will built matrices, this time a little differently. In the probability matrices we were looking up what the strategy does and building the matrices around what the choice was. However, this time we wanted to consider both rolling and banking at each game state. We could then see which out of rolling and banking had the highest probability of winning. If the strategy's choice is not one with the highest chance of it winning, we could then change the choice the strategy makes at that game state and also the probability it has.
 
