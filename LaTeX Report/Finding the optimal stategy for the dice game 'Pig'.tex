@@ -185,7 +185,7 @@ Next, we started testing strategies on MATLAB using a script to simulate thousan
 
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
 
-\subsection{Human Interactions in Pig}
+\subsection{Human interactions in Pig}
 Maximising the probability of winning can be determined through the use of MATLAB, as discovered by T. Neller\cite{neller2004optimal} to create an optimum solution. However, through the analysis of playing Pig ourselves, we discovered the human interactions that occurred during the game.
 
 Therefore, we decided to investigate the following two questions:
@@ -490,7 +490,7 @@ It made sense to work with matrix strategies, but we still wanted to use functio
 
 This allowed us to check what the strategy wanted to do at any game state, which was important for the type of equation to use when building the matrices.
 
-\subsubsection{Coding Matrices}
+\subsubsection{Coding matrices}
 
 \textit{This section covers how to build general matrices for any set of simultaneous equations}.
 
@@ -716,7 +716,7 @@ When optimising against Neller's strategy, the strategy produced is an exact cop
 
 To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by MATLAB as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Neller's. However we could take the fact that the optimal against Neller's is itself, therefore meaning no strategy could do any better than its optimal, and so Neller's will beat every other strategy. We had found the optimal at this point.
 
-\subsection{Human Interactions of playing Pig}
+\subsection{Human interactions of playing Pig}
 \subsubsection{Do players stick to their stated risk preference}
 To determine whether players stuck to their stated risk preferences, we divided all of the samples into the three risk preference categories (risk averse, risk seeking, risk neutral). After doing this, we plotted the total score of each player at each turn
 \begin{figure}
@@ -762,7 +762,7 @@ In addition, we expected the risk neutral gradient to be equally between the ris
 Moreover, looking at all three graphs the points plotted at turn number 15-16 are all below the average gradient by a significant amount. This could be because at this point in the game the players opponent is close to winning and therefore the player begins to panic and roll too much at each turn, causing them to roll a 1 and lose. This links back to the ideas exposed in Prospect theory\cite{kahneman2013prospect} as humans compensate to win by taking extra risks when they are losing. In this case the player is rolling excessively in order to build up a greater score to bank on. Therefore, this shows that for the results we gathered, at approximately turn 14, on average, players strategies change dependent on the opponents play.
 
 Overall, a possible explanation for the similarity of the gradients is that in the long run of playing Pig, players preferences are ‘evened out’ by the game, much like the stock market evens out returns in the long run.
-\subsubsection{Players Interactions}
+\subsubsection{Players interactions}
 For our second experiment we looked into how player A's strategy was influenced by player B's strategy and vice versa. To do this we took all 15 sample games that were played and plotted the total scores of player A and player B at each turn.
 
 Firstly, an interesting game that we wanted to look at was Game 14 (Figure \ref{figure13}).
