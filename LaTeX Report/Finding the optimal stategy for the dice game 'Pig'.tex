@@ -400,13 +400,13 @@ MATLAB has a function that did this for us, giving the probability values in the
 Example where A rolled on $97,99,2$.
 
 \begin{align*}
-	P_{97,99,0} + \frac{1}{6}Q_{99,97,0} - \frac{1}{6}P_{97,99,2} &= \frac{5}{6}\\
-	P_{97,99,2} + \frac{1}{6}Q_{99,97,0}                          &=  1\\
+	P_{97,99,0} - \frac{1}{6}P_{97,99,2} + \frac{1}{6}Q_{99,97,0} &= \frac{5}{6}\\
+	P_{97,99,2}                          + \frac{1}{6}Q_{99,97,0} &=  1\\
 	Q_{99,97,0} + \frac{1}{6}P_{97,99,0}                          &= 1\\
 	\begin{bmatrix}
-		1           & \frac{1}{6} & -\frac{1}{6}\\
-		\frac{1}{6} & 1           & 0\\
-		\frac{1}{6} & 0           & 1\\
+		1           & -\frac{1}{6} & \frac{1}{6}\\
+		0           & 1            & \frac{1}{6}\\
+		\frac{1}{6} & 0            & 1\\
 	\end{bmatrix}
 	\begin{bmatrix}
 		P_{97,99,0}\\
@@ -428,7 +428,7 @@ Example where A banked on $97,99,2$.
 	P_{97,99,2}                                                    &= 1 - Q_{99,99,0}\\
 	Q_{99,97,0} + \frac{1}{6}P_{97,99,0}                           &= 1\\
 	\begin{bmatrix}
-		1           & \frac{1}{6} & -\frac{1}{6}\\
+		1           & -\frac{1}{6} & \frac{1}{6}\\
 		0           & 1           & 0\\
 		\frac{1}{6} & 0           & 1\\
 	\end{bmatrix}
