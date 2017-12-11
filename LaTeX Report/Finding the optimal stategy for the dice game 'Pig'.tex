@@ -188,15 +188,10 @@ Next, we started testing strategies on MATLAB using a script to simulate thousan
 These findings highlighted that there are many ways to perceive what an optimal strategy may be. However, without extensive testing, we did not know if these hypothetical optimal strategies could be beaten easily.
 
 \subsection{Human Interactions in Pig}
-Maximising the probability of winning can be determined through the use of MATLAB, as discovered by T. Neller\cite{neller2004optimal} to create an optimum solution. However, through the analysis of playing Pig ourselves, we discovered the human behavioural aspects that occurred during the game.
-
-
-\subsubsection{Human Interactions in Pig}
-Developing a strategy that maximises the probability of winning can be determined through the use of MATLAB. However, through the analysis of playing Pig ourselves we also wanted to look into the human interactions that occur when playing Pig.
+Maximising the probability of winning can be determined through the use of MATLAB, as discovered by T. Neller\cite{neller2004optimal} to create an optimum solution. However, through the analysis of playing Pig ourselves, we discovered the human interactions that occurred during the game.
 
 Therefore, we decided to investigate the following two questions:
 
-We decided to investigate two ideas:
 \begin{enumerate}
 \item How are players' strategies influenced by their opponents'?
 \item Do players stick to their stated risk preferences during game play?
@@ -699,7 +694,7 @@ The true value of $n$ needed to be calculated and not chosen arbitrarily. To do 
  \subsubsection{Deciding that a strategy is better than another}
 Once we had decided on a value for $n$ at which we decide that the test is fair, we could easily do tests to conclude that one strategy is better than another. By finding $n$, we had chosen an upper and lower limit of the $p$-value at which we wanted our results to lie within. To illustrate this, suppose we concluded that $100$ games of Pig is a fair test, and we wanted our practical probability to lie within $0.1$ of the true (theoretical) probability. If we were to test the same strategy against itself, theoretically either strategy should win with a probability of $0.5$. Therefore after simulating many games, we would want the representative probability to lie within $0.4$ and $0.6$.
 
-As the probability was calculated by dividing a strategy's number of wins by the total number of games, we could then either perform this calculation to find the representative probability or we could calculate directly from the confidence interval how many games a certain strategy wwould need to win in order to conclude that it is a better strategy. In the above case, as it needs to have a probability higher than $0.6$ to conclude that it is a better strategy, it would therefore need to win a minimum of $100\times0.6=60$ games in order to be considered a better strategy.
+As the probability was calculated by dividing a strategy's number of wins by the total number of games, we could then either perform this calculation to find the representative probability or we could calculate directly from the confidence interval how many games a certain strategy would need to win in order to conclude that it is a better strategy. In the above case, as it needs to have a probability higher than $0.6$ to conclude that it is a better strategy, it would therefore need to win a minimum of $100\times0.6=60$ games in order to be considered a better strategy.
 \subsubsection{Testing our optimal}
 To finalise our findings we needed to test our version of the optimal to determine whether it actually was an optimal, and at least as good as Neller’s\citep{neller2004optimal}. Therefore we ran some tests on it and evaluated the findings.
 
