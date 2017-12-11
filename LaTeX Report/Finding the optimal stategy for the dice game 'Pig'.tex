@@ -7,6 +7,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage[margin=2cm]{geometry}
+\usepackage{float}
 
 \graphicspath{{pictures/}}
 \setlength{\parindent}{0em}
@@ -40,7 +41,7 @@
 
 	\HRule\\[0.4cm]
 
-	{\huge\bfseries Finding the optimal strategy for the dice game `Pig'}\\[0.4cm]
+	{\huge\bfseries Finding the optimal strategy for the dice game Pig}\\[0.4cm]
 
 	\HRule\\[1.5cm]
 
@@ -133,11 +134,11 @@ The dice game Pig has many variations, so we chose to focus on the two-player si
 
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
 
-A game state is defined by the current position of the game, player P's banked score, player Q's banked score and player P's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+A game state is defined by the current position of the game, player A's banked score, player B's banked score and player P's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
 
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game pig.
 
-At any game state it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that game state. Suppose there are two strategies A and B. Consider that it is P's turn and they are in position ($i,j,k$) where $i$ is P's banked points, $j$ is Q's banked points, and $k$ is B's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of P winning from the current position and $Q_{jik}$ denote probability of Q winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is from the perspective of each player). Then,
+At any game state it is possible to produce linear equations to determine if it is better to roll or bank by looking at the probability of winning from that game state. Suppose there are two strategies A and B. Consider that it is A's turn and they are in position ($i,j,k$) where $i$ is A's banked points, $j$ is B's banked points, and $k$ is B's sum total of points so far on this turn. Let $P_{ijk}$ denote the probability of A winning from the current position and $Q_{jik}$ denote probability of B winning from the equivalent position (Note that the position of $j$ and $i$ have swapped because it is from the perspective of each player). Then,
 \begin{equation}\label{1.2.1.a}
 P_{ijk} = \dfrac{1}{6} (1-Q_{ij0}) + \dfrac{1}{6}\sum^{6}_{r=2}P_{ijk+r}
 \end{equation}
@@ -149,12 +150,12 @@ if P banks their points.
 \subsubsection{Neller's work}
 In \textit{Dice Games Properly Explained}, R. Knizia takes the view of each roll of the die in Pig as a bet of not rolling a $1$. He said of the best strategy, ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}. The issue with this claim is, as T. Neller stated, ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal} From this, T. Neller attempted to find a more optimal solution for Pig by maximising equations \ref{1.2.1.a} and \ref{1.2.1.b}. However this was not possible as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result, T. Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows a visual interpretation of the resulting optimal strategy. Figure 1 shows that you should roll if the current game state is within the surface of the graph, and bank otherwise.
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{neller_optimal_solution}
 \caption{Roll\slash hold boundary for the optimal Pig play policy (Neller)\label{figure1}}
 \end{figure}
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{neller_optimal_solution_2}
 \caption{All of the states reachable by an optimal player (Neller)\label{figure2}}
@@ -189,11 +190,9 @@ Maximising the probability of winning can be determined through the use of MATLA
 
 \subsubsection{Human Interactions in Pig}
 Developing a strategy that maximises the probability of winning can be determined through the use of MATLAB. However, through the analysis of playing Pig ourselves we also wanted to look into the human interactions that occur when playing Pig.
-\\
-\\
+
 Therefore, we decided to investigate the following two questions:
-\\
-\\
+
 We decided to investigate two ideas:
 \begin{enumerate}
 \item How are players' strategies influenced by their opponents'?
@@ -212,7 +211,7 @@ For our second investigation, we focussed on the chosen risk preference stated b
 
 Risk can be defined as the intentional interaction with uncertainty, and individuals differ greatly in their attitudes towards risk.\cite{what_is_risk_2017}
 
-People differ greatly in their attitudes towards risk. Most individuals would, in general, prefer to take a less risky option when given a choice, they are risk-averse. However, some individuals prefer risk, risk-seekers, and some are indifferent towards risk and are considered risk-neutral. A risk-averse person will usually prefer a sure thing to a gamble where both have the same expected value. Conversely, a risk-seeking individual will try to choose a fair gamble over a sure thing; where a fair gamble is defined as a gamble with an expected payoff equal to that of a sure thing. Sometimes it happens that a risk-seeking person will end up choosing an unfair gamble (where the expected payoff is less than zero). Finally, a risk-neutral individual prioritises the option with the highest expected monetary value.
+People differ greatly in their attitudes towards risk. Most individuals would, in general, prefer to take a less risky option when given a choice, they are risk-averse. However, some individuals prefer risk, risk-seekers, and some are indifferent towards risk and are considered risk-neutral. A risk-averse person will usually prefer a sure thing to a gamble where both have the same expected value. Conversely, a risk-seeking individual will try to choose a fair gamble over a sure thing; where a fair gamble is defined as a gamble with an expected payoff equal to that of a sure thing. Sometimes it happens that a risk-seeking person will end up choosing an unfair gamble (where the expected pay-off is less than zero). Finally, a risk-neutral individual prioritises the option with the highest expected monetary value.
 
 We can apply these risk preferences to Pig as follows:\\A risk-seeker will roll a greater amount of times on each turn and therefore bank on higher scores. A risk-averse individual will roll a fewer number of times at each turn and bank at lower scores and a risk-neutral player will be somewhere in between these two.
 
@@ -221,9 +220,9 @@ These three risk preferences are represented graphically in figure \ref{figure4}
 \includegraphics[width=\textwidth]{lottery-a-5}
 \caption{Risk preferences graph\label{figure4}}
 \end{figure}
-We wanted to see how an individual’s stated risk preferences affected their strategy when playing ‘Pig’. This information could then be used to calculate the optimal strategy for each of the three risk preferences. Over time, a computer could then adapt its strategy to find an optimal strategy for a player’s risk preference.
+We wanted to see how an individual’s stated risk preferences affected their strategy when playing Pig. This information could then be used to calculate the optimal strategy for each of the three risk preferences. Over time, a computer could then adapt its strategy to find an optimal strategy for a player’s risk preference.
 
-\subsection{Statisical analysis}
+\subsection{Statistical analysis}
 In terms of statistical analysis, we wanted to test whether or not a strategy is better than the one it is playing against based on the games they play against one another, given as a probability of winning. Firstly, we needed to establish what we believed to be a fair test between two strategies and the importance of this to our project. We approximated playing two strategies against one another to a statistical distribution and then constructed a confidence interval, at a particular level of significance, and then worked backwards by assuming that a strategy should beat itself with probability $0.5$. From this, we intended to find the optimal number of games required to run one single test between any two strategies, so that we could accurately say whether or not a particular strategy is consistently better than another.
 
 After this had been determined, the next step was to decide the number of tests required to run in order to gain a desired degree of accuracy. Through this we were able to produce an good approximation of the probability that one of each strategy winning with the player going first alternated on each trial. If this probability lies above the upper bound of the confidence interval, then the particular strategy could be declared better than its opponent. Similarly, a probability falling below the lower bound indicated that it was worse. However, if the probability fell inside the confidence interval, the two strategies were considered inseparable at our given level of significance, meaning we could not strictly say that one is better than the other.
@@ -467,7 +466,7 @@ We first played Piglet to a total score of $3$, taking strategy A as banking on 
 We repeated this process for a game to total score $2$. We used the same strategies again; strategy A was to bank on a turn score of $1$; strategy B was to bank on a turn score of $2$, which is equivalent to rolling at every game state, what we called "rolling to win". We achieved another answer which looked relatively correct. As a group we noticed a pattern at this point to which the number of sets of simultaneous equations is that of the total score squared. It was here we realised that working out piglet to $10$ would require $100$ sets of equations.
 
 \subsection{Coding}
-Once we had familiarised ourselves with the rules of the game, the equations, the matrices, and a few simple Piglet examples, we began building matlab scripts. We had two functions we wanted to produce. One to calculate probabilities as we described so far and another to calculate optimised strategies.
+Once we had familiarised ourselves with the rules of the game, the equations, the matrices, and a few simple Piglet examples, we began building MATLAB scripts. We had two functions we wanted to produce. One to calculate probabilities as we described so far and another to calculate optimised strategies.
 
 \subsubsection{Initial Calculations}
 Our first attempt at getting our ideas down as code was a very simplified calculation of Piglet. Although we coded in a dice probability variable that could be changed, the code only worked for a dice flip, and when the variable was set to $\frac{1}{2}$. It was also limited to taking in only Bank on strategies. We could however run to any winning score.
@@ -475,7 +474,7 @@ Our first attempt at getting our ideas down as code was a very simplified calcul
 By using the hand calculated simple Piglet probabilities, we could check to see if our coded matrices were correct and fix any bugs. We even found that we could use the MATLAB-produced matrices to correct our handwritten mistakes. Once this was working we had our first runnable code. Next we had to fully generalise the code for Pig. There were two steps to doing this, firstly taking any strategy as an input, and secondly, having any dice probability working in the code. The former was easier; an independent problem that we made a function in MATLAB. The latter was a little trickier but was a fundamental part of building the matrices.
 
 \subsubsection{Strategies to matrices}
-In our introduction, we defined a strategy as a 3 dimensional array of choices. Another way, and the way that we were introduced to strategies, is by a matlab function. These functions take inputs of "my score","your score", and "turn score", then output a "choice" that is a logical value of $1$ or $0$. Below is an example of Bank on 20.
+In our introduction, we defined a strategy as a 3 dimensional array of choices. Another way, and the way that we were introduced to strategies, is by a MATLAB function. These functions take inputs of "my score","your score", and "turn score", then output a "choice" that is a logical value of $1$ or $0$. Below is an example of Bank on 20.
 
 \begin{lstlisting}
 function choice = Bank20(myscore,yourscore,turnscore)
@@ -499,13 +498,21 @@ This allowed us to check what the strategy wanted to do at any game state, which
 
 \textit{This section covers how to build general matrices for any set of simultaneous equations}.
 
-Firstly, we needed to consider which probability values rely on each other to produce a single set. Take $P_{i,j,0}$ the probability of A winning at the beginning of their turn. Assuming A rolls (we looked at banking on 0 later on in this paper), $P_{i,j,0}$ will rely on other probabilities. On a successful roll, the new probabilities have different turn scores $k$, but same banked score $i$ and $j$. On an unsuccessful roll, a new probability from B's perspective is required; $Q_{j,i,0}$. This has not been previously calculated as it is not from a higher game state, therefore must be considered. Continuing on from the probabilities from A's perspective that we must now also consider, they can either bank or roll again. If A banks, that probability will be equal to $1-Q_{j,i+k,0}$, where $k$ is the now non zero turnscore. As $Q_{j,i+k,0}$ is for a higher game state, it would have already been calculated, so there were no new probabilities to consider. Banking was an easy choice to deal with for this reason. If A rolls again at the new game states with a higher turnscore, more probabilities must also be considered. The important fact however is that only the turnscore has changed again. They also rely on $Q_{j,i,0}$ if the roll is unsuccessful, which is one we are already considering. It seems then that we must consider all $P$ probabilities containing a higher turnscore but the same banked scores, as our orignial $P_{i,j,0}$, up until the turnscore has won A the game.
+Firstly, we needed to consider which probability values rely on each other to produce a single set. Take $P_{i,j,0}$ the probability of A winning at the beginning of their turn. Assuming A rolls (we looked at banking on 0 later on in this paper), $P_{i,j,0}$ will rely on other probabilities. On a successful roll, the new probabilities have different turn scores $k$, but same banked score $i$ and $j$. On an unsuccessful roll, a new probability from B's perspective is required; $Q_{j,i,0}$. This has not been previously calculated as it is not from a higher game state, therefore must be considered. Continuing on from the probabilities from A's perspective that we must now also consider, they can either bank or roll again. If A banks, that probability will be equal to $1-Q_{j,i+k,0}$, where $k$ is the now non zero turn score. As $Q_{j,i+k,0}$ is for a higher game state, it would have already been calculated, so there were no new probabilities to consider. Banking was an easy choice to deal with for this reason. If A rolls again at the new game states with a higher turn score, more probabilities must also be considered. The important fact however is that only the turn score has changed again. They also rely on $Q_{j,i,0}$ if the roll is unsuccessful, which is one we are already considering. It seems then that we must consider all $P$ probabilities containing a higher turn score but the same banked scores, as our original $P_{i,j,0}$, up until the turn score has won A the game.
 
+<<<<<<< HEAD
 So far we have only considered $P$ probabilities from A's perspective, but we also rely on $Q_{j,i,0}$. Similarly to what we have discussed with repeats to A's probabilities $P$, we also had to consider all $Q$ probabilities with higher turnscores up until the turnscore where B had won the game. Again however, only the turnscore is changing. It can be concluded then that each set of simultaneous equations is built around fixed banked scores $i$ and $j$. This fact could also have been reached by realising that any higher game state (higher banked values) than the current one would have already been calculated so would not produce another equation, and no lower game state (lower banked values) would ever be called because the players cannot lose their banked score.
 
 From this we can see that there must be a simultaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why this is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig: $100\times100\times100=1$ million.
 
 At this point we had a rough idea of every equation in any simultaneous set. For clarity, we ordered them as follows in the probabilities matrix, $X$.
+=======
+So far we have only considered $P$ probabilities from A's perspective, but we also rely on $Q_{j,i,0}$. Similarly to what we have discussed with repeats to A's probabilities $P$, we also had to consider all $Q$ probabilities with higher turn scores up until the turn score where B had won the game. Again however, only the turn score is changing. It can be concluded then that each set of simultaneous equations is built around fixed banked scores $i$ and $j$. This fact could also have been reached by realising that any higher game state (higher banked values) than the current one would have already been calculated so would not produce another equation, and no lower game state (lower banked values) would ever be called because the players cannot lose their banked score.
+
+From this we can see that there must be a simultaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why this is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig: $100\times100\times100=1$ million.
+
+Now we have a rough idea of every equation in any simultaneous set. For clarity, we will order them as follows in the probabilities matrix, $X$.
+>>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 \begin{align}
 	\begin{bmatrix}
 		P_{i,j,0}\\
@@ -522,31 +529,75 @@ At this point we had a rough idea of every equation in any simultaneous set. For
 \end{align}
 where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
 
+<<<<<<< HEAD
 The first problem to our assumptions was that we needed all of these equations. This only outlines all of the ones that could be needed. Take for example, the set built around $0,0$, where A is banking on $20$. $P_{0,0,50}$ for example would never be considered, as the strategy would have banked many rolls ago. For banking on 20 strategy, the game state $0,0,50$ and many others would be impossible. This idea of impossible game states was touched on in the introduction, the difference here is that this one is specific to a strategy. As discussed in the introduction, a turnscore of 1 is also not possible for pig.
 
 We found that this problem had an elegant solution. The definition of an impossible game state is one that cannot be reached from other game states. The coefficient's matrix is filled from top to bottom, meaning lower turnscore probabilities are completed first. Therefore, if we got to any probability that is an impossible game state, it would not have been called by any other game states before it. Therefore all the coefficient values for it would be zero. This is a simple to check in our program. We then decided to ignore this row of the matrix, which is the same as it not being there. With this problem solved, we could use the set probability matrix described above, without worrying if the probability is relevant or not.
+=======
+The first problem to our assumptions so far is that we will need all of these equations. This only outlines all of the ones that could be needed. Take for example, the set built around $0,0$, where A is banking on $20$. $P_{0,0,50}$ for example would never be considered, as the strategy would have banked many rolls ago. For banking on 20 strategy, the game state $0,0,50$ and many others would be impossible. This idea of impossible game states was touched on in the introduction, the difference here is that this one is specific to a strategy. As discussed in the introduction, a turn score of 1 is also not possible for pig.
+
+This problem has a surprisingly elegant solution. The definition of an impossible game state is one that cannot be reached from other game states. The coefficient's matrix will be filled from top to bottom, meaning lower turn score probabilities are completed first. So if we get to any probability that is an impossible game state, it would not have been called by any other game states before it. Therefore all the coefficient values for it would be zero. This is a simple to check in our program. We then go on to ignore this row of the matrix, which is the same as it not being there. With this problem solved, we can use the set probability matrix described above, without worrying if the probability is relevant or not.
+>>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 Next we could fill in the coefficient matrix and the constant value matrix. This was done by checking what the strategy does at each game state, either rolling or banking. This wasnmuch easier with strategies in matrix form. By making use of Matlab's variables, for loops and general programming techniques, we successfully put all the needed values into the matrices.
 
 \begin{align*}
 	\setcounter{MaxMatrixCols}{40}
 	\begin{bmatrix}
-		1       &&&&&&&&&&&&&&|&&&&&&\\
-		& \ddots &&&&&&&&&&&&&|&&&&&&\\
-		&& \ddots &&&&&&&&&&&&|&&&&&&\\
-		0 & \cdots & 0 & 1 & 0 & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6}  & 0 & \cdots & 0 & | & \frac{1}{6} & 0 & 0 & \cdots & 0 & 0\\
-		&&&& \ddots &&&&&&&&&&|&&&&\\
-		&&&&& \ddots &&&&&&&&&|&&&& \\
-		0 & \cdots & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 &\cdots&&0&|&0&\cdots&&&0&0\\
-		&&&&&&&\ddots&&&&&&&|&&&&&&\\
-		&&&&&&&&\ddots&&&&&&|&&&&&&\\
-		0 & \cdots & 0 & 1 & 0 & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6} & \frac{-1}{6}  & 0 & \cdots & 0 & | & \frac{1}{6} & 0 & \cdots & 0\\
-		&   &   &   & \ddots &&&&&&&&&&|&&&&\\
-		&   &   &   &   & \ddots &&&&&&&&&|&&&& \\
+		1&0&\frac{-1}{6}&\cdots&\frac{-1}{6}&0&\cdots&0&|&\frac{1}{6}&0&0&\cdots&0\\
+		\vdots& \ddots &&&&&\vdots&&			|&&&&&\\
+		\vdots&& \ddots &&&&\vdots&&			|&&&&&\\
+		0 & \cdots & 0 & 1 & 0 & 0 &\cdots&0&   |&0&0&\cdots&0&0\\
+		\vdots&&&&\ddots&&\vdots&&				|&&&&&\\
+		\vdots&&&&&\ddots&0&&					|&&&&&\\
+		0&0&0&\cdots&0&0&1&0&					|&0&0&\cdots&0&0\\
+		\vdots&&&&&&&\ddots&					|&&&&&\\
+		-&-&-&-&-&-&-&-&    					+&-&-&-&-&-\\
+		\vdots& & & & & & & &    				|&\ddots& & & &\\
+		\vdots& & & & & & & &    				|&&\ddots&&&\\
+		\frac{1}{6}&0&\cdots&&&&\cdots&0&		|&0&\cdots& 1 & 0 & \frac{-1}{6}\\
+		\vdots& & & & & & & &    				|&&&&\ddots\\
+		0&0&\cdots& & & &\cdots&0&   			|&0&0&\cdots&0&1\\
+	\end{bmatrix}
+	\times X =
+	\begin{bmatrix}
+		\frac{1}{6}\\
+		\vdots\\
+		\vdots\\
+		1-Q_{j,i+k,0}\\
+		\vdots\\
+		\vdots\\
+		0\\
+		\vdots\\
+		-\\
+		\vdots\\
+		\vdots\\
+		\frac{5}{6}\\
+		\vdots\\
+		1-P_{i,j+k,0}\\
 	\end{bmatrix}
 \end{align*}
 
+<<<<<<< HEAD
 We then ran through every game state backwards, collecting the probabilities as we solved them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we built our collection of probabilities, we will had to call upon them as we worked down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice probability and to any winning score.
+=======
+<<<<<<< HEAD
+We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice probability and to any winning score.
+=======
+The matrices above are a very generalised version used for Pig. Although the number of line can vary, each written out row in this example shows a different situation that is dealt with from both strategies perspective. The dotted lines show the seperation between $P$s and $Q$s.
+
+\begin{itemize}
+	\item The first line shows the values inserted when A rolls
+	\item The second line shows the values inserted when A banks, going to a higher game state probability in terms of $Q$
+	\item The third line shows how an impossible game state is dealt with from A's perspective.
+	\item The forth line shows the values inserted when B rolls near the end of the game. The main difference being that trivial game states exist, changing the value in $D$.
+	\item The final line shows the values inserted when B banks, going to a higher game state probability in terms of $P$
+
+\end{itemize}
+
+We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
+>>>>>>> 52a1555d5abba7c28c28b8143944e32166960b09
+>>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 For Pig, Matlab completes all 1 million sets in 5 seconds. Although we had every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$, the main outputs that we were interested in, were $P_{0,0,0}$ and $Q_{0,0,0}$. These are the probabilities each strategy has of winning, when going first.
 
@@ -554,9 +605,16 @@ For Pig, Matlab completes all 1 million sets in 5 seconds. Although we had every
 
 To test the output of the code, we compared the calculated probabilities to experimental results. It was sufficient to test only the value in the lowest position in the matrix, $P_{0,0,0}$, since this value relies on the higher game states (and therefore any errors in higher positions should be reflected in this output).
 
+<<<<<<< HEAD
 $P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, the $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in section \ref{bank20}. The median on the box plot is very close to the projected probability which indicated that our code had correctly calculated $P_{0,0,0}$.
 
 We similarly tested some more simple strategies with successful results. Then we tried to create awkward strategies that would test the limitations of our program. Of special interest were strategies that involved banking at turnscore 0, i.e. ``skipping'' a turn. In certain circumstances this decision could theoretically lead to a stalemate, where both strategies refused to roll. While this would never happen in practical play, it was important to equip our Matlab script to deal with these scenarios so that it wouldn't cause issues when we later come to computer-generated strategies.
+=======
+$P_{0,0,0}$ represents strategy A's probability of winning at the start of the game, assuming strategy A is the first to roll. To test this value, we simulated a series of games of pig with strategy A always being the first to roll, and outputted the number of wins for strategy A. For example, the $P_{0,0,0}$ for the input strategies ``bank on 20'' and ``bank on 21'' was 0.542626, indicating that ``bank on 20'' has a 54.26\% chance of beating ``bank on 21'' when going first. Running 1,000 series of 1,000 games gave us a distribution for the number of wins for ``bank on 20'' displayed in section \ref{bank20}
+. The median on the box-plot is very close to the projected probability which indicated that our code had correctly calculated $P_{0,0,0}$.
+
+We similarly tested some more simple strategies with successful results. Then we tried to create awkward strategies that would test the limitations of our program. Of special interest were strategies that involved banking at turn score 0, i.e. ``skipping'' a turn. In certain circumstances this decision could theoretically lead to a stalemate, where both strategies refuse to roll. While this would never happen in practical play, it was important to equip our Matlab script to deal with these scenarios so that it wouldn't cause issues when we later come to computer-generated strategies.
+>>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 A particularly interesting example is a strategy which skips a turn whenever the two players' banked scores are equal. (For convenience we excluded the starting game state where both players have score 0.) When this strategy plays against itself, around a quarter of games result in stalemates. But because the majority of games resulted in victories for one player, we still wanted to be able to analyse this strategy, and therefore had to update the code to accommodate stalemates.
 
@@ -568,7 +626,11 @@ Adjusting the script for simulating series of games to output the number of stal
 
 The piece of code that we produced, was one that could produce an optimal strategy against any other strategy. Note that this is not the overall optimal for Pig, but we used this code to find it. With the foundations that we have explained so far, regarding equations, matrices and strategies, we can explain how we produced this code.
 
+<<<<<<< HEAD
 As a brief explanation of how it works, the code takes two important inputs (not including a general 'to win' score and dice probability, which is also implemented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continually get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will mad use of "strategies to matrices" to get them in our preferred matrix form. The code then runs through the simultaneous sets again, modifying A to be the best it possibly can against B.
+=======
+As a brief explanation of how it works, the code takes two important inputs (not including a general 'to win' score and dice probability, which is also implemented). The main input is the strategy that we wish to optimise against, let us call this strategy B. The other input is another strategy that we will be modifying, to continually get better against B, let us call this strategy A. The reason we wanted to be able to start from any point was to see if there were multiple optimals against B, local maximas. Strategies A and B can be in any format as we will make use of "strategies to matrices" to get them in our preferred matrix form. The code then runs through the simultaneous sets again, modifying A to be the best it possibly can be against B.
+>>>>>>> 2ec93797b356c919ff64953bdff8f99c49e1b802
 
 As we did for calculating the probabilities, we will built matrices, this time a little differently. In the probability matrices we were looking up what the strategy does and building the matrices around what the choice was. However, this time we wanted to consider both rolling and banking at each game state. We could then see which out of rolling and banking had the highest probability of winning. If the strategy's choice is not one with the highest chance of it winning, we could then change the choice the strategy makes at that game state and also the probability it has.
 
@@ -598,7 +660,7 @@ The Probability matrix at each set now looks like this.
 
 where $n=\text{"to win score"}-i-1$ and $m=\text{"to win score"}-j-1$.
 
-When strategy A looks at a $P^{Roll}_{i,j,k}$, it relies on future $P_{i,j,k+r}$s. The question now is how do we choose which future $P_{i,j,k+r}$ to rely on, as we have a rolling version and a banking version. This is where we use the current version of A to choose. We then build the matrices accordingly, solving them again to get our new probabilities. At this point we compare rolling and banking, and see if A needs to change. If A does change, then we must run through the same process again, recalculating probabilities and changing A. This wil converge for each set. This process will modify A as it works down, recalculating probabilties when it makes changes to the strategy. Once it has finished every set, A will have been completely modified to choose the best choice at every game state against B.
+When strategy A looks at a $P^{Roll}_{i,j,k}$, it relies on future $P_{i,j,k+r}$s. The question now is how do we choose which future $P_{i,j,k+r}$ to rely on, as we have a rolling version and a banking version. This is where we use the current version of A to choose. We then build the matrices accordingly, solving them again to get our new probabilities. At this point we compare rolling and banking, and see if A needs to change. If A does change, then we must run through the same process again, recalculating probabilities and changing A. This will converge for each set. This process will modify A as it works down, recalculating probabilities when it makes changes to the strategy. Once it has finished every set, A will have been completely modified to choose the best choice at every game state against B.
 
 Coding this was a lot harder than finding the probabilities and it also takes matlab a lot longer to run for a full game of pig, a few minutes compared to the few second for calculating probabilities. The results were promising however as it always produced a new strategy that beat what it was optimised against by a large margin.
 
@@ -628,16 +690,16 @@ To investigate if players aligned game play with their stated risk preference an
 \caption{Information inputted into Excel\label{figure6}}
 \end{figure}
 The reasoning behind the questions on the tracker form:\\
-\textbf{Question 1}\\This question was used to find out participants risk preference (risk neutral, risk averse, risk seeking) so we could see if individuals actually stuck to their stated risk preference whilst playing.\\ \textbf{Questions 2 and 3}\\We created these questions to test whether this would correlate with the stated preference in question 1. The risk neutral person (in theory) should have no preference to option a or b as they both have the same expected payoff. A risk averse person (in theory) should pick option a in both cases and a risk seeking person will (in theory) pick option b in both cases. Both question 2 and 3 represent gambles, however the expected payoff in question 3 is much greater than that of question 2. Therefore question 3 allows us to see how risk seeking a participant may be, as a greater payoff will be a lot more attractive to a risk seeker.
+\textbf{Question 1}\\This question was used to find out participants risk preference (risk neutral, risk averse, risk seeking) so we could see if individuals actually stuck to their stated risk preference whilst playing.\\ \textbf{Questions 2 and 3}\\We created these questions to test whether this would correlate with the stated preference in question 1. The risk neutral person (in theory) should have no preference to option a or b as they both have the same expected pay off. A risk averse person (in theory) should pick option a in both cases and a risk seeking person will (in theory) pick option b in both cases. Both question 2 and 3 represent gambles, however the expected pay off in question 3 is much greater than that of question 2. Therefore question 3 allows us to see how risk seeking a participant may be, as a greater payoff will be a lot more attractive to a risk seeker.
 
-These questions created were motivated by a branch of economics called Prospect Theory. As in Kahneman and Tversky’s 1979 paper, prospect theory is the ‘Analysis of decision under risk’\cite{kahneman2013prospect}. The theory explains that humans dislike losing far more than we like winning and that depending on whether a scenario is framed as win or a loss, we act differently. Humans dislike losing so much, that they are willing to take huge risks to avoid a loss scenario. As an example, in the case of ‘Pig’, if player A is close to winning and player B is far behind, then player B will usually try to keep rolling on their turn, to build up a big score and then bank it, when actually their optimal strategy might be to bank earlier on. (this is later discussed in REFERENCE)
+These questions created were motivated by a branch of economics called Prospect Theory. As in Kahneman and Tversky’s 1979 paper, prospect theory is the ‘Analysis of decision under risk’\cite{kahneman2013prospect}. The theory explains that humans dislike losing far more than we like winning and that depending on whether a scenario is framed as win or a loss, we act differently. Humans dislike losing so much, that they are willing to take huge risks to avoid a loss scenario. As an example, in the case of Pig, if player A is close to winning and player B is far behind, then player B will usually try to keep rolling on their turn, to build up a big score and then bank it, when actually their optimal strategy might be to bank earlier on. (this is later discussed in REFERENCE)
 \subsection{Statistical Testing}
 \subsubsection{Fair test}
 Throughout our project, we will be testing numerous different strategies against one another to determine whether a strategy is better than another. To do this accurately, we will need to ensure that the test we conduct is fair and will give a reliable result. This will be particularly important for our final findings when we want to test our version of the optimal strategy. We will want to know whether it is an optimal strategy or whether there are still some strategies that are able to beat it, meaning it isn’t `the' optimal.
 
 To determine whether a strategy is better than another is not as simple as playing them against each other once and deciding that the winner is the better strategy. A strategy will have a theoretical probability of winning against another given strategy, but playing only one game may not give a reliable result. Say you were to play the same strategy against itself. The theoretical probability of either strategy winning would be $0.5$ if you were to alternate which goes first and to play a numerous amount of games. By playing only one game you would deduce that one of the strategies is better than the other even though they are the same strategy. You could also play two strategies where one has a significantly larger theoretical probability of winning than the other, but the test could conclude that the worse strategy wins, meaning you would accept that the lesser strategy is better even though theoretically it is not. This false result will be due to statistical inference.
 
-Theoretical probabilities don’t always agree with the practical results, though there are ways where you can improve the accuracy of a practical test to make it more accurate, closer to its theoretical probability. That is the point behind the fair test, to try and get a result that’s accurate to within a certain confidence of the theoretical results.  In our case, we can increase the number of games we play so that inference is reduced, therefore giving a reliable score when testing strategies. Instead of playing only 1 game, we can play numerous games and then take scores. Say we played $100$ games, each individual game of pig will result in a winner which will result in that strategy receiving a score of $1$. This will be continued until $100$ games are complete and the probability for each strategy would be their score divided by $100$, in this case.
+Theoretical probabilities don't always agree with the practical results, though there are ways where you can improve the accuracy of a practical test to make it more accurate, closer to its theoretical probability. That is the point behind the fair test, to try and get a result that’s accurate to within a certain confidence of the theoretical results.  In our case, we can increase the number of games we play so that inference is reduced, therefore giving a reliable score when testing strategies. Instead of playing only 1 game, we can play numerous games and then take scores. Say we played $100$ games, each individual game of pig will result in a winner which will result in that strategy receiving a score of $1$. This will be continued until $100$ games are complete and the probability for each strategy would be their score divided by $100$, in this case.
 
 The true $n$ value will need to be calculated and not decided. To do so we can use hypothesis testing. From theoretical probability values, we can define an interval around the value for which we want the practical result to lie in. The practical test will involve playing $N$ amount of games of pig where a strategy receives a score of $1$ for each game they win. After $N$ games have been completed, we can calculate the probability of the strategy winning against the other by dividing the number of games it has won by the total number of games. Then we can test numerous results for different values of $N$ and observe the distribution of $p$ as $N$ increases. From there we can chose an appropriate value for the number of games which will give us constant results within our confidence interval. Once this value has been obtained, the testing of strategies should result in reliable results and therefore be as fair of a test as possible.
  \subsubsection{Deciding that a strategy is better than another}
@@ -661,11 +723,11 @@ From the two functions we built in matlab, we were able to run many tests and fi
 
 \subsubsection{Did we solve Pig}
 
-From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same proccess again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this proccess we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final Optimal?
+From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same process again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this proccess we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final Optimal?
 
-We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Nella's optimal, to which both it and Nella's optimal has the same probability of winning when each going first. From previous testings, we had learnt that if these probabilities were the same, it was highely likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in matlab with the command \textbf{matlab code here}. This confirmed this idea, as every element in our strategy was the same as Nellas.
+We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Nella's optimal, to which both it and Nella's optimal has the same probability of winning when each going first. From previous testing, we had learnt that if these probabilities were the same, it was highly likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in matlab with the command \textbf{matlab code here}. This confirmed this idea, as every element in our strategy was the same as Nellas.
 
-When Optimising against Nella's strategy, the strategy produced is an exact copy of Nella's. This is the same as how repeated implications of the optimal finder eventualy converges and doesnt change, meaning that it reached Nella's optimal.
+When Optimising against Nella's strategy, the strategy produced is an exact copy of Nella's. This is the same as how repeated implications of the optimal finder eventually converges and doesn't change, meaning that it reached Nella's optimal.
 
 To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by matlab as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Nella. However we could take the fact that the optimal against Nella is itself, therefore meaning no strategy could do any better than its optimal, and so Nella will beat every other strategy. We have found the optimal!
 
@@ -796,7 +858,7 @@ From looking at our maximal value for the probability in the confidence interval
 
 We could also look at the respective probability of the strategies from the theoretical results.  As $p=\dfrac{X}{n}$, if the value for $p$ is outside our determined confidence interval, we can then deduce that one of the strategies is better than the other.
 \subsubsection{Statistical findings on the optimal}
-It happens to be that simply hold at strategies, i.e. If your turn score is less than $20$ (say, then you always roll, are quite affective (as said by neller?). This made us think that testing our version of the optimal strategy against simply hold at strategies would be a good place to start. We could find the optimal and then play it against numerous hold at strategies and see the results, though we thought it would be good to find whether there was a best hold at strategy so that we only need to use that to analyse our version of the optimal.
+It happens to be that simply hold at strategies, i.e. If your turn score is less than $20$ (say, then you always roll, are quite effective. This made us think that testing our version of the optimal strategy against simply hold at strategies would be a good place to start. We could find the optimal and then play it against numerous hold at strategies and see the results, though we thought it would be good to find whether there was a best hold at strategy so that we only need to use that to analyse our version of the optimal.
 
 As we saw earlier, Figure \ref{figure17} shows some of the probabilities we obtained from running these tests along with their theoretical probabilities. We decided to run a test, in compliance with our rules for a fair test, in Matlab of every hold at strategy from hold at $1$ to hold at $100$ in order to determine which particular hold at strategy was better than all of the others. As we saw earlier, the strategy hold at $0$ cannot win any games it plays and so, to reduce computing time, we will not include this in our simulations. We wanted to know whether there was one hold at strategy which beat all other strategies, as opposed to finding which one won the most against the others. By this we mean whether the strategies are transitive. By saying that the strategies are transitive, we mean that if we have strategies A, B and C, where A is better than B and B is better than C, then A is better than C also. This would mean that if we find one strategy that is the best, it will beat all other strategies. We ran a Matlab simulation, again alongside our rules for a fair test, which returned a result that confirmed that these simple hold at strategies are in fact transitive.
 
