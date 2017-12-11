@@ -94,7 +94,9 @@
 \begin{flushleft}
 Pig is a jeopardy dice game in which two players aim to be the first to a predetermined score. Pig combines strategy and chance in a fun and intuitive way. The more common name of `pass the pigs' is a commercialised adaptation for which the core aims are identical. The ability to optimise one's strategy is very subtle and is more challenging than it first appears.
 
+
 This project considers both the theoretical and practical issues surrounding the finding of ‘the optimal’ strategy. The biggest focus is on creating a method of finding optimums and statistically comparing these optimums so that we can see which strategy is best when played against another. Alongside this, we looked into how humans played Pig and the interactions that occur between players.
+>>>>>>> 0bd14cdc236bd3c1de090b58ebe206b161988405
 
 We managed to find an optimum strategy which matched T. Nellers' Optimal, alongside using statistical analysis to consider how many real-world games are needed to compare to a computer. Additionally, when looking at how humans played Pig we found that an individual's strategy is influenced by how well their opponent is doing and we also found that individual's do not stick to their stated risk preference during game play.
 \end{flushleft}
@@ -135,6 +137,7 @@ The dice game Pig has many variations, so we chose to focus on the two-player si
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the die, or bank the turn score, at any game state.
 
 A game state is defined by the current position of the game, player A's banked score, player B's banked score and whichever player's turn it is, turn score. These three scores can vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turn score larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+>>>>>>> 0bd14cdc236bd3c1de090b58ebe206b161988405
 
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game Pig.
 
@@ -707,7 +710,7 @@ Need general brief on overall findings here
 
 From the two functions we built in MATLAB, we were able to run many tests and find lots of results. The main objective from these finding was to produce an absolute optimal for Pig.
 
-\subsubsection{Did we solve Pig}
+\subsubsection{Did we solve Pig?}
 
 From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same process again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this process we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final optimal?
 
@@ -761,6 +764,7 @@ A risk seeker would potentially believe the outcome of rolling and scoring a gre
 In addition, we expected the risk neutral gradient to be equally between the risk seekers gradient and risk averse gradient. Conversely, it’s the lowest gradient of the three. This could be due to experimental error as the difference between the greatest and lowest gradient is only $2\%$.
 
 Moreover, looking at all three graphs the points plotted at turn number 15-16 are all below the average gradient by a significant amount. This could be because at this point in the game the players opponent is close to winning and therefore the player begins to panic and roll too much at each turn, causing them to roll a 1 and lose. This links back to the ideas exposed in Prospect theory\cite{kahneman2013prospect} as humans compensate to win by taking extra risks when they are losing. In this case the player is rolling excessively in order to build up a greater score to bank on. Therefore, this shows that for the results we gathered, at approximately turn 14, on average, players strategies change dependent on the opponents play.
+>>>>>>> c95b138e788e0fc585b41586451b32f6d1ea47f9
 
 Overall, a possible explanation for the similarity of the gradients is that in the long run of playing Pig, players preferences are ‘evened out’ by the game, much like the stock market evens out returns in the long run.
 \subsubsection{Players Interactions}
