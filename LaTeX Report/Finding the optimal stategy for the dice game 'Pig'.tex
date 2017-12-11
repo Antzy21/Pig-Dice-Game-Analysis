@@ -96,6 +96,7 @@ Pig is a jeopardy dice game in which two players aim to be the first to a predet
 
 
 This project considers both the theoretical and practical issues surrounding the finding of ‘the optimal’ strategy. The biggest focus is on creating a method of finding optimums and statistically comparing these optimums so that we can see which strategy is best when played against another. Alongside this, we looked into how humans played Pig and the interactions that occur between players.
+>>>>>>> 0bd14cdc236bd3c1de090b58ebe206b161988405
 
 We managed to find an optimum strategy which matched T. Nellers' Optimal, alongside using statistical analysis to consider how many real-world games are needed to compare to a computer. Additionally, when looking at how humans played Pig we found that an individual's strategy is influenced by how well their opponent is doing and we also found that individual's do not stick to their stated risk preference during game play.
 \end{flushleft}
@@ -136,6 +137,7 @@ The dice game Pig has many variations, so we chose to focus on the two-player si
 Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the die, or bank the turn score, at any game state.
 
 A game state is defined by the current position of the game, player A's banked score, player B's banked score and whichever player's turn it is, turn score. These three scores can vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turn score larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+>>>>>>> 0bd14cdc236bd3c1de090b58ebe206b161988405
 
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game Pig.
 
@@ -708,15 +710,15 @@ Need general brief on overall findings here
 
 From the two functions we built in MATLAB, we were able to run many tests and find lots of results. The main objective from these finding was to produce an absolute optimal for Pig.
 
-\subsubsection{Did we solve Pig}
+\subsubsection{Did we solve Pig?}
 
-From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same process again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this proccess we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final optimal?
+From any strategy A, we could produce an optimal against it. We will call this a first order optimal against A. From this optimal, we could run the same process again, thus producing an optimal against our first order optimal. We will call this the second order optimal against A. By repeating this process we can get higher and higher ordered optimals against any strategy. We found that this converges to a single strategy, from most starting strategies. Could this be our final optimal?
 
-We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Neller's optimal, to which both it and Neller's optimal has the same probability of winning when each going first. From previous testing, we had learnt that if these probabilities were the same, it was highly likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in MATLAB with the command \textbf{MATLAB code here}. This confirmed this idea, as every element in our strategy was the same as Neller's.
+We used our probability calculator to test it against other strategies. It beats all strategies that we had produced. We then tested it against Neller's optimal, to which both it and Neller's optimal have the same probability of winning when each goes first. From previous testing, we had learnt that if these probabilities were the same, it was highly likely that the strategies were the same. We could test to see if the strategies were the same by simply comparing them in MATLAB with the command \textbf{MATLAB code here}. This confirmed this idea, as every element in our strategy was the same as Neller's.
 
 When optimising against Neller's strategy, the strategy produced is an exact copy of Neller's. This is the same as how repeated implications of the optimal finder eventually converges and doesn't change, meaning that it reached Neller's optimal.
 
-To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by MATLAB as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Neller's. However we could take the fact that the optimal against Neller's is itself, therefore meaning no strategy could do any better than its optimal, and so Neller's will beat every other strategy. We have found the optimal!
+To check that it cannot be beaten by any strategies by brute force, we would have to test it against every strategy. This is not even possible by MATLAB as there are roughly $2^{100\times100\times100}$ possible strategies which would not be possible to test all against Neller's. However we could take the fact that the optimal against Neller's is itself, therefore meaning no strategy could do any better than its optimal, and so Neller's will beat every other strategy. We had found the optimal at this point.
 
 \subsection{Human Interactions of playing Pig}
 \subsubsection{Do players stick to their stated risk preference}
@@ -757,15 +759,16 @@ Looking at Figure \ref{figure10}, \ref{figure11}, \ref{figure12}, we can see tha
 
 The gradients are therefore all very similar. The results have shown that the gradient is greater for risk seekers than risk averse participants, however, we expected there to be a greater change in the gradients. This is because risk seeker’s would roll more each turn to increase the chances of a getting a high bank score. Whereas a risk averse participant would bank on a smaller score at each turn as this is a safer option.
 
-A risk seeker would potentially believe the outcome of rolling and scoring a greater bank score would be of greater interest then banking at a safe score, therefore they would be at a greater risk of rolling a 1 and losing all the points from that round. This could therefore explain why the gradient is only a smaller percentage greater, as looking through the game strategies performed by risk seekers a lot of them banked on a score 0, due to rolling a greater amount of times thus a greater chance of scoring 1. Therefore their overall accumulated score was still achieved by the same amount of turn numbers as risk adverse participants.
+A risk seeker would potentially believe the outcome of rolling and scoring a greater bank score would be of greater interest than banking at a safe score, therefore they would be at a greater risk of rolling a 1 and losing all the points from that round. Therefore, this could explain why the gradient is only a small percentage greater, as looking through the game strategies performed by risk seekers a lot of them banked on a score 0, due to rolling a greater amount of times thus a greater chance of scoring 1. Therefore, their overall accumulated score was still achieved by the same amount of turn numbers as risk adverse participants.
 
 In addition, we expected the risk neutral gradient to be equally between the risk seekers gradient and risk averse gradient. Conversely, it’s the lowest gradient of the three. This could be due to experimental error as the difference between the greatest and lowest gradient is only $2\%$.
 
-Moreover, looking at all three graphs the points plotted at turn number 15-16 are all below the average gradient by a significant amount. This could be because at this point in the game the players opponent is close to winning and therefore the player begins to panic and roll too each turn number, causing them to roll a 1 and lose. This links back to the ideas exposed in Prospect theory\cite{kahneman2013prospect} as humans compensate to win by taking extra risks which they usually wouldn’t. In this case the player is rolling excessively in order to rebuild up a greater score to bank on. This therefore shows, that for our results gathered, that at around the turn number 14, on average, players strategies change dependent on the opponents play.
+Moreover, looking at all three graphs the points plotted at turn number 15-16 are all below the average gradient by a significant amount. This could be because at this point in the game the players opponent is close to winning and therefore the player begins to panic and roll too much at each turn, causing them to roll a 1 and lose. This links back to the ideas exposed in Prospect theory\cite{kahneman2013prospect} as humans compensate to win by taking extra risks when they are losing. In this case the player is rolling excessively in order to build up a greater score to bank on. Therefore, this shows that for the results we gathered, at approximately turn 14, on average, players strategies change dependent on the opponents play.
+>>>>>>> c95b138e788e0fc585b41586451b32f6d1ea47f9
 
 Overall, a possible explanation for the similarity of the gradients is that in the long run of playing Pig, players preferences are ‘evened out’ by the game, much like the stock market evens out returns in the long run.
 \subsubsection{Players Interactions}
-For our second experiment we looked into how players A's strategy was influenced by player B's strategy and vice versa. To do this we took all 15 sample games that were played and plotted the total scores of player A and player B at each turn.
+For our second experiment we looked into how player A's strategy was influenced by player B's strategy and vice versa. To do this we took all 15 sample games that were played and plotted the total scores of player A and player B at each turn.
 
 Firstly, an interesting game that we wanted to look at was Game 14 (Figure \ref{figure13}).
 
@@ -774,16 +777,16 @@ Firstly, an interesting game that we wanted to look at was Game 14 (Figure \ref{
 \includegraphics[scale=1]{game14}
 \caption{A graph to show the total score of each player at each game state for Game 14 (Player 1: Risk Averse, Player 2: Risk Neutral)\label{figure13}}
 \end{figure}
-Looking at Game 14, we found that from turn 4 onwards, as player 1’s score increases and gets closer to the target score of 100, player 2’s total score stays the same until turn 8. A possible explanation for this is that as player 1 continues to increase their total score, player 2 wants to try and build up a big bank score in order to catch up with player 1. As a result, they've roll for too long, eventually rolling 1, thus scoring a turn total of 0.
+Looking at Game 14, we found that from turn 4 onwards, as player 1’s score increases and gets closer to the target score of 100, player 2’s total score stays the same until turn 8. A possible explanation for this is that as player 1 continues to increase their total score, player 2 wants to try and build up a big bank score in order to catch up with player 1. As a result, they've rolled for too long, eventually rolling 1, thus scoring a turn total of 0.
 
-This shows us that player 1's strategy is influencing the strategy used by Player 2. At first, both players represent similar game techniques, but after an increased score from Player 1, Player 2 demonstrates traits of a risk seeker (although they stated to be risk neutral) by rolling a greater amount of times to attempt to gain a better outcome. However, in this case they have been unsuccessful. This highlights two concepts. Firstly, player 2 has not stuck to their stated risk preference during the game, and secondly, the strategy implemented by player 1 has resulted in a change of behaviour in player 2. As this game lead to a lose for player 2 it may show that a strategy shouldn’t be changed during game play, and that individuals should play a strategy that is independent of their opponents.
+This shows us that player 1's strategy is influencing the strategy used by Player 2. At first, both players represent similar game techniques, but after an increased score from Player 1, Player 2 demonstrates traits of a risk seeker (although they stated to be risk neutral) by rolling a greater amount of times to attempt to gain a better outcome. However, in this case they have been unsuccessful. This highlights two concepts. Firstly, player 2 has not stuck to their stated risk preference during the game, and secondly, the strategy implemented by player 1 has resulted in a change of behaviour in player 2. As this game lead to a loss for player 2 it may show that a strategy shouldn't be changed during game play, and that individuals should play a strategy that is independent of their opponents.
 
 
 \begin{figure}
 \includegraphics[scale=1]{game11}
 \caption{A graph to show the total score of each player at each game state for Game 11 (Player 1: Risk loving, Player 2: Risk Neutral)\label{figure14}}
 \end{figure}
-Whilst looking through all of our results we found a common theme that is shown well through Game 11 (Figure \ref{figure14}) in particular. We can see that players start to mirror one another’s strategies.
+Whilst looking through all of our results we found a common theme that is shown well through Game 11 (Figure \ref{figure14}) in particular. We can see that players start to mirror each other's strategy.
 
 The stated risk preferences of each player are different and therefore we would expect slightly different graphs from each player. However, they both follow the same pattern from the beginning of the game. The shape of the graphs follow that of one expected by a risk neutral participant and thus may show that player 1 (stated risk loving) has actually adopted the strategy of player 2.
 \subsection{Statistical Testing}
