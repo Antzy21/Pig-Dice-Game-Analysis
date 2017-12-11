@@ -317,7 +317,7 @@ This example is one complete set of simultaneous equations. It turns out that ev
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
 \end{align*}
 
-After writing this out, we saw the other probabilities it relies on. Next, we wanted to see what the strategies do at these game states and then we wrote out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
+After writing this out, we see the other probabilities it relies on. Next, we want to see what the strategies do at these game states and then write out the probability equations for them. In this example, let A roll at $97,99,2$ and B roll at $99,97,0$
 
 \begin{align*}
 	P_{97,99,2} &= 1 - \frac{1}{6}Q_{99,97,0}\\
@@ -332,7 +332,7 @@ Now we have all three simultaneous equations that can be solved:
 	Q_{99,97,0} &= 0.8612
 \end{align*}
 
-This method of calculation worked well. However, before we ran through every set of equations, we had to look at the interesting case of banking. For example, instead of rolling at $97,99,2$, A banks. The equations are now:
+This method of calculation works well. However, before we can do the same for every set of equations, we must to look at the interesting case of banking. For example, instead of rolling at $97,99,2$, let A bank. The equations are now:
 
 \begin{align*}
 	P_{97,99,0} &= \frac{1}{6}(1 - Q_{99,97,0})+\frac{1}{6}P_{97,99,2}+\frac{4}{6}\\
@@ -340,7 +340,7 @@ This method of calculation worked well. However, before we ran through every set
 	Q_{99,97,0} &= 1 - \frac{1}{6}P_{97,99,0}\\
 \end{align*}
 
-We did not need to write out the equation for $Q_{99,99,0}$ because we already calculated it in our first example. Its value was $\frac{6}{7}$. So with this we managed to solve the equations, getting a much different result:
+We do not need to write out the equation for $Q_{99,99,0}$ because we already calculated it's value to be $\frac{6}{7}$ in our first example. We then solve the equations, getting a much different result:
 
 \begin{align*}
 	P_{97,99,0} &= 0.7102\\
@@ -348,9 +348,9 @@ We did not need to write out the equation for $Q_{99,99,0}$ because we already c
 	Q_{99,97,0} &= 0.8816
 \end{align*}
 
-From this we concluded that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores than itself, which we shall be called ``higher game states'' from this point onwards. Note that it will not rely on game states ``lower'' than it as the game will always be progressing forward and a player cannot lose banked points. Once we had solved the sets containing higher game states first, we could run through the rest of the sets and solve them all successfully.
+From this we conclude that when a strategy banks, it relies on knowledge of the probabilities of game states with higher banked scores than itself, which shall be called ``higher game states'' from this point onwards. Note that it will not rely on game states ``lower'' than it as the game will always be progressing forward and a player cannot lose banked points. Once we have solved the sets containing higher game states first, we can work down the rest of the sets and solve them all successfully.
 
-Solving these equations meant we could calculate every probability of winning from every game state for any given strategy. From this we could check $P_{0,0,0}$, which is the probability that any strategy has of winning the game. Computational power was required to give us the probability values that we wanted to calculate. This is where we turned to MATLAB for assistance.
+Solving these equations would mean we can calculate every probability of winning from every game state for any given strategy. From this we can check $P_{0,0,0}$, which is the probability that any strategy has of winning the game. Computational power was required to give us the probability values that we wanted to calculate. This is where we turned to MATLAB for assistance.
 
 \subsubsection{Matrices}
 To make use of MATLAB, we wrote the equations in terms of matrices. Every set of equations can be written in the form $CX=D$, where $C$, $X$ and $D$ are matrices containing the coefficients, the probabilities, and the constant values respectively. We looked at the examples above to build these matrices.
