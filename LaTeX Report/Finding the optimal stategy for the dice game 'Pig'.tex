@@ -94,7 +94,7 @@
 \begin{flushleft}
 Pig is a jeopardy dice game in which two players aim to be the first to a predetermined score. Pig combines strategy and chance in a fun and intuitive way. The more common name of ‘pass the pigs’ is a commercialised adaptation for which the core aims are identical. The ability to optimise one’s strategy is very subtle and is more challenging than it first appears.
 
-This project considers both the theoretical and practical issues surrounding the finding of ‘the optimal’ strategy. The biggest focus is on creating a method of finding optimums and statistically comparing these optimums so that we can see which strategy is best when played against another. Alongside this, we looked into how humans played Pig and the interactions that occur between payers.
+This project considers both the theoretical and practical issues surrounding the finding of ‘the optimal’ strategy. The biggest focus is on creating a method of finding optimums and statistically comparing these optimums so that we can see which strategy is best when played against another. Alongside this, we looked into how humans played Pig and the interactions that occur between players.
 
 We managed to find an optimum strategy which matched T. Nellers’ Optimal, alongside using statistical analysis to consider how many real-world games are needed to compare to a computer. Additionally, when looking at how humans played Pig we found that an individual’s strategy is influenced by how well their opponent is doing and we also found that individual’s do not stick to their stated risk preference during game play.
 \end{flushleft}
@@ -114,7 +114,7 @@ We managed to find an optimum strategy which matched T. Nellers’ Optimal, alon
 \section{Introduction}
 
 \subsection{Aims and objectives}
-The ultimate aim of this project was to find an optimal strategy (or optimal strategies) for the dice game Pig. The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. Another aim of the project was to compare our findings to the optimal strategy that T. Neller described in his 2004 paper\cite{neller2004optimal}. Finally, we looked at the psychological aspect of playing Pig; including whether human players play according to their risk preferences (risk-neutral, risk-loving or risk-averse) and whether an individual's strategy is influenced by how well his opponent is playing.
+The ultimate aim of this project was to find an optimal strategy (or optimal strategies) for the dice game Pig. The optimal strategy is defined as a strategy that has the highest probability of winning when played against all other strategies. Another aim of the project was to compare our findings to the optimal strategy that T. Neller described in his 2004 paper\cite{neller2004optimal}. Finally, we looked at the psychological aspect of playing Pig; including whether human players play according to their risk preferences (risk-neutral, risk-loving or risk-averse) and whether an individual's strategy is influenced by how well his or her opponent is playing.
 
 We tried to achieve these aims by pursuing the following objectives:
 
@@ -125,16 +125,16 @@ We tried to achieve these aims by pursuing the following objectives:
 
 \item Combine our probability calculator and strategy optimiser to run many tests on different strategies, producing a variety of results to study.
 
-\item Have a sample of people play Pig and record their results so we can determine whether their strategies are influenced by how well (or badly) their opponent is doing, and whether they stick to their stated risk preferences (risk-averse, risk-neutral, risk-loving).
+\item Have a sample of people play Pig and record their results so we could determine whether their strategies are influenced by how well (or badly) their opponent was doing, and whether they stick to their stated risk preferences (risk-averse, risk-neutral, risk-loving).
 \end{enumerate}
 
 \subsection{A brief history of Pig}
 \subsubsection{Basics of Pig}
 The dice game Pig has many variations, so we chose to focus on the two-player single-die variant. When it is a player's turn, they can repeatedly roll the die as many times as they wish. The number on each roll signifies the points gained on that roll, which is added to a running total of points for the turn. These points can be banked to bring a player's turn to an end. However, all of the points in this running total are lost if the player rolls a $1$ before banking, immediately bringing their turn to an end. The aim of the game is to be the first player to have a banked total of at least $100$ points.
 
-Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the dice, or bank the turn score, at any game state.
+Many different strategies can be used in Pig. For example, a simple strategy would be to roll until passing a turn score of 20, then banking. A strategy can be thought of as the choice to either roll the die, or bank the turn score, at any game state.
 
-A game state is defined by the current position of the game, player A's banked score, player B's banked score and player P's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game! This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
+A game state is defined by the current position of the game, player A's banked score, player B's banked score and player P's turn score. These three scores vary between zero and 100. The mistake would be to assume that this means there are $100\times100\times100 = 1$ Million game states. The reason this is not true is because many are not possible. Take a banked score of $90$ and a turn score of $50$ for example, this game would have ended a long time ago when the player reached a turn score of $10$ winning them the game. This could be called an impossible game state, because it is not possible to reach this state, playing by the rules of the game. Another type of impossible game state is with a turn score of $1$. The smallest turnscore larger than $0$ that a player can have is by rolling a $2$, giving them a turn score of $2$.
 
 Let us now define a strategy as an array of choices, 1s for rolling, and 0s for banking, where the array is 3 dimensional, and containing every possible game state. Does this let us define every possible strategy or are there more variables to consider? If this does define every strategy, the next big question, and the main focus of this paper, is what is the best strategy to play? What strategy is most likely to win against any other, and be crowned the Optimal Strategy for the dice game Pig.
 
