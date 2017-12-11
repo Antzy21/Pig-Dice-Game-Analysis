@@ -566,6 +566,17 @@ Now we can fill in the coefficient matrix and the constant value matrix. This is
 	\end{bmatrix}
 \end{align*}
 
+The matrices above are a very generalised version used for Pig. Although the number of line can vary, each written out row in this example shows a different situation that is dealt with from both strategies perspective. The dotted lines show the seperation between $P$s and $Q$s.
+
+\begin{itemize}
+	\item The first line shows the values inserted when A rolls
+	\item The second line shows the values inserted when A banks, going to a higher game state probability in terms of $Q$
+	\item The third line shows how an impossible game state is dealt with from A's perspective.
+	\item The forth line shows the values inserted when B rolls near the end of the game. The main difference being that trivial game states exist, changing the value in $D$.
+	\item The final line shows the values inserted when B banks, going to a higher game state probability in terms of $P$
+
+\end{itemize}
+
 We then run through every game state backwards, collecting the probabilities as we solve them. Remember that matrices might need the probabilities calculated from higher game states, so whilst we build our collection of probabilities, we will call upon them as we work down. Once we had completed every matrix calculation, we had a generalised working code that could calculate the probabilities of winning at any game state, for any two strategies, for any given dice proability and to any winning score.
 
 For pig, Matlab completes all 1 million sets in 5 seconds, must faster than we could have by hand! Although we have every probability on Strategy A's turn $P_{i,j,k}$ and every probability on Strategy B's turn $Q_{i,j,k}$. The main outputs that we are interested in, is $P_{0,0,0}$ and $Q_{0,0,0}$; the probability each strategy has of winning, when going first.
