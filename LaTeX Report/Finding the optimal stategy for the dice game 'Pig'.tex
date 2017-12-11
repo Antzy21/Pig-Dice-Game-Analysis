@@ -7,6 +7,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage[margin=2cm]{geometry}
+\usepackage{float}
 
 \graphicspath{{pictures/}}
 \setlength{\parindent}{0em}
@@ -149,12 +150,12 @@ if P banks their points.
 \subsubsection{Neller's work}
 In \textit{Dice Games Properly Explained}, R. Knizia takes the view of each roll of the die in Pig as a bet of not rolling a $1$. He said of the best strategy, ``Whenever your accumulated points are less than 20, you should continue throwing, because the odds are in your favour.''\cite{knizia2010dice}. The issue with this claim is, as T. Neller stated, ``\textit{risking points is not the same as risking the probability of winning.}''\cite{neller2004optimal} From this, T. Neller attempted to find a more optimal solution for Pig by maximising equations \ref{1.2.1.a} and \ref{1.2.1.b}. However this was not possible as he ended up with an equation of the form $x=$max$ (A_1 x+b_1,A_2 x+b_2)$ for which there is no known general method. As a result, T. Neller implemented value iteration to calculate an accurate estimate for the probabilities at each position $(i,j,k)$ for both bank and roll. Figure \ref{figure1} shows a visual interpretation of the resulting optimal strategy. Figure 1 shows that you should roll if the current game state is within the surface of the graph, and bank otherwise.
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{neller_optimal_solution}
 \caption{Roll\slash hold boundary for the optimal Pig play policy (Neller)\label{figure1}}
 \end{figure}
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[width=0.5\textwidth]{neller_optimal_solution_2}
 \caption{All of the states reachable by an optimal player (Neller)\label{figure2}}
@@ -223,7 +224,7 @@ These three risk preferences are represented graphically in figure \ref{figure4}
 \end{figure}
 We wanted to see how an individual’s stated risk preferences affected their strategy when playing ‘Pig’. This information could then be used to calculate the optimal strategy for each of the three risk preferences. Over time, a computer could then adapt its strategy to find an optimal strategy for a player’s risk preference.
 
-\subsection{Statisical analysis}
+\subsection{Statistical analysis}
 In terms of statistical analysis, we wanted to test whether or not a strategy is better than the one it is playing against based on the games they play against one another, given as a probability of winning. Firstly, we needed to establish what we believed to be a fair test between two strategies and the importance of this to our project. We approximated playing two strategies against one another to a statistical distribution and then constructed a confidence interval, at a particular level of significance, and then worked backwards by assuming that a strategy should beat itself with probability $0.5$. From this, we intended to find the optimal number of games required to run one single test between any two strategies, so that we could accurately say whether or not a particular strategy is consistently better than another.
 
 After this had been determined, the next step was to decide the number of tests required to run in order to gain a desired degree of accuracy. Through this we were able to produce an good approximation of the probability that one of each strategy winning with the player going first alternated on each trial. If this probability lies above the upper bound of the confidence interval, then the particular strategy could be declared better than its opponent. Similarly, a probability falling below the lower bound indicated that it was worse. However, if the probability fell inside the confidence interval, the two strategies were considered inseparable at our given level of significance, meaning we could not strictly say that one is better than the other.
