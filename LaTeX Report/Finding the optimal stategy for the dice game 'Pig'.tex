@@ -472,7 +472,7 @@ Our first attempt at getting our ideas down as code was a very simplified calcul
 By using the hand calculated simple Piglet probabilities, we could check to see if our coded matrices were correct and fix any bugs. We even found that we could use the MATLAB-produced matrices to correct our handwritten mistakes. Once this was working we had our first runnable code. Next we had to fully generalise the code for Pig. There were two steps to doing this, firstly taking any strategy as an input, and secondly, having any dice probability working in the code. The former was easier; an independent problem that we made a function in MATLAB. The latter was a little trickier but was a fundamental part of building the matrices.
 
 \subsubsection{Strategies to matrices}
-In our introduction, we defined a strategy as a 3 dimensional array of choices. Another way, and the way that we were introduced to strategies, is by a MATLAB function. These functions take inputs of ``my score'',``your score'', and ``turn score'', then output a ``choice'' that is a logical value of $1$ or $0$. Below is an example of Bank on 20.
+In our introduction, we defined a strategy as a collection of choices. Another way, and the way that we were introduced to strategies, is by a MATLAB function. These functions take inputs of ``myscore'',``yourscore'', and ``turnscore'', then output a ``choice'' that is a logical value of $1$ or $0$. Below is an example of Bank on 20.
 
 \begin{lstlisting}
 function choice = Bank20(myscore,yourscore,turnscore)
