@@ -504,18 +504,19 @@ So far we have only considered $P$ probabilities from A's perspective, but we al
 
 From this we can see that there must be a simultaneous set for every banked score $i$ for A and every banked score $j$ for the opponent B. In the piglet section we explained how we noticed that the number of sets was the "to win" score squared. It is now clear to see why this is the case. $i$ and $j$ can take the same amount of values as the "to win" score so multiplying them together for every possible combination gives the "to win" score squared. This gives us some scope on how many sets will need to be solved in Pig: $100\times100\times100=1$ million.
 
-Now we have a rough idea of every equation in any simultaneous set. For clarity, we will order them as follows in the probabilities matrix, $X$.
+Now we have a rough idea of every equation in any simultaneous set. For clarity, we will order them as follows in the probabilities matrix, $X$. There is an artificial line to seperate the $P$s and $Q$s, for our visual understanding only.
 
 \begin{align}
 	\begin{bmatrix}
 		P_{i,j,0}\\
 		P_{i,j,1}\\
-		...\\
+		\vdots\\
 		P_{i,j,n-1}\\
 		P_{i,j,n}\\
+		-\\
 		Q_{j,i,0}\\
 		Q_{j,i,1}\\
-		...\\
+		\vdots\\
 		Q_{j,i,m-1}\\
 		Q_{j,i,m}\\
 	\end{bmatrix}
@@ -531,22 +532,36 @@ Next we could fill in the coefficient matrix and the constant value matrix. This
 \begin{align*}
 	\setcounter{MaxMatrixCols}{40}
 	\begin{bmatrix}
-		1&0&\frac{-1}{6}&\cdots&\frac{-1}{6}&0&\cdots&0&|&\frac{1}{6}&0&0&\cdots&0\\
-		\vdots& \ddots &&&&&\vdots&&			|&&&&&\\
-		\vdots&& \ddots &&&&\vdots&&			|&&&&&\\
-		0 & \cdots & 0 & 1 & 0 & 0 &\cdots&0&   |&0&0&\cdots&0&0\\
-		\vdots&&&&\ddots&&\vdots&&				|&&&&&\\
-		\vdots&&&&&\ddots&0&&					|&&&&&\\
-		0&0&0&\cdots&0&0&1&0&					|&0&0&\cdots&0&0\\
-		\vdots&&&&&&&\ddots&					|&&&&&\\
-		-&-&-&-&-&-&-&-&    					+&-&-&-&-&-\\
-		\vdots& & & & & & & &    				|&\ddots& & & &\\
-		\vdots& & & & & & & &    				|&&\ddots&&&\\
-		\frac{1}{6}&0&\cdots&&&&\cdots&0&		|&0&\cdots& 1 & 0 & \frac{-1}{6}\\
-		\vdots& & & & & & & &    				|&&&&\ddots\\
-		0&0&\cdots& & & &\cdots&0&   			|&0&0&\cdots&0&1\\
+		1&0&-\frac{1}{6}&\cdots&-\frac{1}{6}&0&0&|&\frac{1}{6}&0&0&\cdots&0\\
+		\vdots& \ddots &&&&&\vdots&			|&&&&&\\
+		\vdots&& \ddots &&&&0&					|&&&&&\\
+		0 & \cdots & 0 & 1 & 0 & 0 &\cdots&   	|&0&0&\cdots&0&0\\
+		\vdots&&&&\ddots&&\vdots&				|&&&&&\\
+		\vdots&&&&&\ddots&0&					|&&&&&\\
+		0&0&0&\cdots&0&0&1&						|&0&0&\cdots&0&0\\
+		-&-&-&-&-&-&-&    					+&-&-&-&-&-\\
+		& & & & & &\vdots &    				|&\ddots& & & &\\
+		& & & & & &\vdots &    				|&&\ddots&&&\\
+		\frac{1}{6}&0&\cdots&0&0&0&0&			|&0&\cdots& 1 & 0 & -\frac{1}{6}\\
+		& & & & & &\vdots &    				|&&&&\ddots\\
+		0&0&0&\cdots&0&0&0&   				|&0&0&\cdots&0&1\\
 	\end{bmatrix}
-	\times X =
+	\begin{bmatrix}
+		P_{i,j,0}\\
+		\vdots\\
+		\vdots\\
+		P_{i,j,k}\\
+		\vdots\\
+		\vdots\\
+		P_{i,j,n}\\
+		-\\
+		\vdots\\
+		\vdots\\
+		Q_{j,i,m-2}\\
+		\vdots\\
+		Q_{j,i,m}\\
+	\end{bmatrix}
+	=
 	\begin{bmatrix}
 		\frac{1}{6}\\
 		\vdots\\
@@ -555,13 +570,12 @@ Next we could fill in the coefficient matrix and the constant value matrix. This
 		\vdots\\
 		\vdots\\
 		0\\
-		\vdots\\
 		-\\
 		\vdots\\
 		\vdots\\
 		\frac{5}{6}\\
 		\vdots\\
-		1-P_{i,j+k,0}\\
+		1-P_{i,j+m,0}\\
 	\end{bmatrix}
 \end{align*}
 
@@ -570,7 +584,7 @@ We then ran through every game state backwards, collecting the probabilities as 
 The matrices above are a very generalised version used for Pig. Although the number of line can vary, each written out row in this example shows a different situation that is dealt with from both strategies perspective. The dotted lines show the seperation between $P$s and $Q$s.
 
 \begin{itemize}
-	\item The first line shows the values inserted when A rolls
+	\item The first line shows the values inserted when A rolls. There will be 5 $\frac{1}{6}$s in $C$
 	\item The second line shows the values inserted when A banks, going to a higher game state probability in terms of $Q$
 	\item The third line shows how an impossible game state is dealt with from A's perspective.
 	\item The forth line shows the values inserted when B rolls near the end of the game. The main difference being that trivial game states exist, changing the value in $D$.
@@ -611,17 +625,19 @@ The Probability matrix at each set now looks like this.
 	\begin{bmatrix}
 		P^{Roll}_{i,j,0}\\
 		P^{Roll}_{i,j,1}\\
-		...\\
+		\vdots\\
 		P^{Roll}_{i,j,n-1}\\
 		P^{Roll}_{i,j,n}\\
+		-\\
 		P^{Bank}_{i,j,0}\\
 		P^{Bank}_{i,j,1}\\
-		...\\
+		\vdots\\
 		P^{Bank}_{i,j,n-1}\\
 		P^{Bank}_{i,j,n}\\
+		-\\
 		Q_{j,i,0}\\
 		Q_{j,i,1}\\
-		...\\
+		\vdots\\
 		Q_{j,i,m-1}\\
 		Q_{j,i,m}\\
 	\end{bmatrix}
